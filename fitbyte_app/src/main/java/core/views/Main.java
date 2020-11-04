@@ -94,6 +94,7 @@ public class Main extends javax.swing.JFrame {
         this.dispose();
         LoginView login = new LoginView();
         login.setVisible(true);
+
     }//GEN-LAST:event_btnLogInActionPerformed
 
     /**
