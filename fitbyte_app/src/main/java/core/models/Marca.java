@@ -12,28 +12,28 @@ package core.models;
  * Version 1.1 of the class
  * For changes please refer to GitHub Documentation
  */
-public class marca {
+public class Marca {
     int ID_MARCA;
     String NOMBRE;
     int PAIS_ID;
 
-    public marca(){
+    public Marca(){
     }
 
-    public marca(int id_marca) {
+    public Marca(int id_marca) {
         this.ID_MARCA = id_marca;
     }
      
-   public marca(String nombre_marca) {
+   public Marca(String nombre_marca) {
         this.NOMBRE = nombre_marca;
     }
 
-    public marca(String nombre_marca, int pais_id) {
+    public Marca(String nombre_marca, int pais_id) {
         this.NOMBRE = nombre_marca;
         this.PAIS_ID = pais_id;
     }
 
-    public marca(int id_marca, String nombre_marca, int pais_id) {
+    public Marca(int id_marca, String nombre_marca, int pais_id) {
         this.ID_MARCA = id_marca;
         this.NOMBRE = nombre_marca;
         this.PAIS_ID = pais_id;

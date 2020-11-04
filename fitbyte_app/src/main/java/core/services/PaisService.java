@@ -20,7 +20,7 @@ import java.util.Scanner;
  * For changes please refer to GitHub Documentation
  */
 
-public class paisService {
+public class PaisService {
      public static final String THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE = "El ID indicado no existe";
     private static final Scanner scanner = new Scanner(System.in);
     private static final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

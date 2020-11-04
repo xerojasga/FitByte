@@ -9,7 +9,7 @@ package core.models;
  *
  * @author developer
  */
-public class ingrediente {
+public class Ingrediente {
     private int ID_INGREDIENTE;
     private String NOMBRE;
     private int MARCA_ID;
@@ -17,25 +17,25 @@ public class ingrediente {
     private int CARBOHIDRATOS;
     private int PROTEINAS;
     
-    public ingrediente(){
+    public Ingrediente(){
     }
     
-     public ingrediente(String nombre_alimento) {
+     public Ingrediente(String nombre_alimento) {
         this.NOMBRE = nombre_alimento;
     }
      
-    public ingrediente(String nombre_alimento, int marca_id) {
+    public Ingrediente(String nombre_alimento, int marca_id) {
         this.NOMBRE = nombre_alimento;
         this.MARCA_ID = marca_id;
     }
     
-    public ingrediente(int id_alimento, String nombre_alimento, int marca_id) {
+    public Ingrediente(int id_alimento, String nombre_alimento, int marca_id) {
         this.ID_INGREDIENTE = id_alimento;
         this.NOMBRE = nombre_alimento;
         this.MARCA_ID = marca_id;
     }
 
-    public ingrediente(int id_alimento, int marca_id, String nombre_alimento, int calorias_alimento, int carbs_alimento, int prot_alimento) {
+    public Ingrediente(int id_alimento, int marca_id, String nombre_alimento, int calorias_alimento, int carbs_alimento, int prot_alimento) {
         this.ID_INGREDIENTE = id_alimento;
         this.MARCA_ID = marca_id;
         this.NOMBRE = nombre_alimento;

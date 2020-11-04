@@ -6,7 +6,7 @@
 package core.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import core.models.marca;
+import core.models.Marca;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * Version 1.1 of the class
  * For changes please refer to GitHub Documentation
  */
-public class marcaDAO {
+public class MarcaDAO {
     
     public static final String SELECT_ALL_SQL = 
             "SELECT ID_MARCA, NOMBRE,PAIS_ID FROM marca";
@@ -38,7 +38,7 @@ public class marcaDAO {
     private static final Connection connection = ConnectionProvider.connection;
 
 
-    public static int create(marca marca){
+    public static int create(Marca marca){
         try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
             statement.setInt(1, marca.getID_MARCA());
             statement.setString(2,marca.getNOMBRE());
@@ -52,14 +52,14 @@ public class marcaDAO {
         }
     }
     
-    public static marca find(int id_marca){
-        marca marca = new marca();
+    public static Marca find(int id_marca){
+        Marca marca = new Marca();
          try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)){
              statement.setInt(1, id_marca);
              if(statement.execute()){
                  try(ResultSet resultset = statement.getResultSet()){
                      if(resultset.next()){
-                         marca = new marca(
+                         marca = new Marca(
                              resultset.getInt("ID_MARCA"),
                              resultset.getString("NOMBRE"),
                              resultset.getInt("PAIS_ID"));
@@ -74,15 +74,15 @@ public class marcaDAO {
          return marca;
     }
     
-    public static ArrayList<marca> findAll(){ 
-        ArrayList<marca> data = new ArrayList<>();
+    public static ArrayList<Marca> findAll(){ 
+        ArrayList<Marca> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        marca  marca;
-                       marca = new marca(
+                        Marca  marca;
+                       marca = new Marca(
                              resultset.getInt("ID_MARCA"),
                              resultset.getString("NOMBRE"),
                              resultset.getInt("PAIS_ID"));
@@ -107,7 +107,7 @@ public class marcaDAO {
         }
     }
     
-    public static int update(marca marca){
+    public static int update(Marca marca){
            try(PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)){
                statement.setString(1,marca.getNOMBRE());
                statement.setInt(2, marca.getPAIS_ID());

@@ -6,7 +6,7 @@
 package core.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import core.models.ingrediente;
+import core.models.Ingrediente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,12 +16,12 @@ import java.util.ArrayList;
 /**
  *
  * @author Xamir
- Based On Xamir's implementation for ingrediente.Java
+ Based On Xamir's implementation for Ingrediente.Java
  Version 1.1 of the class
  For changes please refer to GitHub Documentation
  */
 
-public class ingredienteDAO {
+public class IngredienteDAO {
     
     public static final String SELECT_ALL_SQL = "SELECT  NOMBRE, MARCA_ID FROM ingrediente";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_INGREDIENTE = ?";
@@ -30,14 +30,14 @@ public class ingredienteDAO {
     public static final String DELETE_SQL = "DELETE FROM ingrediente WHERE ID_INGREDIENTE = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-    public static ingrediente find(int id_alimento){        
-        ingrediente alimento = new ingrediente();
+    public static Ingrediente find(int id_alimento){        
+        Ingrediente alimento = new Ingrediente();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setInt(1, id_alimento);   
             if(statement.execute()){
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
-                        alimento = new ingrediente(
+                        alimento = new Ingrediente(
                                 resultset.getInt("ID_INGREDIENTE"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getInt("MARCA_ID"));                    
@@ -52,15 +52,15 @@ public class ingredienteDAO {
             return alimento;
       }
     
-    public static ArrayList<ingrediente> findAll(){ 
-        ArrayList<ingrediente> data = new ArrayList<>();
+    public static ArrayList<Ingrediente> findAll(){ 
+        ArrayList<Ingrediente> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultSet = statement.getResultSet()) {
                     while(resultSet.next()){
-                        ingrediente alimento;
-                        alimento = new ingrediente(
+                        Ingrediente alimento;
+                        alimento = new Ingrediente(
                                 resultSet.getInt("ID_INGREDIENTE"),
                                 resultSet.getString("NOMBRE"),
                                 resultSet.getInt("MARCA_ID")
@@ -76,7 +76,7 @@ public class ingredienteDAO {
         return data;
     }
     
-    public static int create(ingrediente alimento){
+    public static int create(Ingrediente alimento){
         try (PreparedStatement stmnt = connection.prepareStatement(CREATE_SQL)) {
           stmnt.setInt(1,alimento.getMARCA_ID());
           stmnt.setString(2, alimento.getNOMBRE());
@@ -88,7 +88,7 @@ public class ingredienteDAO {
         }        
     }
     
-    public static int update(ingrediente alimento){       
+    public static int update(Ingrediente alimento){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
                 statement.setString(1, alimento.getNOMBRE());
                 statement.setInt(2, alimento.getMARCA_ID());
