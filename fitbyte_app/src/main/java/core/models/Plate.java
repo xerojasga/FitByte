@@ -1,4 +1,4 @@
-package com.core.models;
+package core.models;
 
 /*
 @author kevin

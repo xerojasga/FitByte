@@ -1,4 +1,4 @@
-package com.core.models;
+package core.models;
 
 public class Exercise{
    private int exerciseID;

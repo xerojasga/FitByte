@@ -1,7 +1,7 @@
-package com.core.DAO;
+package core.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import com.core.models.Exercise;
+import core.models.Exercise;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
