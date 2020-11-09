@@ -37,6 +37,14 @@ public class UserRegister extends javax.swing.JFrame {
             model.addElement(pais.getNOMBRE());
         }
         cbxPais.setModel(model);
+        usernameInput.setText("test");
+        nombreInput.setText("test");
+        apellidoInput.setText("test");
+        emailInput.setText("test@gmail.com");
+        alturaInput.setText("180");
+        pesoInput.setText("50");
+        edadInput.setText("30");
+        descripcionInput.setText("soy un usuario de test");
     }
     public static Usuario usuario = new Usuario();
     /**
@@ -269,6 +277,7 @@ public class UserRegister extends javax.swing.JFrame {
         usuario.setPassword(Hash.sha1(password));
         usuario.setDescripcion(descripcionInput.getText());
         if(UsuarioDAO.create(usuario)>0){
+            usuario.setId_usuario(UsuarioDAO.find(usuario.getUsername()).getId_usuario());
             this.dispose();
             Home home = new Home();
             home.setVisible(true);

@@ -5,9 +5,11 @@
  */
 package auth.views;
 
+import core.views.BusquedaUsuario;
 import entrenador.DAO.EntrenadorDAO;
 import entrenador.models.Entrenador;
 import user.models.Usuario;
+import user.views.ConfigUsuario;
 
 /**
  *
@@ -18,18 +20,22 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    public static Usuario usuario_actual = new Usuario();
+    
     public Home() {
         initComponents();
         this.setLocationRelativeTo(null);
         Usuario usuario = new Usuario();
+        System.out.println(UserRegister.usuario.getUsername());
+        
         if(UserRegister.usuario.getUsername() == null ){
             usuario = LoginView.usuario;
-        }else if(LoginView.usuario.getUsername() == null){
-            usuario = UserRegister.usuario;
         }else{
-            usuario.setUsername("error");
+            System.out.println("estamos aqui");
+            usuario = UserRegister.usuario;
         }
         
+        usuario_actual = usuario;
         usernameLabel.setText(usuario.getUsername());
         nameLabel.setText(usuario.getNombre());
         lastNameLabel.setText(usuario.getApellido());
@@ -38,8 +44,12 @@ public class Home extends javax.swing.JFrame {
         if( entrenador.getCalificacion() == 0){
            calificationLabel.setText("");
            rankLabel.setText("");
+           btnBuscarEntrenador.setVisible(true);
+           btnSolicitudesRecibidas.setVisible(false);
         }else{
-        rankLabel.setText(String.valueOf(entrenador.getCalificacion()));
+            rankLabel.setText(String.valueOf(entrenador.getCalificacion()));
+            btnBuscarEntrenador.setVisible(false);
+            btnSolicitudesRecibidas.setVisible(true);
         }
     }
 
@@ -62,6 +72,9 @@ public class Home extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         calificationLabel = new javax.swing.JLabel();
+        btnConfigUsuario = new javax.swing.JButton();
+        btnBuscarEntrenador = new javax.swing.JButton();
+        btnSolicitudesRecibidas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +98,22 @@ public class Home extends javax.swing.JFrame {
 
         calificationLabel.setText("Calificación:");
 
+        btnConfigUsuario.setText("Configuración Cuenta");
+        btnConfigUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfigUsuarioActionPerformed(evt);
+            }
+        });
+
+        btnBuscarEntrenador.setText("Buscador entrenador");
+        btnBuscarEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarEntrenadorActionPerformed(evt);
+            }
+        });
+
+        btnSolicitudesRecibidas.setText("Solicitudes recibidas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,17 +121,15 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(25, 178, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(calificationLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(descriptionLabel)
                             .addComponent(rankLabel, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -114,6 +141,14 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(usernameLabel)
                         .addGap(2, 2, 2)))
                 .addGap(73, 73, 73))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConfigUsuario)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSolicitudesRecibidas)
+                    .addComponent(btnBuscarEntrenador))
+                .addGap(17, 17, 17))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,15 +169,37 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(descriptionLabel)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rankLabel)
                     .addComponent(calificationLabel))
-                .addGap(45, 45, 45))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(btnBuscarEntrenador))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSolicitudesRecibidas)
+                            .addComponent(btnConfigUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntrenadorActionPerformed
+        this.dispose();
+        BusquedaUsuario buscador = new BusquedaUsuario();
+        buscador.setVisible(true);
+    }//GEN-LAST:event_btnBuscarEntrenadorActionPerformed
+
+    private void btnConfigUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigUsuarioActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        ConfigUsuario conf = new ConfigUsuario();
+        conf.setVisible(true);
+    }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +237,9 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscarEntrenador;
+    private javax.swing.JButton btnConfigUsuario;
+    private javax.swing.JButton btnSolicitudesRecibidas;
     private javax.swing.JLabel calificationLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel jLabel1;

@@ -22,6 +22,8 @@ public class UsuarioDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `ID_USUARIO` = ?";
     public static final String SELECT_SQL_NAME = SELECT_ALL_SQL + " WHERE `USERNAME` = ?";
+    public static final String SELECT_ALL_SQL_NAME = SELECT_ALL_SQL + " WHERE `USERNAME` LIKE ?";
+    public static final String SELECT_ALL_ENTRENADOR_SQL_NAME = "SELECT * FROM `USUARIO` JOIN `ENTRENADOR` ON `USUARIO`.`ID_USUARIO` = `ENTRENADOR`.`USUARIO_ID` WHERE `USUARIO`.`USERNAME` LIKE ? ";
     public static final String CREATE_SQL = 
             "INSERT INTO `USUARIO`(`USERNAME`, `NOMBRE`, `APELLIDO`, `EMAIL`, `PAIS_ID`, `ALTURA`, `PESO`, `EDAD`, `ADMIN`, `PASSWORD`, `DESCRIPCION`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_SQL = 
@@ -40,7 +42,7 @@ public class UsuarioDAO {
                     if(resultset.next()){
                         usuario = new Usuario(
                                 resultset.getInt("ID_USUARIO"),
-                                resultset.getString("USERNAME"),
+                                resultset.getString("USUARIO.USERNAME"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getString("APELLIDO"),
                                 resultset.getString("EMAIL"),
@@ -95,7 +97,74 @@ public class UsuarioDAO {
         }
             return usuario;
       }
-    
+    public static ArrayList<Usuario> findAll(String username){
+        ArrayList<Usuario> data = new ArrayList<>();
+            
+         try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL_NAME)) {
+            String query = username + "_%";
+            statement.setString(1, query); 
+            if (statement.execute()) {
+                try (ResultSet resultset = statement.getResultSet()) {
+                    while(resultset.next()){
+                        Usuario usuario;
+                        usuario = new Usuario(
+                                resultset.getInt("ID_USUARIO"),
+                                resultset.getString("USERNAME"),
+                                resultset.getString("NOMBRE"),
+                                resultset.getString("APELLIDO"),
+                                resultset.getString("EMAIL"),
+                                resultset.getInt("PAIS_ID"),
+                                resultset.getInt("ALTURA"),
+                                resultset.getInt("PESO"),
+                                resultset.getInt("EDAD"),
+                                resultset.getBoolean("ADMIN"),
+                                resultset.getString("PASSWORD"),
+                                resultset.getString("DESCRIPCION")
+                        );
+                        data.add(usuario);
+                    }
+                }
+            }           
+        }catch(SQLException e){
+            System.out.println("no se pudieron traer los usuarios");
+            System.out.println(e);
+        }
+        return data;
+    }
+    public static ArrayList<Usuario> findAllEntrenador(String username){
+        ArrayList<Usuario> data = new ArrayList<>();
+         try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ENTRENADOR_SQL_NAME)) {
+            String query = username + "_%";
+            statement.setString(1, query);
+            
+            if (statement.execute()) {
+                try (ResultSet resultset = statement.getResultSet()) {
+                    while(resultset.next()){
+                        Usuario usuario;
+                        usuario = new Usuario(
+                                resultset.getInt("ID_ENTRENADOR"),
+                                resultset.getString("USERNAME"),
+                                resultset.getString("NOMBRE"),
+                                resultset.getString("APELLIDO"),
+                                resultset.getString("EMAIL"),
+                                resultset.getInt("PAIS_ID"),
+                                resultset.getInt("ALTURA"),
+                                resultset.getInt("PESO"),
+                                resultset.getInt("EDAD"),
+                                resultset.getBoolean("ADMIN"),
+                                resultset.getString("PASSWORD"),
+                                resultset.getString("DESCRIPCION")
+                        );
+                        data.add(usuario);
+                    }
+                }
+            }           
+        }catch(SQLException e){
+            System.out.println("no se pudieron traer los usuarios");
+            System.out.println(e);
+        }
+        return data;
+    }
     public static ArrayList<Usuario> findAll(){ 
         ArrayList<Usuario> data = new ArrayList<>();
         
