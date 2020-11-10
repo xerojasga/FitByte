@@ -15,20 +15,20 @@ public class Resena {
     int entrenador_id;
     String contenido;
     
-    Resena(){
+    public Resena(){
     }
-    Resena(int id_resena){
+    public Resena(int id_resena){
         this.id_resena = id_resena;
     }
-    Resena(int id_resena, int usuario_id){
+    public Resena(int id_resena, int usuario_id){
         this(id_resena);
         this.usuario_id = usuario_id;
     }
-    Resena(int id_resena, int usuario_id, int entrenador_id){
+    public Resena(int id_resena, int usuario_id, int entrenador_id){
         this(id_resena, usuario_id);
         this.entrenador_id = entrenador_id;
     }
-    Resena(int id_resena, int usuario_id, int entrenador_id, String contenido){
+    public Resena(int id_resena, int usuario_id, int entrenador_id, String contenido){
         this(id_resena, usuario_id, entrenador_id);
         this.contenido = contenido;
     }
