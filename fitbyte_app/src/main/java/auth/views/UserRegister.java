@@ -5,6 +5,7 @@
  */
 package auth.views;
 
+import core.views.Home;
 import auth.models.Hash;
 import core.DAO.PaisDAO;
 import core.models.Pais;

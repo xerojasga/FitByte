@@ -5,6 +5,7 @@
  */
 package auth.views;
 
+import core.views.Home;
 import auth.DAO.LoginDAO;
 import auth.models.Hash;
 import javax.swing.JOptionPane;

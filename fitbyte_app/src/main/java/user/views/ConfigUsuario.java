@@ -6,7 +6,7 @@
 package user.views;
 
 import auth.models.Hash;
-import auth.views.Home;
+import core.views.Home;
 import static auth.views.UserRegister.usuario;
 import core.DAO.PaisDAO;
 import core.models.Pais;

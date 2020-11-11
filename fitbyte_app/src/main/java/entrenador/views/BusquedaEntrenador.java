@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core.views;
+package entrenador.views;
 
-import auth.views.Home;
+import core.views.Home;
 import entrenador.DAO.SolicitudDAO;
 import entrenador.models.Solicitud;
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ import user.models.Usuario;
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class BusquedaUsuario extends javax.swing.JFrame {
+public class BusquedaEntrenador extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     
     public static Usuario usuario = new Usuario();
     /**
      * Creates new form BusquedaUsuario
      */
-    public BusquedaUsuario() {
+    public BusquedaEntrenador() {
         initComponents();
         ArrayList<Object> columnas = new ArrayList<Object>();
         columnas.add("ID");
@@ -194,20 +194,21 @@ public class BusquedaUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BusquedaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BusquedaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BusquedaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BusquedaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BusquedaUsuario().setVisible(true);
+                new BusquedaEntrenador().setVisible(true);
             }
         });
     }

@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package auth.views;
+package core.views;
 
-import core.views.BusquedaUsuario;
+import auth.views.LoginView;
+import auth.views.UserRegister;
+import entrenador.views.BusquedaEntrenador;
 import entrenador.DAO.EntrenadorDAO;
 import entrenador.models.Entrenador;
 import user.models.Usuario;
@@ -190,7 +192,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnBuscarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntrenadorActionPerformed
         this.dispose();
-        BusquedaUsuario buscador = new BusquedaUsuario();
+        BusquedaEntrenador buscador = new BusquedaEntrenador();
         buscador.setVisible(true);
     }//GEN-LAST:event_btnBuscarEntrenadorActionPerformed
 
