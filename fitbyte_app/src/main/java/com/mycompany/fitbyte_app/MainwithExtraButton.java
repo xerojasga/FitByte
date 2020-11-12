@@ -6,7 +6,7 @@
 package com.mycompany.fitbyte_app;
 
 import auth.views.LoginView;
-import auth.views.UserRegister;
+import auth.views.UserRegisterView;
 import core.views.fitbyte_appGUI;
 
 /**
@@ -101,7 +101,7 @@ public class MainwithExtraButton extends javax.swing.JFrame {
 
     private void btnUserRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserRegisterActionPerformed
         this.dispose();
-        UserRegister register = new UserRegister();
+        UserRegisterView register = new UserRegisterView();
         register.setVisible(true);
     }//GEN-LAST:event_btnUserRegisterActionPerformed
 

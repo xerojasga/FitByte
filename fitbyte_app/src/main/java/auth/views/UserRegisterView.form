@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnRegister" alignment="1" min="-2" pref="409" max="-2" attributes="0"/>
+                  <Component id="registerBtn" alignment="1" min="-2" pref="409" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
@@ -51,15 +51,15 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="apellidoInput" max="32767" attributes="0"/>
-                                      <Component id="nombreInput" max="32767" attributes="0"/>
+                                      <Component id="last_nameInput" max="32767" attributes="0"/>
+                                      <Component id="nameInput" max="32767" attributes="0"/>
                                       <Component id="emailInput" max="32767" attributes="0"/>
                                       <Component id="usernameInput" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jScrollPane1" pref="189" max="32767" attributes="0"/>
-                                      <Component id="cbxPais" max="32767" attributes="0"/>
-                                      <Component id="alturaInput" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pesoInput" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="edadInput" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="countryCbx" max="32767" attributes="0"/>
+                                      <Component id="heightInput" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="weightInput" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ageInput" alignment="0" max="32767" attributes="0"/>
                                       <Component id="passwordInput" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -90,12 +90,12 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nombreInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameInput" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="apellidoInput" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="last_nameInput" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -105,22 +105,22 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxPais" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="countryCbx" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                          <Component id="alturaInput" min="-2" max="-2" attributes="0"/>
+                          <Component id="heightInput" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <Component id="pesoInput" min="-2" max="-2" attributes="0"/>
+                          <Component id="weightInput" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="edadInput" min="-2" max="-2" attributes="0"/>
+                      <Component id="ageInput" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -141,7 +141,7 @@
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
+              <Component id="registerBtn" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -153,9 +153,9 @@
         <Property name="text" type="java.lang.String" value="Registro Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nombreInput">
+    <Component class="javax.swing.JTextField" name="nameInput">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreInputActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameInputActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -163,7 +163,7 @@
         <Property name="text" type="java.lang.String" value="Nombre de Usuario"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="apellidoInput">
+    <Component class="javax.swing.JTextField" name="last_nameInput">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -222,12 +222,12 @@
         <Property name="text" type="java.lang.String" value="Descipcion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnRegister">
+    <Component class="javax.swing.JButton" name="registerBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrarme!"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegisterActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerBtnActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -237,7 +237,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="descripcionInput">
+        <Component class="javax.swing.JTextArea" name="descriptionInput">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -245,24 +245,24 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JComboBox" name="cbxPais">
+    <Component class="javax.swing.JComboBox" name="countryCbx">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxPaisActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="countryCbxActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="alturaInput">
+    <Component class="javax.swing.JTextField" name="heightInput">
     </Component>
-    <Component class="javax.swing.JTextField" name="pesoInput">
+    <Component class="javax.swing.JTextField" name="weightInput">
     </Component>
-    <Component class="javax.swing.JTextField" name="edadInput">
+    <Component class="javax.swing.JTextField" name="ageInput">
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordInput">
     </Component>

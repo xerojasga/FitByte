@@ -5,12 +5,12 @@
  */
 package auth.views;
 
-import core.views.Home;
+import core.views.HomeView;
 import auth.DAO.LoginDAO;
 import auth.models.Hash;
 import javax.swing.JOptionPane;
-import user.DAO.UsuarioDAO;
-import user.models.Usuario;
+import user.DAO.UserDAO;
+import user.models.User;
 
 /**
  *
@@ -25,7 +25,7 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    public static Usuario usuario;
+    public static User current_user;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,17 +103,17 @@ public class LoginView extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameInputActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        Usuario user_login = new Usuario();
+        User user_login = new User();
         String username = usernameInput.getText();
         String password = new String(passwordInput.getPassword());
         if(!username.equals("") && !password.equals("")){
             String encryptedPassword = Hash.sha1(password);
             user_login.setUsername(username);
             user_login.setPassword(encryptedPassword);
-            if(LoginDAO.ingresar(user_login)){
+            if(LoginDAO.login(user_login)){
                 this.dispose();
-                usuario = UsuarioDAO.find(username);
-                Home home = new Home();
+                current_user = UserDAO.find(username);
+                HomeView home = new HomeView();
                 home.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");

@@ -7,7 +7,7 @@
 package entrenador.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import entrenador.models.Entrenador;
+import entrenador.models.Couch;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * 
  * @author developer
  */
-public class EntrenadorDAO {
+public class CouchDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM ENTRENADOR";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USUARIO_ID` = ?";
     public static final String CREATE_SQL = 
@@ -30,14 +30,14 @@ public class EntrenadorDAO {
     private static final Connection connection = ConnectionProvider.connection;
     
     
-    public static Entrenador find(int id_usuario){        
-        Entrenador entrenador = new Entrenador();
+    public static Couch find(int id_user){        
+        Couch couch = new Couch();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
-            statement.setInt(1, id_usuario);   
+            statement.setInt(1, id_user);   
             if(statement.execute()){
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
-                        entrenador = new Entrenador(
+                        couch = new Couch(
                                 resultset.getInt("ID_ENTRENADOR"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
@@ -51,24 +51,24 @@ public class EntrenadorDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-            return entrenador;
+            return couch;
       }
     
-    public static ArrayList<Entrenador> findAll(){ 
-        ArrayList<Entrenador> data = new ArrayList<>();
+    public static ArrayList<Couch> findAll(){ 
+        ArrayList<Couch> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        Entrenador entrenador;
-                        entrenador = new Entrenador(
+                        Couch couch;
+                        couch = new Couch(
                                 resultset.getInt("ID_ENTRENADOR"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
                                 resultset.getInt("CALIFICACION")
                         );
-                        data.add(entrenador);
+                        data.add(couch);
                     }
                 }
             }           
@@ -80,11 +80,11 @@ public class EntrenadorDAO {
     }
     
     
-    public static int create(Entrenador entrenador){
+    public static int create(Couch couch){
         try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
-            statement.setInt(1, entrenador.getUsuario_id()); 
-            statement.setBoolean(2, entrenador.isVerificacion());    
-            statement.setInt(3, entrenador.getCalificacion()); 
+            statement.setInt(1, couch.getUser_id()); 
+            statement.setBoolean(2, couch.isVerificated());    
+            statement.setInt(3, couch.getCalification()); 
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -93,12 +93,12 @@ public class EntrenadorDAO {
     }
     
     
-    public static int update(Entrenador entrenador){       
+    public static int update(Couch couch){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-                statement.setInt(1, entrenador.getUsuario_id()); 
-                statement.setBoolean(2, entrenador.isVerificacion());    
-                statement.setInt(3, entrenador.getCalificacion());
-                statement.setInt(4, entrenador.getId_entrenador());
+                statement.setInt(1, couch.getUser_id()); 
+                statement.setBoolean(2, couch.isVerificated());    
+                statement.setInt(3, couch.getCalification());
+                statement.setInt(4, couch.getId_couch());
                 return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);
@@ -107,10 +107,10 @@ public class EntrenadorDAO {
     
     }
 
-    public static int delete(int id_entrenador){
+    public static int delete(int id_couch){
         
         try (PreparedStatement statement = connection.prepareStatement(DELETE_SQL)) {
-             statement.setInt(1, id_entrenador);
+             statement.setInt(1, id_couch);
              return statement.executeUpdate();             
         }catch(SQLException e) {
             System.out.println(e);

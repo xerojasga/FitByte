@@ -5,20 +5,20 @@
  */
 package com.mycompany.fitbyte_app;
 
-import core.views.Home;
+import core.views.HomeView;
 import auth.views.LoginView;
-import auth.views.UserRegister;
+import auth.views.UserRegisterView;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Main extends javax.swing.JFrame {
+public class MainView extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
-    public Main() {
+    public MainView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -33,24 +33,24 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnLogIn = new javax.swing.JButton();
-        btnUserRegister = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
+        userRegisterBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("FitByte");
 
-        btnLogIn.setText("Iniciar Sesión");
-        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+        loginBtn.setText("Iniciar Sesión");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogInActionPerformed(evt);
+                loginBtnActionPerformed(evt);
             }
         });
 
-        btnUserRegister.setText("Registrarte");
-        btnUserRegister.addActionListener(new java.awt.event.ActionListener() {
+        userRegisterBtn.setText("Registrarte");
+        userRegisterBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUserRegisterActionPerformed(evt);
+                userRegisterBtnActionPerformed(evt);
             }
         });
 
@@ -64,9 +64,9 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(btnLogIn)
+                .addComponent(loginBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addComponent(btnUserRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userRegisterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
@@ -76,26 +76,26 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(149, 149, 149)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUserRegister))
+                    .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(userRegisterBtn))
                 .addGap(71, 71, 71))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUserRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserRegisterActionPerformed
+    private void userRegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRegisterBtnActionPerformed
         this.dispose();
-        UserRegister register = new UserRegister();
+        UserRegisterView register = new UserRegisterView();
         register.setVisible(true);
-    }//GEN-LAST:event_btnUserRegisterActionPerformed
+    }//GEN-LAST:event_userRegisterBtnActionPerformed
 
-    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         this.dispose();
         LoginView login = new LoginView();
         login.setVisible(true);
 
-    }//GEN-LAST:event_btnLogInActionPerformed
+    }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,27 +114,28 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                new MainView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogIn;
-    private javax.swing.JButton btnUserRegister;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JButton userRegisterBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,50 +6,50 @@
 package core.views;
 
 import auth.views.LoginView;
-import auth.views.UserRegister;
-import entrenador.views.BusquedaEntrenador;
-import entrenador.DAO.EntrenadorDAO;
-import entrenador.models.Entrenador;
-import user.models.Usuario;
-import user.views.ConfigUsuario;
+import auth.views.UserRegisterView;
+import entrenador.views.SearchCoachView;
+import entrenador.DAO.CouchDAO;
+import entrenador.models.Couch;
+import user.models.User;
+import user.views.UserConfigView;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Home extends javax.swing.JFrame {
+public class HomeView extends javax.swing.JFrame {
 
     /**
-     * Creates new form Home
+     * Creates new form HomeView
      */
-    public static Usuario usuario_actual = new Usuario();
+    public static User current_user = new User();
     
-    public Home() {
+    public HomeView() {
         initComponents();
         this.setLocationRelativeTo(null);
-        Usuario usuario = new Usuario();
-        System.out.println(UserRegister.usuario.getUsername());
+        User user = new User();
+        System.out.println(UserRegisterView.current_user.getUsername());
         
-        if(UserRegister.usuario.getUsername() == null ){
-            usuario = LoginView.usuario;
+        if(UserRegisterView.current_user.getUsername() == null ){
+            user = LoginView.current_user;
         }else{
             System.out.println("estamos aqui");
-            usuario = UserRegister.usuario;
+            user = UserRegisterView.current_user;
         }
         
-        usuario_actual = usuario;
-        usernameLabel.setText(usuario.getUsername());
-        nameLabel.setText(usuario.getNombre());
-        lastNameLabel.setText(usuario.getApellido());
-        descriptionLabel.setText(usuario.getDescripcion());
-        Entrenador entrenador = EntrenadorDAO.find(usuario.getId_usuario());
-        if( entrenador.getCalificacion() == 0){
+        current_user = user;
+        usernameLabel.setText(user.getUsername());
+        nameLabel.setText(user.getName());
+        lastNameLabel.setText(user.getLast_name());
+        descriptionLabel.setText(user.getDescription());
+        Couch coach = CouchDAO.find(user.getId_user());
+        if( coach.getCalification() == 0){
            calificationLabel.setText("");
            rankLabel.setText("");
            btnBuscarEntrenador.setVisible(true);
            btnSolicitudesRecibidas.setVisible(false);
         }else{
-            rankLabel.setText(String.valueOf(entrenador.getCalificacion()));
+            rankLabel.setText(String.valueOf(coach.getCalification()));
             btnBuscarEntrenador.setVisible(false);
             btnSolicitudesRecibidas.setVisible(true);
         }
@@ -192,14 +192,14 @@ public class Home extends javax.swing.JFrame {
 
     private void btnBuscarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntrenadorActionPerformed
         this.dispose();
-        BusquedaEntrenador buscador = new BusquedaEntrenador();
+        SearchCoachView buscador = new SearchCoachView();
         buscador.setVisible(true);
     }//GEN-LAST:event_btnBuscarEntrenadorActionPerformed
 
     private void btnConfigUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigUsuarioActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        ConfigUsuario conf = new ConfigUsuario();
+        UserConfigView conf = new UserConfigView();
         conf.setVisible(true);
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
@@ -220,20 +220,21 @@ public class Home extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HomeView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new HomeView().setVisible(true);
             }
         });
     }

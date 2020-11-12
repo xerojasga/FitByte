@@ -6,28 +6,28 @@
 package user.views;
 
 import auth.models.Hash;
-import core.views.Home;
-import static auth.views.UserRegister.usuario;
+import core.views.HomeView;
 import core.DAO.PaisDAO;
 import core.models.Pais;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-import user.DAO.UsuarioDAO;
-import user.models.Usuario;
+import user.DAO.UserDAO;
+import user.models.User;
+import static auth.views.UserRegisterView.current_user;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class ConfigUsuario extends javax.swing.JFrame {
+public class UserConfigView extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConfigUsuario
+     * Creates new form UserConfigView
      */
-    public static Usuario usuario = new Usuario(); 
-    public ConfigUsuario() {
-        usuario = Home.usuario_actual;
+    public static User usuario = new User(); 
+    public UserConfigView() {
+        usuario = HomeView.current_user;
         initComponents();
         this.setLocationRelativeTo(null);
         ArrayList<Pais> paises = PaisDAO.findAll();
@@ -37,15 +37,15 @@ public class ConfigUsuario extends javax.swing.JFrame {
         }
         cbxPais.setModel(model);        
         usernameInput.setText(usuario.getUsername());
-        nombreInput.setText(usuario.getNombre());
-        apellidoInput.setText(usuario.getApellido());
+        nombreInput.setText(usuario.getName());
+        apellidoInput.setText(usuario.getLast_name());
         emailInput.setText(usuario.getEmail());
-        Pais pais = PaisDAO.find(usuario.getPais_id());
+        Pais pais = PaisDAO.find(usuario.getCountry_id());
         cbxPais.setSelectedIndex(pais.getID_PAIS()-1);
-        alturaInput.setText(String.valueOf(usuario.getAltura()));
-        pesoInput.setText(String.valueOf(usuario.getPeso()));
-        edadInput.setText(String.valueOf(usuario.getEdad()));
-        descripcionInput.setText(usuario.getDescripcion());
+        alturaInput.setText(String.valueOf(usuario.getHeight()));
+        pesoInput.setText(String.valueOf(usuario.getWeight()));
+        edadInput.setText(String.valueOf(usuario.getAge()));
+        descripcionInput.setText(usuario.getDescription());
         
         System.out.println(usernameInput.getText());
     }
@@ -215,11 +215,12 @@ public class ConfigUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(new_passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(new_passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(apellidoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,17 +280,17 @@ public class ConfigUsuario extends javax.swing.JFrame {
             String name = ((String)item);
             Pais pais = PaisDAO.find(name);
             usuario.setUsername(usernameInput.getText());
-            usuario.setNombre(nombreInput.getText());
-            usuario.setApellido(apellidoInput.getText());
+            usuario.setName(nombreInput.getText());
+            usuario.setLast_name(apellidoInput.getText());
             usuario.setEmail(emailInput.getText());
-            usuario.setPais_id(pais.getID_PAIS());
-            usuario.setAltura(Integer.parseInt(alturaInput.getText()));
-            usuario.setPeso(Integer.parseInt(pesoInput.getText()));
-            usuario.setEdad(Integer.parseInt(edadInput.getText()));
-            usuario.setDescripcion(descripcionInput.getText());
-            if(UsuarioDAO.update(usuario)>0){
+            usuario.setCountry_id(pais.getID_PAIS());
+            usuario.setHeight(Integer.parseInt(alturaInput.getText()));
+            usuario.setWeight(Integer.parseInt(pesoInput.getText()));
+            usuario.setAge(Integer.parseInt(edadInput.getText()));
+            usuario.setDescription(descripcionInput.getText());
+            if(UserDAO.update(usuario)>0){
                 this.dispose();
-                Home home = new Home();
+                HomeView home = new HomeView();
                 home.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(this, "Error");
@@ -300,7 +301,7 @@ public class ConfigUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void passwordInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordInputActionPerformed
-        UsuarioDAO.delete(usuario.getId_usuario());
+        UserDAO.delete(usuario.getId_user());
     }//GEN-LAST:event_passwordInputActionPerformed
 
     /**
@@ -320,20 +321,23 @@ public class ConfigUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConfigUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserConfigView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConfigUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserConfigView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConfigUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserConfigView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConfigUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UserConfigView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConfigUsuario().setVisible(true);
+                new UserConfigView().setVisible(true);
             }
         });
     }

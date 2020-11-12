@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import user.models.Usuario;
+import user.models.User;
 
 /**
  * 
@@ -22,7 +22,7 @@ public class LoginDAO {
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USERNAME` = ?";
     private static final Connection connection = ConnectionProvider.connection;
     
-    public static boolean ingresar(Usuario usuario){
+    public static boolean login(User usuario){
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setString(1, usuario.getUsername());   
             if(statement.execute()){

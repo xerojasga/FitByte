@@ -8,7 +8,7 @@ package entrenador.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
 import core.models.Pais;
-import entrenador.models.Solicitud;
+import entrenador.models.Request;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class SolicitudDAO {
+public class RequestDAO {
     
     public static final String SELECT_ALL_SQL = "SELECT * FROM `SOLICITUD`  ";
     public static final String SELECT_SQL_ENTRENADOR = SELECT_ALL_SQL + " WHERE `U_ENTRENADOR_ID` = ?";
@@ -29,20 +29,20 @@ public class SolicitudDAO {
     public static final String DELETE_SQL = "DELETE FROM SOLICITUD WHERE ID_SOLICITUD = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-    public static ArrayList<Solicitud> findEntrenador(int id_entrenador){        
-        ArrayList<Solicitud> solicitudes = new ArrayList<>();
+    public static ArrayList<Request> findCoach(int id_coach){        
+        ArrayList<Request> requests = new ArrayList<>();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_ENTRENADOR)){
-            statement.setInt(1,id_entrenador);
+            statement.setInt(1,id_coach);
              if(statement.execute()){
                  try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        Solicitud solicitud;
-                        solicitud = new Solicitud(
+                        Request request;
+                        request = new Request(
                            resultset.getInt("USUARIO_ID"),
                            resultset.getInt("U_ENTRENADOR_ID`"),
                            resultset.getBoolean("ACEPTADA")
                         );
-                        solicitudes.add(solicitud);
+                        requests.add(request);
                     }
                  } catch(SQLException ex){
                      System.out.println(ex);
@@ -51,23 +51,23 @@ public class SolicitudDAO {
         }catch(SQLException ex){
            System.out.println(ex);
         }
-        return solicitudes;
+        return requests;
     }
     
-    public static ArrayList<Solicitud> findusuario(int id_usuario){        
-        ArrayList<Solicitud> solicitudes = new ArrayList<>();
+    public static ArrayList<Request> findUser(int id_user){        
+        ArrayList<Request> requests = new ArrayList<>();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_ENTRENADOR)){
-            statement.setInt(1,id_usuario);
+            statement.setInt(1,id_user);
              if(statement.execute()){
                  try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        Solicitud solicitud;
-                        solicitud = new Solicitud(
+                        Request request;
+                        request = new Request(
                            resultset.getInt("USUARIO_ID"),
                            resultset.getInt("U_ENTRENADOR_ID`"),
                            resultset.getBoolean("ACEPTADA")
                         );
-                        solicitudes.add(solicitud);
+                        requests.add(request);
                     }
                  } catch(SQLException ex){
                      System.out.println(ex);
@@ -76,24 +76,24 @@ public class SolicitudDAO {
         }catch(SQLException ex){
            System.out.println(ex);
         }
-        return solicitudes;
+        return requests;
     }
         
-    public static ArrayList<Solicitud> findAll(){ 
-        ArrayList<Solicitud> data = new ArrayList<>();
+    public static ArrayList<Request> findAll(){ 
+        ArrayList<Request> requests = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
              
             if (statement.execute()) {
                 try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        Solicitud solicitud;
-                        solicitud = new Solicitud(
+                        Request request;
+                        request = new Request(
                            resultset.getInt("USUARIO_ID"),
                            resultset.getInt("U_ENTRENADOR_ID`"),
                            resultset.getBoolean("ACEPTADA")
                         );
-                        data.add(solicitud);
+                        requests.add(request);
                     }
                 }
             }           
@@ -101,14 +101,14 @@ public class SolicitudDAO {
             System.out.println("No se pudieron traer las solicitudes");
             System.out.println(e);
         }
-        return data;
+        return requests;
     }
     
-    public static int create(Solicitud solicitud){
+    public static int create(Request request){
         try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
-            statement.setInt(1,solicitud.getUsuario_id());
-            statement.setInt(2,solicitud.getU_entrenador_id());
-            statement.setBoolean(3, solicitud.isAceptada());
+            statement.setInt(1,request.getUser_id());
+            statement.setInt(2,request.getCoach_id());
+            statement.setBoolean(3, request.isAccepted());
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -117,12 +117,12 @@ public class SolicitudDAO {
     }
     //pendiente
     
-     public static int update(Solicitud solicitud){       
+     public static int update(Request request){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-            statement.setInt(1,solicitud.getUsuario_id());
-            statement.setInt(2,solicitud.getU_entrenador_id());
-            statement.setBoolean(3, solicitud.isAceptada());
-            statement.setInt(4, solicitud.getU_entrenador_id());
+            statement.setInt(1,request.getUser_id());
+            statement.setInt(2,request.getCoach_id());
+            statement.setBoolean(3, request.isAccepted());
+            statement.setInt(4, request.getCoach_id());
             return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);
@@ -131,9 +131,9 @@ public class SolicitudDAO {
     
     }
     
-     public static int delete(int id_solicitud){
+     public static int delete(int id_request){
         try (PreparedStatement statement = connection.prepareStatement(DELETE_SQL)) {
-             statement.setInt(1, id_solicitud);
+             statement.setInt(1, id_request);
              return statement.executeUpdate();             
         }catch(SQLException e) {
             System.out.println(e);

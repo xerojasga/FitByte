@@ -6,8 +6,8 @@
 
 package entrenador.service;
 
-import entrenador.DAO.EntrenadorDAO;
-import entrenador.models.Entrenador;
+import entrenador.DAO.CouchDAO;
+import entrenador.models.Couch;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,45 +15,45 @@ import java.util.Scanner;
  * 
  * @author developer
  */
-public class EntrenadorService {
+public class CoachService {
     public static final String THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE = "El ID indicado no existe";
     private static final Scanner scanner = new Scanner(System.in);
     
     public static void find(){
         System.out.println("indica el id del entrenador a mostrar (0 oara todos los entrenadores) \n >");
-        int id_entrenador = scanner.nextInt();
-        if(id_entrenador != 0){
+        int id_coach = scanner.nextInt();
+        if(id_coach != 0){
             scanner.nextLine(); // Eat enter
-            Entrenador entrenador = EntrenadorDAO.find(id_entrenador);
-            if(entrenador != null){
-                System.out.println("ID entrenador: "+ entrenador.getId_entrenador() );
-                System.out.println("id usuario : "+ entrenador.getUsuario_id());
-                System.out.println("veridicado : " + entrenador.isVerificacion());
-                System.out.println("calificacion : " + entrenador.getCalificacion());
+            Couch coach = CouchDAO.find(id_coach);
+            if(coach != null){
+                System.out.println("ID entrenador: "+ coach.getId_couch() );
+                System.out.println("id usuario : "+ coach.getUser_id());
+                System.out.println("veridicado : " + coach.isVerificated());
+                System.out.println("calificacion : " + coach.getCalification());
             }else{
                 System.out.println(THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE);    
             }
         }else{
-            ArrayList<Entrenador> data = EntrenadorDAO.findAll();
-            for(Entrenador entrenador : data){
-                System.out.println("ID entrenador: "+ entrenador.getId_entrenador() );
-                System.out.println("id usuario : "+ entrenador.getUsuario_id());
-                System.out.println("veridicado : " + entrenador.isVerificacion());
-                System.out.println("calificacion : " + entrenador.getCalificacion());
+            ArrayList<Couch> data = CouchDAO.findAll();
+            for(Couch coach : data){
+                System.out.println("ID entrenador: "+ coach.getId_couch() );
+                System.out.println("id usuario : "+ coach.getUser_id());
+                System.out.println("veridicado : " + coach.isVerificated());
+                System.out.println("calificacion : " + coach.getCalification());
             }
         }
     }
     
     public static void create(){
-        Entrenador registro = new Entrenador();
+        Couch coach = new Couch();
         System.out.println("------------------------");
         System.out.println("Escribe el id de usuario del entrenador");
-        registro.setUsuario_id(scanner.nextInt());
+        coach.setUser_id(scanner.nextInt());
         System.out.println("Tu entrenador está verificado? (true/false)");
-        registro.setVerificacion(scanner.nextBoolean());
+        coach.setVerificated(scanner.nextBoolean());
         System.out.println("Escribe la calificación del entrenador");
-        registro.setCalificacion(scanner.nextInt());
-        if(EntrenadorDAO.create(registro)>0){
+        coach.setCalification(scanner.nextInt());
+        if(CouchDAO.create(coach)>0){
             System.out.println("El entrenador fue creado");
         }else{
             System.out.println("Hubo un error al crear el entrenador");
@@ -63,40 +63,40 @@ public class EntrenadorService {
     public static void update(){
         int opcion;
         System.out.println("indica el id del entrenador a actualizar");
-        Entrenador entrenador = EntrenadorDAO.find(scanner.nextInt());
+        Couch coach = CouchDAO.find(scanner.nextInt());
         System.out.println("----------------------");
         System.out.println("info del actual entrenador que deseas cambiar");
-        System.out.println("ID entrenador: "+ entrenador.getId_entrenador() );
-        System.out.println("id usuario : "+ entrenador.getUsuario_id());
-        System.out.println("veridicado : " + entrenador.isVerificacion());
-        System.out.println("calificacion : " + entrenador.getCalificacion());
+        System.out.println("ID entrenador: "+ coach.getId_couch() );
+        System.out.println("id usuario : "+ coach.getUser_id());
+        System.out.println("veridicado : " + coach.isVerificated());
+        System.out.println("calificacion : " + coach.getCalification());
         System.out.println("----------------------");
         System.out.println("Deseas cambiar:");
         System.out.println("1.verificacion");
         System.out.println("2.calificacion");
         opcion = scanner.nextInt();
         System.out.println("----------------------");
-        if(entrenador != null){
+        if(coach != null){
             switch(opcion){
                 case 1:
                     System.out.println("indica si el entrenador esta verificado o no (true / false)");
                     scanner.nextLine(); // Eat enter
-                    entrenador.setVerificacion(scanner.nextBoolean());
+                    coach.setVerificated(scanner.nextBoolean());
                     break;
                 case 2:
                     System.out.println("indica la nueva calificación del entrenador");
-                    entrenador.setCalificacion(scanner.nextInt());
+                    coach.setCalification(scanner.nextInt());
                     break;
                 default:
                     break;
             }
         System.out.println("info nueva del entrenador que deseas cambiar");
-        System.out.println("ID entrenador: "+ entrenador.getId_entrenador() );
-        System.out.println("id usuario : "+ entrenador.getUsuario_id());
-        System.out.println("veridicado : " + entrenador.isVerificacion());
-        System.out.println("calificacion : " + entrenador.getCalificacion());
+        System.out.println("ID entrenador: "+ coach.getId_couch() );
+        System.out.println("id usuario : "+ coach.getUser_id());
+        System.out.println("veridicado : " + coach.isVerificated());
+        System.out.println("calificacion : " + coach.getCalification());
         System.out.println("----------------------");
-            if(EntrenadorDAO.update(entrenador)>0){
+            if(CouchDAO.update(coach)>0){
                 System.out.println("el entrenador fue actualizado");        
             }else{
                 System.out.println("hubo un error al actualizar el entrenador");
@@ -110,7 +110,7 @@ public class EntrenadorService {
     
     public static void delete(){
         System.out.println("indica el ID del entrenador a borrar \n >");
-        if(EntrenadorDAO.delete(scanner.nextInt())>0){
+        if(CouchDAO.delete(scanner.nextInt())>0){
             System.out.println("El entrenador fue borrado");
         }else{
             System.err.println(THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE);

@@ -5,26 +5,26 @@
  */
 package entrenador.views;
 
-import core.views.Home;
-import entrenador.DAO.SolicitudDAO;
-import entrenador.models.Solicitud;
+import core.views.HomeView;
+import entrenador.DAO.RequestDAO;
+import entrenador.models.Request;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import user.DAO.UsuarioDAO;
-import user.models.Usuario;
+import user.DAO.UserDAO;
+import user.models.User;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class BusquedaEntrenador extends javax.swing.JFrame {
+public class SearchCoachView extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     
-    public static Usuario usuario = new Usuario();
+    public static User usuario = new User();
     /**
      * Creates new form BusquedaUsuario
      */
-    public BusquedaEntrenador() {
+    public SearchCoachView() {
         initComponents();
         ArrayList<Object> columnas = new ArrayList<Object>();
         columnas.add("ID");
@@ -33,7 +33,7 @@ public class BusquedaEntrenador extends javax.swing.JFrame {
         for(Object columna : columnas){
             model.addColumn(columna);
         }
-        usuario = Home.usuario_actual;
+        usuario = HomeView.current_user;
     }
     
     /**
@@ -152,11 +152,11 @@ public class BusquedaEntrenador extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         
-        ArrayList<Usuario> usuarios = UsuarioDAO.findAllEntrenador(usernameInput.getText());
+        ArrayList<User> usuarios = UserDAO.findAllEntrenador(usernameInput.getText());
         System.out.println(usuarios);
-        for(Usuario usuario : usuarios){
+        for(User usuario : usuarios){
             System.out.println("username:" + usuario.getUsername());
-            Object[] data = new Object[]{usuario.getId_usuario(),usuario.getUsername(),usuario.getEmail()};
+            Object[] data = new Object[]{usuario.getId_user(),usuario.getUsername(),usuario.getEmail()};
             model.addRow(data);
         }
         usuariosTabla.setModel(model);
@@ -173,8 +173,8 @@ public class BusquedaEntrenador extends javax.swing.JFrame {
         String codigo = usuariosTabla.getValueAt(Fila, 0).toString();
         String username = usuariosTabla.getValueAt(Fila, 1).toString();
         entrenadorSeleccionadoLabel.setText(username);
-        Solicitud solicitud = new Solicitud(usuario.getId_usuario(),entrenador_id,false); 
-        SolicitudDAO.create(solicitud);
+        Request solicitud = new Request(usuario.getId_user(),entrenador_id,false); 
+        RequestDAO.create(solicitud);
     }//GEN-LAST:event_EntrenadorMouseCliked
 
     /**
@@ -194,21 +194,27 @@ public class BusquedaEntrenador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BusquedaEntrenador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BusquedaEntrenador().setVisible(true);
+                new SearchCoachView().setVisible(true);
             }
         });
     }
