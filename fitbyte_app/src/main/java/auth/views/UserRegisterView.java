@@ -280,7 +280,7 @@ public class UserRegisterView extends javax.swing.JFrame {
         if(UserDAO.create(current_user)>0){
             current_user.setId_user(UserDAO.find(current_user.getUsername()).getId_user());
             this.dispose();
-            HomeView home = new HomeView();
+            HomeView home = new HomeView(current_user);
             home.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Error");

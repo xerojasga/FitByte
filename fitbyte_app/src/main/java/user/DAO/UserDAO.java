@@ -131,7 +131,7 @@ public class UserDAO {
         }
         return data;
     }
-    public static ArrayList<User> findAllEntrenador(String username){
+    public static ArrayList<User> findAllCoach(String username){
         ArrayList<User> data = new ArrayList<>();
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_ENTRENADOR_SQL_NAME)) {
             String query = username + "_%";
@@ -142,7 +142,7 @@ public class UserDAO {
                     while(resultset.next()){
                         User usuario;
                         usuario = new User(
-                                resultset.getInt("ID_ENTRENADOR"),
+                                resultset.getInt("ID_USUARIO"),
                                 resultset.getString("USERNAME"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getString("APELLIDO"),

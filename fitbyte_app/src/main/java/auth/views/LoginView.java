@@ -113,7 +113,7 @@ public class LoginView extends javax.swing.JFrame {
             if(LoginDAO.login(user_login)){
                 this.dispose();
                 current_user = UserDAO.find(username);
-                HomeView home = new HomeView();
+                HomeView home = new HomeView(current_user);
                 home.setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");

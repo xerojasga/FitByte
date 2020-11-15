@@ -10,22 +10,22 @@ package entrenador.models;
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class Couch {
+public class Coach {
     int id_couch;
     int user_id;
     boolean verificated;
     int calification;
     
-    public Couch(){
+    public Coach(){
     }
     
-    public Couch(int user_id, boolean verificated, int calification) {
+    public Coach(int user_id, boolean verificated, int calification) {
         this.user_id = user_id;
         this.verificated = verificated;
         this.calification = calification;
     }
     
-    public Couch(int id_coach, int user_id, boolean verificated, int calification) {
+    public Coach(int id_coach, int user_id, boolean verificated, int calification) {
         this.id_couch = id_coach;
         this.user_id = user_id;
         this.verificated = verificated;

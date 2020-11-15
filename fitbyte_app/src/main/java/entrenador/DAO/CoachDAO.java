@@ -7,7 +7,7 @@
 package entrenador.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import entrenador.models.Couch;
+import entrenador.models.Coach;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * 
  * @author developer
  */
-public class CouchDAO {
+public class CoachDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM ENTRENADOR";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USUARIO_ID` = ?";
     public static final String CREATE_SQL = 
@@ -30,14 +30,14 @@ public class CouchDAO {
     private static final Connection connection = ConnectionProvider.connection;
     
     
-    public static Couch find(int id_user){        
-        Couch couch = new Couch();
+    public static Coach find(int id_user){        
+        Coach couch = new Coach();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setInt(1, id_user);   
             if(statement.execute()){
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
-                        couch = new Couch(
+                        couch = new Coach(
                                 resultset.getInt("ID_ENTRENADOR"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
@@ -54,15 +54,15 @@ public class CouchDAO {
             return couch;
       }
     
-    public static ArrayList<Couch> findAll(){ 
-        ArrayList<Couch> data = new ArrayList<>();
+    public static ArrayList<Coach> findAll(){ 
+        ArrayList<Coach> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        Couch couch;
-                        couch = new Couch(
+                        Coach couch;
+                        couch = new Coach(
                                 resultset.getInt("ID_ENTRENADOR"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
@@ -80,7 +80,7 @@ public class CouchDAO {
     }
     
     
-    public static int create(Couch couch){
+    public static int create(Coach couch){
         try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
             statement.setInt(1, couch.getUser_id()); 
             statement.setBoolean(2, couch.isVerificated());    
@@ -93,7 +93,7 @@ public class CouchDAO {
     }
     
     
-    public static int update(Couch couch){       
+    public static int update(Coach couch){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
                 statement.setInt(1, couch.getUser_id()); 
                 statement.setBoolean(2, couch.isVerificated());    

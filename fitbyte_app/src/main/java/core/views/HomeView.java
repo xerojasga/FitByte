@@ -8,8 +8,8 @@ package core.views;
 import auth.views.LoginView;
 import auth.views.UserRegisterView;
 import entrenador.views.SearchCoachView;
-import entrenador.DAO.CouchDAO;
-import entrenador.models.Couch;
+import entrenador.DAO.CoachDAO;
+import entrenador.models.Coach;
 import user.models.User;
 import user.views.UserConfigView;
 
@@ -22,28 +22,21 @@ public class HomeView extends javax.swing.JFrame {
     /**
      * Creates new form HomeView
      */
-    public static User current_user = new User();
+    public static User current_user ;
     
-    public HomeView() {
+    public HomeView(User user) {
         initComponents();
         this.setLocationRelativeTo(null);
-        User user = new User();
         System.out.println(UserRegisterView.current_user.getUsername());
-        
-        if(UserRegisterView.current_user.getUsername() == null ){
-            user = LoginView.current_user;
-        }else{
-            System.out.println("estamos aqui");
-            user = UserRegisterView.current_user;
-        }
-        
         current_user = user;
         usernameLabel.setText(user.getUsername());
         nameLabel.setText(user.getName());
         lastNameLabel.setText(user.getLast_name());
         descriptionLabel.setText(user.getDescription());
-        Couch coach = CouchDAO.find(user.getId_user());
+        // se verifica si el usuario es entrenador y en base a ello se muestra info determinada
+        Coach coach = CoachDAO.find(user.getId_user());
         if( coach.getCalification() == 0){
+            // si el usuario no es entrenador puede buscar entrenadores pero no ver las solicitudes recibidas
            calificationLabel.setText("");
            rankLabel.setText("");
            btnBuscarEntrenador.setVisible(true);
@@ -192,14 +185,14 @@ public class HomeView extends javax.swing.JFrame {
 
     private void btnBuscarEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEntrenadorActionPerformed
         this.dispose();
-        SearchCoachView buscador = new SearchCoachView();
+        SearchCoachView buscador = new SearchCoachView(current_user);
         buscador.setVisible(true);
     }//GEN-LAST:event_btnBuscarEntrenadorActionPerformed
 
     private void btnConfigUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfigUsuarioActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        UserConfigView conf = new UserConfigView();
+        UserConfigView conf = new UserConfigView(current_user);
         conf.setVisible(true);
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
 
@@ -234,7 +227,7 @@ public class HomeView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HomeView().setVisible(true);
+                new HomeView(current_user).setVisible(true);
             }
         });
     }

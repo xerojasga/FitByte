@@ -6,8 +6,8 @@
 
 package entrenador.service;
 
-import entrenador.DAO.CouchDAO;
-import entrenador.models.Couch;
+import entrenador.DAO.CoachDAO;
+import entrenador.models.Coach;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class CoachService {
         int id_coach = scanner.nextInt();
         if(id_coach != 0){
             scanner.nextLine(); // Eat enter
-            Couch coach = CouchDAO.find(id_coach);
+            Coach coach = CoachDAO.find(id_coach);
             if(coach != null){
                 System.out.println("ID entrenador: "+ coach.getId_couch() );
                 System.out.println("id usuario : "+ coach.getUser_id());
@@ -34,8 +34,8 @@ public class CoachService {
                 System.out.println(THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE);    
             }
         }else{
-            ArrayList<Couch> data = CouchDAO.findAll();
-            for(Couch coach : data){
+            ArrayList<Coach> data = CoachDAO.findAll();
+            for(Coach coach : data){
                 System.out.println("ID entrenador: "+ coach.getId_couch() );
                 System.out.println("id usuario : "+ coach.getUser_id());
                 System.out.println("veridicado : " + coach.isVerificated());
@@ -45,7 +45,7 @@ public class CoachService {
     }
     
     public static void create(){
-        Couch coach = new Couch();
+        Coach coach = new Coach();
         System.out.println("------------------------");
         System.out.println("Escribe el id de usuario del entrenador");
         coach.setUser_id(scanner.nextInt());
@@ -53,7 +53,7 @@ public class CoachService {
         coach.setVerificated(scanner.nextBoolean());
         System.out.println("Escribe la calificación del entrenador");
         coach.setCalification(scanner.nextInt());
-        if(CouchDAO.create(coach)>0){
+        if(CoachDAO.create(coach)>0){
             System.out.println("El entrenador fue creado");
         }else{
             System.out.println("Hubo un error al crear el entrenador");
@@ -63,7 +63,7 @@ public class CoachService {
     public static void update(){
         int opcion;
         System.out.println("indica el id del entrenador a actualizar");
-        Couch coach = CouchDAO.find(scanner.nextInt());
+        Coach coach = CoachDAO.find(scanner.nextInt());
         System.out.println("----------------------");
         System.out.println("info del actual entrenador que deseas cambiar");
         System.out.println("ID entrenador: "+ coach.getId_couch() );
@@ -96,7 +96,7 @@ public class CoachService {
         System.out.println("veridicado : " + coach.isVerificated());
         System.out.println("calificacion : " + coach.getCalification());
         System.out.println("----------------------");
-            if(CouchDAO.update(coach)>0){
+            if(CoachDAO.update(coach)>0){
                 System.out.println("el entrenador fue actualizado");        
             }else{
                 System.out.println("hubo un error al actualizar el entrenador");
@@ -110,7 +110,7 @@ public class CoachService {
     
     public static void delete(){
         System.out.println("indica el ID del entrenador a borrar \n >");
-        if(CouchDAO.delete(scanner.nextInt())>0){
+        if(CoachDAO.delete(scanner.nextInt())>0){
             System.out.println("El entrenador fue borrado");
         }else{
             System.err.println(THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE);

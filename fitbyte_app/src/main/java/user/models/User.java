@@ -23,7 +23,8 @@ public class User {
     boolean admin;
     String password;
     String description;
-
+    int last_login;
+    String type;
   
     public User(){
     }
