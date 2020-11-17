@@ -6,6 +6,8 @@
 
 package user.models;
 
+import java.sql.Date;
+
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -23,9 +25,13 @@ public class User {
     boolean admin;
     String password;
     String description;
-    int last_login;
+    // agregar a los constructores :
+    Date last_login;
     String type;
-  
+    //eliminar weight
+    //hacer DAOs de lo nuevo
+
+
     public User(){
     }
     public User(String username, String primer_nombre, String apellido, String email, int pais_id, int altura, int peso, int edad, boolean admin, String password, String descripcion) {
@@ -153,6 +159,22 @@ public class User {
         this.country_id = country_id;
     }
     
+    public Date getLast_login() {
+        return last_login;
+    }
+
+    public void setLast_login(Date last_login) {
+        this.last_login = last_login;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+  
    
     
 }

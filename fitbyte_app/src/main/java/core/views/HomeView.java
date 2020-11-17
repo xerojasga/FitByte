@@ -10,6 +10,7 @@ import auth.views.UserRegisterView;
 import entrenador.views.SearchCoachView;
 import entrenador.DAO.CoachDAO;
 import entrenador.models.Coach;
+import entrenador.views.ReceivedRequestsView;
 import user.models.User;
 import user.views.UserConfigView;
 
@@ -108,6 +109,11 @@ public class HomeView extends javax.swing.JFrame {
         });
 
         btnSolicitudesRecibidas.setText("Solicitudes recibidas");
+        btnSolicitudesRecibidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSolicitudesRecibidasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,6 +201,12 @@ public class HomeView extends javax.swing.JFrame {
         UserConfigView conf = new UserConfigView(current_user);
         conf.setVisible(true);
     }//GEN-LAST:event_btnConfigUsuarioActionPerformed
+
+    private void btnSolicitudesRecibidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitudesRecibidasActionPerformed
+        this.dispose();
+        ReceivedRequestsView received = new ReceivedRequestsView(current_user);
+        received.setVisible(true);
+    }//GEN-LAST:event_btnSolicitudesRecibidasActionPerformed
 
     /**
      * @param args the command line arguments

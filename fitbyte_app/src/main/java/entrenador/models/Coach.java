@@ -1,21 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
  */
 
 package entrenador.models;
 
 /**
  * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author developer 
  */
 public class Coach {
     int id_couch;
     int user_id;
     boolean verificated;
     int calification;
-    
+    int contact_number;
+    // falta agregar phone numer a los constructores
     public Coach(){
     }
     
@@ -62,6 +60,14 @@ public class Coach {
 
     public void setCalification(int calification) {
         this.calification = calification;
+    }
+
+    public int getContact_number() {
+        return contact_number;
+    }
+
+    public void setContact_number(int contact_number) {
+        this.contact_number = contact_number;
     }
            
     

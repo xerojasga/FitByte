@@ -5,11 +5,13 @@
  */
 package entrenador.views;
 
+import core.DAO.User_CoachDAO;
+import core.models.User_Coach;
 import core.views.HomeView;
 import entrenador.DAO.CoachDAO;
-import entrenador.DAO.RequestDAO;
+import core.DAO.RequestDAO;
 import entrenador.models.Coach;
-import entrenador.models.Request;
+import core.models.Request;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +20,7 @@ import user.models.User;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author developer
  */
 public class SearchCoachView extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
@@ -186,8 +188,23 @@ public class SearchCoachView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void send_requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_requestBtnActionPerformed
-        Request solicitud = new Request(current_user.getId_user(),selected_coach.getUser_id(),false); 
-        if(RequestDAO.create(solicitud) > 0) JOptionPane.showMessageDialog(this, "Se ha enviado la solicitud exitosamente");
+        Request solicitud = new Request(current_user.getId_user(),selected_coach.getUser_id(),"Entrenamiento"); 
+        //revisar que no exista una solicitud previa desde ese mismo usuario a ese mismo receptor
+        Request request = RequestDAO.find(current_user.getId_user(), selected_coach.getUser_id(),"Entrenamiento");
+        User_Coach user_coach = User_CoachDAO.find(current_user.getId_user(), selected_coach.getUser_id());
+        if(user_coach == null){
+            if(request == null){
+                if(RequestDAO.create(solicitud) > 0){ 
+                    JOptionPane.showMessageDialog(this, "Se ha enviado la solicitud exitosamente");
+                }else{
+                    JOptionPane.showMessageDialog(this, "No se ha podido crear la solicitud");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "No se ha podido crear la solicitud, pueda que haya una existente");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Al parecer ya tienes asignado este entrenador");
+        }
     }//GEN-LAST:event_send_requestBtnActionPerformed
 
     private void EntrenadorMouseCliked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrenadorMouseCliked
@@ -197,7 +214,7 @@ public class SearchCoachView extends javax.swing.JFrame {
         String code = usuariosTabla.getValueAt(row, 0).toString();
         String username = usuariosTabla.getValueAt(row, 1).toString();
         entrenadorSeleccionadoLabel.setText(username);
-        selected_coach = CoachDAO.find(user_coach_id);          
+        selected_coach = CoachDAO.find(user_coach_id);
     }//GEN-LAST:event_EntrenadorMouseCliked
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
