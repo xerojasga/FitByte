@@ -8,6 +8,7 @@ package auth.views;
 import core.views.HomeView;
 import auth.DAO.LoginDAO;
 import auth.models.Hash;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import user.DAO.UserDAO;
 import user.models.User;
@@ -106,6 +107,8 @@ public class LoginView extends javax.swing.JFrame {
         User user_login = new User();
         String username = usernameInput.getText();
         String password = new String(passwordInput.getPassword());
+        Date last_login = new Date(System.currentTimeMillis());
+
         if(!username.equals("") && !password.equals("")){
             String encryptedPassword = Hash.sha1(password);
             user_login.setUsername(username);
@@ -113,8 +116,12 @@ public class LoginView extends javax.swing.JFrame {
             if(LoginDAO.login(user_login)){
                 this.dispose();
                 current_user = UserDAO.find(username);
+                System.out.println(current_user.getUsername());
+                current_user.setLast_login(last_login);
+                UserDAO.update(current_user);
                 HomeView home = new HomeView(current_user);
                 home.setVisible(true);
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
             }

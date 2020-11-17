@@ -25,9 +25,9 @@ public class UserDAO {
     public static final String SELECT_ALL_SQL_NAME = SELECT_ALL_SQL + " WHERE `USERNAME` LIKE ?";
     public static final String SELECT_ALL_ENTRENADOR_SQL_NAME = "SELECT * FROM `USUARIO` JOIN `ENTRENADOR` ON `USUARIO`.`ID_USUARIO` = `ENTRENADOR`.`USUARIO_ID` WHERE `USUARIO`.`USERNAME` LIKE ? ";
     public static final String CREATE_SQL = 
-            "INSERT INTO `USUARIO`(`USERNAME`, `NOMBRE`, `APELLIDO`, `EMAIL`, `PAIS_ID`, `ALTURA`, `PESO`, `EDAD`, `ADMIN`, `PASSWORD`, `DESCRIPCION`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO `USUARIO`(`USERNAME`, `NOMBRE`, `APELLIDO`, `EMAIL`, `PAIS_ID`, `ALTURA`, `PESO`, `EDAD`, `ADMIN`, `PASSWORD`, `DESCRIPCION`,`ULT_INGRESO`,`TIPO`) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_SQL = 
-            "UPDATE `USUARIO` SET `USERNAME`= ?,`NOMBRE`= ?,`APELLIDO`= ?,`EMAIL`= ?,`PAIS_ID`= ?,`ALTURA`= ? ,`PESO`= ?,`EDAD`= ?,`ADMIN`= ?, `PASSWORD`=?, `DESCRIPCION`= ? WHERE `USUARIO`.`ID_USUARIO` = ? ";
+            "UPDATE `USUARIO` SET `USERNAME`= ?,`NOMBRE`= ?,`APELLIDO`= ?,`EMAIL`= ?,`PAIS_ID`= ?,`ALTURA`= ? ,`PESO`= ?,`EDAD`= ?,`ADMIN`= ?, `PASSWORD`=?, `DESCRIPCION`= ? ,`ULT_INGRESO`=?,`TIPO`= ? WHERE `USUARIO`.`ID_USUARIO` = ? ";
     public static final String DELETE_SQL = 
             "DELETE FROM `USUARIO` WHERE `ID_USUARIO` = ?";
     
@@ -52,7 +52,9 @@ public class UserDAO {
                                 resultset.getInt("EDAD"),
                                 resultset.getBoolean("ADMIN"),
                                 resultset.getString("PASSWORD"),
-                                resultset.getString("DESCRIPCION")                
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getDate("ULT_INGRESO"),
+                                resultset.getString("TIPO")
                         );                    
                     }            
                 } catch (SQLException ex) {
@@ -73,7 +75,7 @@ public class UserDAO {
                     if(resultset.next()){
                         usuario = new User(
                                 resultset.getInt("ID_USUARIO"),
-                                resultset.getString("USERNAME"),
+                                resultset.getString("USUARIO.USERNAME"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getString("APELLIDO"),
                                 resultset.getString("EMAIL"),
@@ -83,7 +85,9 @@ public class UserDAO {
                                 resultset.getInt("EDAD"),
                                 resultset.getBoolean("ADMIN"),
                                 resultset.getString("PASSWORD"),
-                                resultset.getString("DESCRIPCION")                
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getDate("ULT_INGRESO"),
+                                resultset.getString("TIPO")         
                         );                    
                     }else{
                         System.out.println("No hay registros");
@@ -109,7 +113,7 @@ public class UserDAO {
                         User usuario;
                         usuario = new User(
                                 resultset.getInt("ID_USUARIO"),
-                                resultset.getString("USERNAME"),
+                                resultset.getString("USUARIO.USERNAME"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getString("APELLIDO"),
                                 resultset.getString("EMAIL"),
@@ -119,7 +123,9 @@ public class UserDAO {
                                 resultset.getInt("EDAD"),
                                 resultset.getBoolean("ADMIN"),
                                 resultset.getString("PASSWORD"),
-                                resultset.getString("DESCRIPCION")
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getDate("ULT_INGRESO"),
+                                resultset.getString("TIPO")
                         );
                         data.add(usuario);
                     }
@@ -143,7 +149,7 @@ public class UserDAO {
                         User usuario;
                         usuario = new User(
                                 resultset.getInt("ID_USUARIO"),
-                                resultset.getString("USERNAME"),
+                                resultset.getString("USUARIO.USERNAME"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getString("APELLIDO"),
                                 resultset.getString("EMAIL"),
@@ -153,7 +159,9 @@ public class UserDAO {
                                 resultset.getInt("EDAD"),
                                 resultset.getBoolean("ADMIN"),
                                 resultset.getString("PASSWORD"),
-                                resultset.getString("DESCRIPCION")
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getDate("ULT_INGRESO"),
+                                resultset.getString("TIPO")
                         );
                         data.add(usuario);
                     }
@@ -175,7 +183,7 @@ public class UserDAO {
                         User usuario;
                         usuario = new User(
                                 resultset.getInt("ID_USUARIO"),
-                                resultset.getString("USERNAME"),
+                                resultset.getString("USUARIO.USERNAME"),
                                 resultset.getString("NOMBRE"),
                                 resultset.getString("APELLIDO"),
                                 resultset.getString("EMAIL"),
@@ -185,7 +193,9 @@ public class UserDAO {
                                 resultset.getInt("EDAD"),
                                 resultset.getBoolean("ADMIN"),
                                 resultset.getString("PASSWORD"),
-                                resultset.getString("DESCRIPCION")
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getDate("ULT_INGRESO"),
+                                resultset.getString("TIPO")
                         );
                         data.add(usuario);
                     }
@@ -211,6 +221,8 @@ public class UserDAO {
           statement.setBoolean( 9, usuario.isAdmin());
           statement.setString( 10, usuario.getPassword());
           statement.setString( 11, usuario.getDescription());
+          statement.setDate( 12, usuario.getLast_login());
+          statement.setString( 13, usuario.getType());
 
           return statement.executeUpdate();
         } catch (SQLException ex) {
@@ -221,19 +233,22 @@ public class UserDAO {
 
     public static int update(User usuario){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-          statement.setString( 1, usuario.getUsername());
-          statement.setString( 2, usuario.getName());
-          statement.setString( 3, usuario.getLast_name());
-          statement.setString( 4, usuario.getEmail());
-          statement.setInt( 5, usuario.getCountry_id());
-          statement.setInt( 6, usuario.getHeight());
-          statement.setInt( 7, usuario.getWeight());
-          statement.setInt( 8, usuario.getAge());
-          statement.setBoolean( 9, usuario.isAdmin());
-          statement.setString( 10, usuario.getPassword());
-          statement.setString( 11, usuario.getDescription());
-          statement.setInt( 12, usuario.getId_user());
-          return statement.executeUpdate();
+            statement.setString( 1, usuario.getUsername());
+            statement.setString( 2, usuario.getName());
+            statement.setString( 3, usuario.getLast_name());
+            statement.setString( 4, usuario.getEmail());
+            statement.setInt( 5, usuario.getCountry_id());
+            statement.setInt( 6, usuario.getHeight());
+            statement.setInt( 7, usuario.getWeight());
+            statement.setInt( 8, usuario.getAge());
+            statement.setBoolean( 9, usuario.isAdmin());
+            statement.setString( 10, usuario.getPassword());
+            statement.setString( 11, usuario.getDescription());
+            statement.setDate( 12, usuario.getLast_login());
+            statement.setString( 13, usuario.getType());
+            
+            statement.setInt( 14, usuario.getId_user());
+            return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);
                 return -1;

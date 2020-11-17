@@ -34,15 +34,15 @@ public class HomeView extends javax.swing.JFrame {
         nameLabel.setText(user.getName());
         lastNameLabel.setText(user.getLast_name());
         descriptionLabel.setText(user.getDescription());
-        // se verifica si el usuario es entrenador y en base a ello se muestra info determinada
-        Coach coach = CoachDAO.find(user.getId_user());
-        if( coach.getCalification() == 0){
+        
+        if("Usuario".equals(current_user.getType())){
             // si el usuario no es entrenador puede buscar entrenadores pero no ver las solicitudes recibidas
            calificationLabel.setText("");
            rankLabel.setText("");
            btnBuscarEntrenador.setVisible(true);
            btnSolicitudesRecibidas.setVisible(false);
         }else{
+            Coach coach = CoachDAO.find(user.getId_user());        
             rankLabel.setText(String.valueOf(coach.getCalification()));
             btnBuscarEntrenador.setVisible(false);
             btnSolicitudesRecibidas.setVisible(true);

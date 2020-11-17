@@ -10,6 +10,7 @@ import auth.models.Hash;
 import core.DAO.PaisDAO;
 import core.models.Pais;
 import java.awt.List;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Vector;
@@ -277,6 +278,10 @@ public class UserRegisterView extends javax.swing.JFrame {
         String password = new String(passwordInput.getPassword());
         current_user.setPassword(Hash.sha1(password));
         current_user.setDescription(descriptionInput.getText());
+        Date date = new Date(System.currentTimeMillis());
+        
+        current_user.setLast_login(date);
+        current_user.setType("Usuario");
         if(UserDAO.create(current_user)>0){
             current_user.setId_user(UserDAO.find(current_user.getUsername()).getId_user());
             this.dispose();

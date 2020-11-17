@@ -31,37 +31,43 @@ public class User {
     //eliminar weight
     //hacer DAOs de lo nuevo
 
-
-    public User(){
+    public User() {
     }
-    public User(String username, String primer_nombre, String apellido, String email, int pais_id, int altura, int peso, int edad, boolean admin, String password, String descripcion) {
+
+    public User(String username, String name, String last_name, String email, int country_id, int height, int weight, int age, boolean admin, String password, String description, Date last_login, String type) {
+        this.id_user = id_user;
         this.username = username;
-        this.name = primer_nombre;
-        this.last_name = apellido;
+        this.name = name;
+        this.last_name = last_name;
         this.email = email;
-        this.country_id = pais_id;
-        this.height = altura;
-        this.weight = peso;
-        this.age = edad;
+        this.country_id = country_id;
+        this.height = height;
+        this.weight = weight;
+        this.age = age;
         this.admin = admin;
         this.password = password;
-        this.description = descripcion;
+        this.description = description;
+        this.last_login = last_login;
+        this.type = type;
     }
     
-    public User(int id_usuario, String username, String primer_nombre, String apellido, String email, int pais_id, int altura, int peso, int edad, boolean admin, String password, String descripcion) {
-        this.id_user = id_usuario;
+    public User(int id_user, String username, String name, String last_name, String email, int country_id, int height, int weight, int age, boolean admin, String password, String description, Date last_login, String type) {
+        this.id_user = id_user;
         this.username = username;
-        this.name = primer_nombre;
-        this.last_name = apellido;
+        this.name = name;
+        this.last_name = last_name;
         this.email = email;
-        this.country_id = pais_id;
-        this.height = altura;
-        this.weight = peso;
-        this.age = edad;
+        this.country_id = country_id;
+        this.height = height;
+        this.weight = weight;
+        this.age = age;
         this.admin = admin;
         this.password = password;
-        this.description = descripcion;
+        this.description = description;
+        this.last_login = last_login;
+        this.type = type;
     }
+
     
     public int getId_user() {
         return id_user;
