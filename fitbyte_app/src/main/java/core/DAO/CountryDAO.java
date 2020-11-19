@@ -7,7 +7,7 @@
 package core.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import core.models.Pais;
+import core.models.Country;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,27 +16,44 @@ import java.util.ArrayList;
 
 /**
 @author Brayan Portela
- * Version 1.0 of the class
+ * Version 2.0 of the class
  * For changes please refer to GitHub Documentation
  */
-public class PaisDAO {
-    
-    public static final String SELECT_ALL_SQL = "SELECT * FROM `PAIS`  ";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `ID_PAIS` = ?";
-    public static final String SELECT_SQL_NAME = SELECT_ALL_SQL + " WHERE `NOMBRE` = ?";
-    public static final String CREATE_SQL = "INSERT INTO PAIS (ID_PAIS,NOMBRE) VALUES (?,?)";
-    public static final String UPDATE_SQL = "UPDATE PAIS SET NOMBRE = ?  WHERE ID_PAIS = ?";
-    public static final String DELETE_SQL = "DELETE FROM PAIS WHERE ID_PAIS = ?";       
+public class CountryDAO {
+    //Query Initializations
+    public static final String SELECT_ALL_SQL =
+            "SELECT * FROM `PAIS`  ";
+    public static final String SELECT_SQL = 
+            SELECT_ALL_SQL + " WHERE `ID_PAIS` = ?";
+    public static final String SELECT_SQL_NAME = 
+            SELECT_ALL_SQL + " WHERE `NOMBRE` = ?";
+    public static final String CREATE_SQL = 
+            "INSERT INTO PAIS (NOMBRE) VALUES (?)";
+    public static final String UPDATE_SQL =
+            "UPDATE PAIS SET NOMBRE = ?  WHERE ID_PAIS = ?";
+    public static final String DELETE_SQL = 
+            "DELETE FROM PAIS WHERE ID_PAIS = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
+    //cambio del metodo create 11/11/20
+    //Data Access Object Methods
+    public static int create(Country country_D){
+        try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) { 
+          statement.setString(1, country_D.getName());
+          return statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+           return  -1;
+        }        
+    }
     
-    public static Pais find(int id_pais){        
-        Pais pais = new Pais();
+    public static Country find(int countryID){        
+        Country country_D = new Country();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL)){
-            statement.setInt(1,id_pais);
+            statement.setInt(1,countryID);
              if(statement.execute()){
                  try(ResultSet resultset = statement.getResultSet()){
                        if(resultset.next()){
-                           pais=new Pais(
+                           country_D=new Country(
                            resultset.getInt("ID_PAIS"),
                            resultset.getString("NOMBRE"));
                        }
@@ -47,17 +64,17 @@ public class PaisDAO {
         }catch(SQLException ex){
            System.out.println(ex);
         }
-        return pais;
+        return country_D;
     }
     
-    public static Pais find(String nombre){        
-        Pais pais = new Pais();
+    public static Country find(String name){        
+        Country country_D = new Country();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_NAME)){
-            statement.setString(1,nombre);
+            statement.setString(1,name);
              if(statement.execute()){
                  try(ResultSet resultset = statement.getResultSet()){
                        if(resultset.next()){
-                           pais=new Pais(
+                           country_D=new Country(
                            resultset.getInt("ID_PAIS"),
                            resultset.getString("NOMBRE"));
                        }
@@ -68,18 +85,18 @@ public class PaisDAO {
         }catch(SQLException ex){
            System.out.println(ex);
         }
-        return pais;
+        return country_D;
     }
     
-    public static ArrayList<Pais> findAll(){ 
-        ArrayList<Pais> data = new ArrayList<>();
+    public static ArrayList<Country> findAll(){ 
+        ArrayList<Country> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultset = statement.getResultSet()) {
                     while(resultset.next()){
-                        Pais pais;
-                        pais = new Pais(
+                        Country pais;
+                        pais = new Country(
                            resultset.getInt("ID_PAIS"), 
                            resultset.getString("NOMBRE")
                         );
@@ -88,27 +105,16 @@ public class PaisDAO {
                 }
             }           
         }catch(SQLException e){
-            System.out.println("No se pudieron traer los paises");
+            System.out.println("Unable to bring the countries");
             System.out.println(e);
         }
         return data;
     }
-    
-     public static int create(Pais pais){
-        try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
-          statement.setInt(1,pais.getID_PAIS()); 
-          statement.setString(2, pais.getNOMBRE());
-          return statement.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-           return  -1;
-        }        
-    }
      
-     public static int update(Pais pais){       
+    public static int update(Country country_D){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-                statement.setString(1, pais.getNOMBRE());
-                statement.setInt(2, pais.getID_PAIS());
+                statement.setString(1, country_D.getName());
+                statement.setInt(2, country_D.getId_country());
                 return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);
@@ -117,9 +123,9 @@ public class PaisDAO {
     
     }
     
-     public static int delete(int id_pais){
+    public static int delete(int countryID){
         try (PreparedStatement statement = connection.prepareStatement(DELETE_SQL)) {
-             statement.setInt(1, id_pais);
+             statement.setInt(1, countryID);
              return statement.executeUpdate();             
         }catch(SQLException e) {
             System.out.println(e);
