@@ -11,12 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import core.models.Favorito;
+import core.models.Favorite;
 /**
  *
  * @author Diego
  */
-public class FavoritoDAO {
+public class FavoriteDAO {
     //id_favorito, fecha, tipo, usuario_id, ingrediente_id, plato_id, ejercicio_id
     public static final String SELECT_ALL_SQL = "SELECT * FROM favorito";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE id_favorito = ?";
@@ -25,14 +25,14 @@ public class FavoritoDAO {
     public static final String DELETE_SQL = "DELETE FROM favorito WHERE id_favorito = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-    public static Favorito find(int id_favorito){        
-        Favorito favorito = new Favorito();
+    public static Favorite find(int id_favorito){        
+        Favorite favorito = new Favorite();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setInt(1, id_favorito);   
             if(statement.execute()){
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
-                        favorito = new Favorito(
+                        favorito = new Favorite(
                             resultset.getInt("id_favorito"),
                             resultset.getString("fecha"),
                             resultset.getString("tipor"),
@@ -52,15 +52,15 @@ public class FavoritoDAO {
             return favorito;
       }
     
-    public static ArrayList<Favorito> findAll(){ 
-        ArrayList<Favorito> data = new ArrayList<>();
+    public static ArrayList<Favorite> findAll(){ 
+        ArrayList<Favorite> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultSet = statement.getResultSet()) {
                     while(resultSet.next()){
-                        Favorito favorito;
-                        favorito = new Favorito(
+                        Favorite favorito;
+                        favorito = new Favorite(
                             resultSet.getInt("id_favorito"),
                             resultSet.getString("fecha"),
                             resultSet.getString("tipo"),
@@ -80,14 +80,14 @@ public class FavoritoDAO {
         return data;
     }
     
-    public static int create(Favorito favorito){
+    public static int create(Favorite favorito){
         try (PreparedStatement stmnt = connection.prepareStatement(CREATE_SQL)) {
-          stmnt.setString(1, favorito.getFecha());
-          stmnt.setString(2, favorito.getTipo());
-          stmnt.setInt(3, favorito.getUsuario_id());
-          stmnt.setInt(4, favorito.getIngrediente_id());
-          stmnt.setInt(5, favorito.getPlato_id());
-          stmnt.setInt(6, favorito.getEjercicio_id());
+          stmnt.setString(1, favorito.getDate());
+          stmnt.setString(2, favorito.getType());
+          stmnt.setInt(3, favorito.getUser_id());
+          stmnt.setInt(4, favorito.getIngredient_id());
+          stmnt.setInt(5, favorito.getPlate_id());
+          stmnt.setInt(6, favorito.getExcersice_id());
           
           return stmnt.executeUpdate();
         } catch (SQLException ex) {
@@ -96,14 +96,14 @@ public class FavoritoDAO {
         }        
     }
     
-    public static int update(Favorito favorito){       
+    public static int update(Favorite favorito){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-            statement.setString(1, favorito.getFecha());
-            statement.setString(2, favorito.getTipo());
-            statement.setInt(3, favorito.getUsuario_id());
-            statement.setInt(4, favorito.getIngrediente_id());
-            statement.setInt(5, favorito.getPlato_id());
-            statement.setInt(6, favorito.getEjercicio_id());
+            statement.setString(1, favorito.getDate());
+            statement.setString(2, favorito.getType());
+            statement.setInt(3, favorito.getUser_id());
+            statement.setInt(4, favorito.getIngredient_id());
+            statement.setInt(5, favorito.getPlate_id());
+            statement.setInt(6, favorito.getExcersice_id());
             return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);

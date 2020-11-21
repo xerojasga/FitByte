@@ -6,7 +6,7 @@
 package core.DAO;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import core.models.Resena;
+import core.models.Review;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Diego
  */
-public class ResenaDAO {
+public class ReviewDAO {
         
     public static final String SELECT_ALL_SQL = "SELECT  * FROM resena";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_RESENA = ?";
@@ -26,14 +26,14 @@ public class ResenaDAO {
     public static final String DELETE_SQL = "DELETE FROM  WHERE ID_RESENA = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-    public static Resena find(int id_resena){        
-        Resena resena = new Resena();
+    public static Review find(int id_resena){        
+        Review resena = new Review();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setInt(1, id_resena);   
             if(statement.execute()){
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
-                        resena = new Resena(
+                        resena = new Review(
                                 resultset.getInt("ID_RESENA"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getInt("ENTRENADOR_ID"),
@@ -50,15 +50,15 @@ public class ResenaDAO {
             return resena;
       }
     
-    public static ArrayList<Resena> findAll(){ 
-        ArrayList<Resena> data = new ArrayList<>();
+    public static ArrayList<Review> findAll(){ 
+        ArrayList<Review> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultSet = statement.getResultSet()) {
                     while(resultSet.next()){
-                        Resena resena;
-                        resena = new Resena(
+                        Review resena;
+                        resena = new Review(
                                 resultSet.getInt("ID_INGREDIENTE"),
                                 resultSet.getInt("USUARIO_ID"),
                                 resultSet.getInt("ENTRENADOR_ID"),
@@ -75,11 +75,11 @@ public class ResenaDAO {
         return data;
     }
     
-    public static int create(Resena resena){
+    public static int create(Review resena){
         try (PreparedStatement stmnt = connection.prepareStatement(CREATE_SQL)) {
-          stmnt.setInt(1,resena.getUsuario_id());
-          stmnt.setInt(2, resena.getEntrenador_id()); 
-          stmnt.setString(1,resena.getContenido());
+          stmnt.setInt(1,resena.getUser_id());
+          stmnt.setInt(2, resena.getCoach_id()); 
+          stmnt.setString(1,resena.getContent());
           return stmnt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -87,11 +87,11 @@ public class ResenaDAO {
         }        
     }
     
-    public static int update(Resena resena){       
+    public static int update(Review resena){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-                statement.setInt(1, resena.getUsuario_id());
-                statement.setInt(2, resena.getEntrenador_id());
-                statement.setString(3, resena.getContenido());
+                statement.setInt(1, resena.getUser_id());
+                statement.setInt(2, resena.getCoach_id());
+                statement.setString(3, resena.getContent());
                 return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);

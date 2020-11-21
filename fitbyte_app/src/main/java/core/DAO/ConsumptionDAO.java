@@ -11,29 +11,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import core.models.Consumo;
+import core.models.Consumption;
 /**
  *
  * @author Diego
  */
 
-public class ConsumoDAO {
-    //id_consumo, fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, num_horas_ejerc, rec_dia_semana
+public class ConsumptionDAO {
+    //id_consumo, fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana
     public static final String SELECT_ALL_SQL = "SELECT * FROM consumo";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE id_consumo = ?";
-    public static final String CREATE_SQL = "INSERT INTO consumo (fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, num_horas_ejerc, rec_dia_semana) VALUES (?,?,?,?,?,?,?,?)";
-    public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , rec_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? , num_horas_ejerc = ? , rec_dia_semana = ? WHERE id_consumo = ?";
+    public static final String CREATE_SQL = "INSERT INTO consumo (fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana) VALUES (?,?,?,?,?,?,?,?,?)";
+    public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , rec_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? , calorias = ?, num_horas_ejerc = ? , rec_dia_semana = ? WHERE id_consumo = ?";
     public static final String DELETE_SQL = "DELETE FROM consumo WHERE id_consumo = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-    public static Consumo find(int id_consumo){        
-        Consumo consumo = new Consumo();
+    public static Consumption find(int id_consumo){        
+        Consumption consumo = new Consumption();
         try (PreparedStatement statement = connection.prepareStatement(SELECT_SQL)) {
             statement.setInt(1, id_consumo);   
             if(statement.execute()){
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
-                        consumo = new Consumo(
+                        consumo = new Consumption(
                             resultset.getInt("id_consumo"),
                             resultset.getString("fecha"),
                             resultset.getBoolean("rec_entenador"),
@@ -41,6 +41,7 @@ public class ConsumoDAO {
                             resultset.getInt("ingrediente_id"),
                             resultset.getInt("plato_id"),
                             resultset.getInt("ejercicio_id"),
+                            resultset.getInt("calorias"),
                             resultset.getInt("num_horas_ejerc"),
                             resultset.getString("rec_dia_semana")
                         );                    
@@ -55,15 +56,15 @@ public class ConsumoDAO {
             return consumo;
       }
     
-    public static ArrayList<Consumo> findAll(){ 
-        ArrayList<Consumo> data = new ArrayList<>();
+    public static ArrayList<Consumption> findAll(){ 
+        ArrayList<Consumption> data = new ArrayList<>();
         
          try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
             if (statement.execute()) {
                 try (ResultSet resultSet = statement.getResultSet()) {
                     while(resultSet.next()){
-                        Consumo consumo;
-                        consumo = new Consumo(
+                        Consumption consumo;
+                        consumo = new Consumption(
                             resultSet.getInt("id_consumo"),
                             resultSet.getString("fecha"),
                             resultSet.getBoolean("rec_entenador"),
@@ -71,6 +72,7 @@ public class ConsumoDAO {
                             resultSet.getInt("ingrediente_id"),
                             resultSet.getInt("plato_id"),
                             resultSet.getInt("ejercicio_id"),
+                            resultSet.getInt("calorias"),
                             resultSet.getInt("num_horas_ejerc"),
                             resultSet.getString("rec_dia_semana")
                         );
@@ -85,15 +87,16 @@ public class ConsumoDAO {
         return data;
     }
     
-    public static int create(Consumo consumo){
+    public static int create(Consumption consumo){
         try (PreparedStatement stmnt = connection.prepareStatement(CREATE_SQL)) {
-          stmnt.setString(1, consumo.getFecha());
-          stmnt.setBoolean(2, consumo.isRec_entrenador());
-          stmnt.setInt(3, consumo.getUsuario_id());
-          stmnt.setInt(4, consumo.getIngrediente_id());
-          stmnt.setInt(5, consumo.getEjercicio_id());
-          stmnt.setInt(6, consumo.getNum_horas_ejerc());
-          stmnt.setString(7, consumo.getRec_dia_semana());
+          stmnt.setString(1, consumo.getDate());
+          stmnt.setBoolean(2, consumo.isRec_coach());
+          stmnt.setInt(3, consumo.getUser_id());
+          stmnt.setInt(4, consumo.getIngredient_id());
+          stmnt.setInt(5, consumo.getExcersice_id());
+          stmnt.setInt(6, consumo.getCalories());
+          stmnt.setInt(7, consumo.getNum_hours_excers());
+          stmnt.setString(8, consumo.getRec_day_weak());
           return stmnt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -101,15 +104,16 @@ public class ConsumoDAO {
         }        
     }
     
-    public static int update(Consumo consumo){       
+    public static int update(Consumption consumo){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-            statement.setString(1, consumo.getFecha());
-            statement.setBoolean(2, consumo.isRec_entrenador());
-            statement.setInt(3, consumo.getUsuario_id());
-            statement.setInt(4, consumo.getIngrediente_id());
-            statement.setInt(5, consumo.getEjercicio_id());
-            statement.setInt(6, consumo.getNum_horas_ejerc());
-            statement.setString(7, consumo.getRec_dia_semana());
+            statement.setString(1, consumo.getDate());
+            statement.setBoolean(2, consumo.isRec_coach());
+            statement.setInt(3, consumo.getUser_id());
+            statement.setInt(4, consumo.getIngredient_id());
+            statement.setInt(5, consumo.getExcersice_id());
+            statement.setInt(6, consumo.getCalories());
+            statement.setInt(6, consumo.getNum_hours_excers());
+            statement.setString(7, consumo.getRec_day_weak());
             return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);
