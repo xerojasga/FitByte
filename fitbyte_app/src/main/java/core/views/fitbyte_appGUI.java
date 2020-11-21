@@ -6,16 +6,21 @@
 package core.views;
 
 import com.mycompany.fitbyte_app.ConnectionProvider;
-import exercise.views.exerciseAddGUI;
-import exercise.views.exerciseDeleteGUI;
-import exercise.views.exerciseFindAllGUI;
-import exercise.views.exerciseFindGUI;
-import exercise.views.exerciseUpdateGUI;
-import plate.views.plateFindGUI;
-import plate.views.plateFindAllGUI;
-import plate.views.plateEditGUI;
-import plate.views.plateDeleteGUI;
-import plate.views.plateAddGUI;
+import core.views.exercise.exerciseAddGUI;
+import core.views.exercise.exerciseDeleteGUI;
+import core.views.exercise.exerciseFindAllGUI;
+import core.views.exercise.exerciseFindGUI;
+import core.views.exercise.exerciseUpdateGUI;
+import core.views.plate.plateFindGUI;
+import core.views.plate.plateFindAllGUI;
+import core.views.plate.plateEditGUI;
+import core.views.plate.plateDeleteGUI;
+import core.views.plate.plateAddGUI;
+import core.views.plateIngredient.plateIngredientAddGUI;
+import core.views.plateIngredient.plateIngredientDelete;
+import core.views.plateIngredient.plateIngredientFindAll;
+import core.views.plateIngredient.plateIngredientFindGUI;
+import core.views.plateIngredient.plateIngredientUpdate;
 import java.sql.Connection;
 import java.util.Scanner;
 /**
@@ -34,6 +39,7 @@ ConnectionProvider conexion = new ConnectionProvider();
     exerciseFindAllGUI exercisefindallGUI = new exerciseFindAllGUI();
     exerciseUpdateGUI exerciseupdateGUI = new exerciseUpdateGUI();
     exerciseDeleteGUI exercisedeleteGUI = new exerciseDeleteGUI();
+    plateIngredientFindAll plateingredientFindAllGUI = new plateIngredientFindAll();
     public fitbyte_appGUI() {
         initComponents();
     }
@@ -145,14 +151,39 @@ ConnectionProvider conexion = new ConnectionProvider();
         });
 
         PLIngredientAddButton.setText("Crear Plato-Ingrediente");
+        PLIngredientAddButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PLIngredientAddButtonActionPerformed(evt);
+            }
+        });
 
         PLIngredientFindButton.setText("Buscar Plato-Ingrediente");
+        PLIngredientFindButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PLIngredientFindButtonActionPerformed(evt);
+            }
+        });
 
         PLIngredientFindAllButton.setText("Mostrar Todos los platos-Ingredientes");
+        PLIngredientFindAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PLIngredientFindAllButtonActionPerformed(evt);
+            }
+        });
 
         PLIngredientDeleteButton.setText("Borrar Plato-Ingrediente");
+        PLIngredientDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PLIngredientDeleteButtonActionPerformed(evt);
+            }
+        });
 
         PLIngredientUpdateButton.setText("Modificar Plato-Ingrediente");
+        PLIngredientUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PLIngredientUpdateButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,18 +193,6 @@ ConnectionProvider conexion = new ConnectionProvider();
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exerciseAddButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exerciseFindAllButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(exerciseDeleteButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(exerciseFindButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(exerciseUpdateButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,15 +207,29 @@ ConnectionProvider conexion = new ConnectionProvider();
                         .addComponent(plateUpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(495, 495, 495))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(PLIngredientAddButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(PLIngredientFindButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PLIngredientFindAllButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(PLIngredientDeleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PLIngredientUpdateButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(exerciseAddButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(exerciseFindAllButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(exerciseDeleteButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(exerciseFindButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(exerciseUpdateButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(PLIngredientAddButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(PLIngredientFindButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(PLIngredientFindAllButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(PLIngredientDeleteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(PLIngredientUpdateButton)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -235,21 +268,13 @@ ConnectionProvider conexion = new ConnectionProvider();
     }// </editor-fold>//GEN-END:initComponents
 
     private void plateCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plateCreateButtonActionPerformed
-        mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(plateaddGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+      this.setVisible(false);
+        new plateFindGUI().setVisible(true);
     }//GEN-LAST:event_plateCreateButtonActionPerformed
 
     private void plateFindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plateFindButtonActionPerformed
-        mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(platefindGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+       this.setVisible(false);
+        new plateFindGUI().setVisible(true);
     }//GEN-LAST:event_plateFindButtonActionPerformed
 
     private void plateFindAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plateFindAllButtonActionPerformed
@@ -262,68 +287,73 @@ ConnectionProvider conexion = new ConnectionProvider();
     }//GEN-LAST:event_plateFindAllButtonActionPerformed
 
     private void plateUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plateUpdateButtonActionPerformed
-        mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(plateupdateGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+        this.setVisible(false);
+        new plateEditGUI().setVisible(true);
     }//GEN-LAST:event_plateUpdateButtonActionPerformed
 
     private void plateDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plateDeleteButtonActionPerformed
-        mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(platedeleteGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+       this.setVisible(false);
+        new plateDeleteGUI().setVisible(true);
     }//GEN-LAST:event_plateDeleteButtonActionPerformed
 
     private void exerciseAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exerciseAddButtonActionPerformed
-         mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(exerciseaddGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+         this.setVisible(false);
+        new exerciseAddGUI().setVisible(true);
     }//GEN-LAST:event_exerciseAddButtonActionPerformed
 
     private void exerciseFindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exerciseFindButtonActionPerformed
-          mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(exercisefindGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+          this.setVisible(false);
+        new exerciseFindGUI().setVisible(true);
     }//GEN-LAST:event_exerciseFindButtonActionPerformed
 
     private void exerciseFindAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exerciseFindAllButtonActionPerformed
-        mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        
-        mainPanel.add(exercisefindallGUI);
-        mainPanel.setVisible(true);
         mainPanel.revalidate();
         mainPanel.repaint();
+        mainPanel.setVisible(false);
+        mainPanel.removeAll();
+        mainPanel.add(exercisefindallGUI);
+        mainPanel.setVisible(true);
+        
     }//GEN-LAST:event_exerciseFindAllButtonActionPerformed
 
     private void exerciseUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exerciseUpdateButtonActionPerformed
-        mainPanel.setVisible(false);
-        mainPanel.removeAll();
-        mainPanel.add(exerciseupdateGUI);
-        mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
+         this.setVisible(false);
+        new exerciseUpdateGUI().setVisible(true);
     }//GEN-LAST:event_exerciseUpdateButtonActionPerformed
 
     private void exerciseDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exerciseDeleteButtonActionPerformed
+        this.setVisible(false);
+        new exerciseDeleteGUI().setVisible(true);
+    }//GEN-LAST:event_exerciseDeleteButtonActionPerformed
+
+    private void PLIngredientAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLIngredientAddButtonActionPerformed
+         this.setVisible(false);
+        new plateIngredientAddGUI().setVisible(true);
+    }//GEN-LAST:event_PLIngredientAddButtonActionPerformed
+
+    private void PLIngredientFindAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLIngredientFindAllButtonActionPerformed
+       mainPanel.revalidate();
+        mainPanel.repaint();
         mainPanel.setVisible(false);
         mainPanel.removeAll();
-        mainPanel.add(exercisedeleteGUI);
+        mainPanel.add(plateingredientFindAllGUI);
         mainPanel.setVisible(true);
-        mainPanel.revalidate();
-        mainPanel.repaint();
-    }//GEN-LAST:event_exerciseDeleteButtonActionPerformed
+    }//GEN-LAST:event_PLIngredientFindAllButtonActionPerformed
+
+    private void PLIngredientFindButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLIngredientFindButtonActionPerformed
+        this.setVisible(false);
+        new plateIngredientFindGUI().setVisible(true);        // TODO add your handling code here:
+    }//GEN-LAST:event_PLIngredientFindButtonActionPerformed
+
+    private void PLIngredientDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLIngredientDeleteButtonActionPerformed
+     this.setVisible(false);
+        new plateIngredientDelete().setVisible(true);
+    }//GEN-LAST:event_PLIngredientDeleteButtonActionPerformed
+
+    private void PLIngredientUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PLIngredientUpdateButtonActionPerformed
+       this.setVisible(false);
+        new plateIngredientUpdate().setVisible(true);
+    }//GEN-LAST:event_PLIngredientUpdateButtonActionPerformed
 
     /**
      * @param args the command line arguments

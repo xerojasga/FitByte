@@ -1,4 +1,4 @@
-package exercise.views;
+package core.views.exercise;
 
 import core.DAO.ExerciseDAO;
 import core.models.Exercise;

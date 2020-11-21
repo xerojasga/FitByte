@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package plate.views;
+package core.views.plate;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 //from   ww w .  java  2 s. co m

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exercise.views;
+package core.views.exercise;
 
 import core.DAO.ExerciseDAO;
 import java.awt.BorderLayout;

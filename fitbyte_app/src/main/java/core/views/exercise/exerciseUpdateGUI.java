@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package exercise.views;
+package core.views.exercise;
 
 import core.DAO.ExerciseDAO;
 import core.models.Exercise;
+import core.views.fitbyte_appGUI;
 
 /**
  *
  * @author Kevin
  */
-public class exerciseUpdateGUI extends javax.swing.JPanel {
+public class exerciseUpdateGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form exerciseUpdateGUI
+     * Creates new form exerciseUpdateGUIfix
      */
     public exerciseUpdateGUI() {
         initComponents();
@@ -30,6 +31,7 @@ public class exerciseUpdateGUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         exerciseUpdatePanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -39,6 +41,9 @@ public class exerciseUpdateGUI extends javax.swing.JPanel {
         exerciseDescriptionUPTF = new javax.swing.JTextField();
         exerciseBurntUPTF = new javax.swing.JTextField();
         UpdateButton = new javax.swing.JButton();
+        eUPGoback = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Edita tu Ejercicio");
 
@@ -52,6 +57,13 @@ public class exerciseUpdateGUI extends javax.swing.JPanel {
         UpdateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdateButtonActionPerformed(evt);
+            }
+        });
+
+        eUPGoback.setText("Regresar");
+        eUPGoback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eUPGobackActionPerformed(evt);
             }
         });
 
@@ -82,7 +94,10 @@ public class exerciseUpdateGUI extends javax.swing.JPanel {
                             .addGroup(exerciseUpdatePanelLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(87, 87, 87))))
+                        .addGap(87, 87, 87))
+                    .addGroup(exerciseUpdatePanelLayout.createSequentialGroup()
+                        .addComponent(eUPGoback)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         exerciseUpdatePanelLayout.setVerticalGroup(
             exerciseUpdatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,38 +118,104 @@ public class exerciseUpdateGUI extends javax.swing.JPanel {
                     .addComponent(exerciseBurntUPTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addComponent(UpdateButton)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(eUPGoback)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exerciseUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(exerciseUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exerciseUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(exerciseUpdatePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void UpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButtonActionPerformed
- int exerciseID = Integer.parseInt(exerciseIDUpTF.getText());        
-  Exercise exercise = ExerciseDAO.find(exerciseID);
-  String exerciseDescription=exerciseDescriptionUPTF.getText();
-  int exerciseBurnt=Integer.parseInt(exerciseBurntUPTF.getText());
-  exercise.setExerciseID(exerciseID);
- exercise.setExerciseDescription(exerciseDescription);
- exercise.setBurntHourCalorieExercise(exerciseBurnt);
-   if(ExerciseDAO.update(exercise)>0){
-                exerciseUpdatePanel.removeAll();
-                exerciseUpdatePanel.setVisible(false);}
-                
+        int exerciseID = Integer.parseInt(exerciseIDUpTF.getText());
+        Exercise exercise = ExerciseDAO.find(exerciseID);
+        String exerciseDescription=exerciseDescriptionUPTF.getText();
+        int exerciseBurnt=Integer.parseInt(exerciseBurntUPTF.getText());
+        exercise.setExerciseID(exerciseID);
+        exercise.setExerciseDescription(exerciseDescription);
+        exercise.setBurntHourCalorieExercise(exerciseBurnt);
+        if(ExerciseDAO.update(exercise)>0){
+           this.setVisible(false);
+        new fitbyte_appGUI().setVisible(true);}
+
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
+    private void eUPGobackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eUPGobackActionPerformed
+        this.setVisible(false);
+        new fitbyte_appGUI().setVisible(true);
+    }//GEN-LAST:event_eUPGobackActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(exerciseUpdateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(exerciseUpdateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(exerciseUpdateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(exerciseUpdateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new exerciseUpdateGUI().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton UpdateButton;
+    private javax.swing.JButton eUPGoback;
     private javax.swing.JTextField exerciseBurntUPTF;
     private javax.swing.JTextField exerciseDescriptionUPTF;
     private javax.swing.JTextField exerciseIDUpTF;
@@ -143,5 +224,6 @@ public class exerciseUpdateGUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
