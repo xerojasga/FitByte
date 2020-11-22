@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+/*
 package core.services;
 
 import core.DAO.MarcaDAO;
@@ -11,13 +11,13 @@ import core.models.Marca;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-/**
+
  * 
  * @author Brayan
  * Based On Xamir's implementation for AlimentoService.Java
  * Version 1.0 of the class
  * For changes please refer to GitHub Documentation
- */
+
 public class MarcaService {
     public static final String THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE = "El ID indicado no existe";
     private static final Scanner scanner = new Scanner(System.in);
@@ -118,3 +118,5 @@ public class MarcaService {
       }
 
 }
+
+*/
