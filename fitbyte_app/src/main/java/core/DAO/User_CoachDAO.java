@@ -40,7 +40,7 @@ public class User_CoachDAO {
                     if(resultset.next()){
                         user_coach = new User_Coach(
                            resultset.getInt("USUARIO_ID"),
-                           resultset.getInt("ENTRENADOR_ID`"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getBoolean("ACTIVO")
                         );
                     }
@@ -64,7 +64,7 @@ public class User_CoachDAO {
                         User_Coach user_coach;
                         user_coach = new User_Coach(
                            resultset.getInt("USUARIO_ID"),
-                           resultset.getInt("ENTRENADOR_ID`"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getBoolean("ACTIVO")
                         );
                         user_coach_items.add(user_coach);
@@ -89,7 +89,7 @@ public class User_CoachDAO {
                         User_Coach user_coach;
                         user_coach = new User_Coach(
                            resultset.getInt("USUARIO_ID"),
-                           resultset.getInt("ENTRENADOR_ID`"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getBoolean("ACTIVO")
                         );
                         user_coach_items.add(user_coach);
@@ -115,7 +115,7 @@ public class User_CoachDAO {
                         User_Coach user_coach;
                         user_coach = new User_Coach(
                            resultset.getInt("USUARIO_ID"),
-                           resultset.getInt("ENTRENADOR_ID`"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getBoolean("ACTIVO")
                         );
                         user_coach_items.add(user_coach);

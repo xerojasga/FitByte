@@ -7,17 +7,13 @@ package auth.views;
 
 import core.views.HomeView;
 import auth.models.Hash;
-import core.DAO.PaisDAO;
-import core.models.Pais;
-import java.awt.List;
+import core.DAO.CountryDAO;
+import core.models.Country;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import user.DAO.UserDAO;
-import static user.DAO.UserDAO.create;
 import user.models.User;
 
 /**
@@ -33,10 +29,10 @@ public class UserRegisterView extends javax.swing.JFrame {
     public UserRegisterView() {
         initComponents();
         this.setLocationRelativeTo(null);
-        ArrayList<Pais> countries = PaisDAO.findAll();
+        ArrayList<Country> countries = CountryDAO.findAll();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for(Pais pais: countries){
-            model.addElement(pais.getNOMBRE());
+        for(Country country: countries){
+            model.addElement(country.getName());
         }
         countryCbx.setModel(model);
         usernameInput.setText("test");
@@ -82,6 +78,7 @@ public class UserRegisterView extends javax.swing.JFrame {
         weightInput = new javax.swing.JTextField();
         ageInput = new javax.swing.JTextField();
         passwordInput = new javax.swing.JPasswordField();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,13 +139,19 @@ public class UserRegisterView extends javax.swing.JFrame {
             }
         });
 
+        backBtn.setText("Volver");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(57, 57, 57)
@@ -183,7 +186,13 @@ public class UserRegisterView extends javax.swing.JFrame {
                                         .addComponent(passwordInput)))))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(201, 201, 201)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(registerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(backBtn)))
                 .addContainerGap(83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -226,21 +235,23 @@ public class UserRegisterView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel9))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(56, 56, 56)
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                        .addGap(39, 39, 39)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
                 .addComponent(registerBtn)
-                .addGap(17, 17, 17))
+                .addGap(1, 1, 1)
+                .addComponent(backBtn)
+                .addContainerGap())
         );
 
         pack();
@@ -266,12 +277,12 @@ public class UserRegisterView extends javax.swing.JFrame {
         // TODO add your handling code here:
         Object item = countryCbx.getSelectedItem();
         String name = ((String)item);
-        Pais pais = PaisDAO.find(name);
+        Country country = CountryDAO.find(name);
         current_user.setUsername(usernameInput.getText());
         current_user.setName(nameInput.getText());
         current_user.setLast_name(last_nameInput.getText());
         current_user.setEmail(emailInput.getText());
-        current_user.setCountry_id(pais.getID_PAIS());
+        current_user.setCountry_id(country.getId_country());
         current_user.setHeight(Integer.parseInt(heightInput.getText()));
         current_user.setWeight(Integer.parseInt(weightInput.getText()));
         current_user.setAge(Integer.parseInt(ageInput.getText()));
@@ -291,6 +302,12 @@ public class UserRegisterView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error");
         }
     }//GEN-LAST:event_registerBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+       this.dispose();
+       LoginView login = new LoginView();
+       login.setVisible(true);
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,6 +347,7 @@ public class UserRegisterView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageInput;
+    private javax.swing.JButton backBtn;
     private javax.swing.JComboBox<String> countryCbx;
     private javax.swing.JTextArea descriptionInput;
     private javax.swing.JTextField emailInput;

@@ -5,6 +5,7 @@
  */
 package auth.views;
 
+import admin.views.AdminHomeView;
 import core.views.HomeView;
 import auth.DAO.LoginDAO;
 import auth.models.Hash;
@@ -116,11 +117,15 @@ public class LoginView extends javax.swing.JFrame {
             if(LoginDAO.login(user_login)){
                 this.dispose();
                 current_user = UserDAO.find(username);
-                System.out.println(current_user.getUsername());
                 current_user.setLast_login(last_login);
                 UserDAO.update(current_user);
-                HomeView home = new HomeView(current_user);
-                home.setVisible(true);
+                if(!current_user.getType().equals("Admin")){
+                    HomeView home = new HomeView(current_user);
+                    home.setVisible(true);
+                }else{
+                    AdminHomeView home = new AdminHomeView(current_user);
+                    home.setVisible(true);
+                }
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");

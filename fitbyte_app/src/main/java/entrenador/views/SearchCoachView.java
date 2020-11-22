@@ -188,13 +188,15 @@ public class SearchCoachView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void send_requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_requestBtnActionPerformed
-        Request solicitud = new Request(current_user.getId_user(),selected_coach.getUser_id(),"Entrenamiento"); 
-        //revisar que no exista una solicitud previa desde ese mismo usuario a ese mismo receptor
-        Request request = RequestDAO.find(current_user.getId_user(), selected_coach.getUser_id(),"Entrenamiento");
-        User_Coach user_coach = User_CoachDAO.find(current_user.getId_user(), selected_coach.getUser_id());
+        Request existing_request = RequestDAO.find(current_user.getId_user(), selected_coach.getUser_id(),"Entrenamiento");
+        
+        int id_coach = selected_coach.getId_couch();
+        User_Coach user_coach = User_CoachDAO.find( current_user.getId_user(),id_coach );
+        
         if(user_coach == null){
-            if(request == null){
-                if(RequestDAO.create(solicitud) > 0){ 
+            if(existing_request == null){
+                Request request = new Request(current_user.getId_user(),selected_coach.getUser_id(),"Entrenamiento"); 
+                if(RequestDAO.create(request) > 0){ 
                     JOptionPane.showMessageDialog(this, "Se ha enviado la solicitud exitosamente");
                 }else{
                     JOptionPane.showMessageDialog(this, "No se ha podido crear la solicitud");

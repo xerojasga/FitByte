@@ -9,8 +9,10 @@ import core.DAO.RequestDAO;
 import core.DAO.User_CoachDAO;
 import core.models.Request;
 import core.models.User_Coach;
+import core.views.HomeView;
 import entrenador.DAO.CoachDAO;
 import entrenador.models.Coach;
+import static entrenador.views.SearchCoachView.current_user;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -112,6 +114,11 @@ public class ReceivedRequestsView extends javax.swing.JFrame {
         });
 
         backBtn.setText("Volver");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
 
         selectedLabel.setText(" ");
 
@@ -207,6 +214,12 @@ public class ReceivedRequestsView extends javax.swing.JFrame {
         RequestDAO.delete(id_selected_request);
         JOptionPane.showMessageDialog(this, "Acabas de rechazar la solicitud de entrenamiento");
     }//GEN-LAST:event_denyBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        this.dispose();
+        HomeView home = new HomeView(current_user);
+        home.setVisible(true);
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments

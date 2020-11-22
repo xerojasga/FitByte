@@ -11,7 +11,7 @@ package core.views;
  */
 public class OptionsPanelMarca extends javax.swing.JPanel {
     
-   private  marcaCreate MC1 = new marcaCreate();
+   //private  marcaCreate MC1 = new marcaCreate();
 
     /**
      * Creates new form OpcionesP
@@ -107,7 +107,7 @@ public class OptionsPanelMarca extends javax.swing.JPanel {
        
         PanelSecundario.setVisible(true);
         PanelSecundario.removeAll();
-        PanelSecundario.add(MC1);
+       // PanelSecundario.add(MC1);
         PanelSecundario.setVisible(true);
     }//GEN-LAST:event_CreateBActionPerformed
 

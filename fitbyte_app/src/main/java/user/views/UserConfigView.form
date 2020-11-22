@@ -71,7 +71,7 @@
                                       <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cbxPais" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cbxCountry" min="-2" max="-2" attributes="0"/>
                                               <Component id="alturaInput" alignment="0" max="32767" attributes="0"/>
                                               <Component id="pesoInput" alignment="0" max="32767" attributes="0"/>
                                           </Group>
@@ -171,7 +171,7 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxPais" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxCountry" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="alturaInput" min="-2" max="-2" attributes="0"/>
@@ -280,7 +280,7 @@
         <Property name="text" type="java.lang.String" value="Peso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxPais">
+    <Component class="javax.swing.JComboBox" name="cbxCountry">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">

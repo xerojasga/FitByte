@@ -128,6 +128,7 @@ public class UserDAO {
                                 resultset.getString("TIPO")
                         );
                         data.add(usuario);
+                        System.out.println("nn");
                     }
                 }
             }           
@@ -199,6 +200,7 @@ public class UserDAO {
                         );
                         data.add(usuario);
                     }
+                    
                 }
             }           
         }catch(SQLException e){

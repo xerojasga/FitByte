@@ -7,8 +7,8 @@ package user.views;
 
 import auth.models.Hash;
 import core.views.HomeView;
-import core.DAO.PaisDAO;
-import core.models.Pais;
+import core.DAO.CountryDAO;
+import core.models.Country;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -31,18 +31,18 @@ public class UserConfigView extends javax.swing.JFrame {
         current_user = user;
         initComponents();
         this.setLocationRelativeTo(null);
-        ArrayList<Pais> paises = PaisDAO.findAll();
+        ArrayList<Country> Countryes = CountryDAO.findAll();
         DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for(Pais pais: paises){
-            model.addElement(pais.getNOMBRE());
+        for(Country Country: Countryes){
+            model.addElement(Country.getName());
         }
-        cbxPais.setModel(model);        
+        cbxCountry.setModel(model);        
         usernameInput.setText(current_user.getUsername());
         nombreInput.setText(current_user.getName());
         apellidoInput.setText(current_user.getLast_name());
         emailInput.setText(current_user.getEmail());
-        Pais pais = PaisDAO.find(current_user.getCountry_id());
-        cbxPais.setSelectedIndex(pais.getID_PAIS()-1);
+        Country country = CountryDAO.find(current_user.getCountry_id());
+        cbxCountry.setSelectedIndex(country.getId_country()-1);
         alturaInput.setText(String.valueOf(current_user.getHeight()));
         pesoInput.setText(String.valueOf(current_user.getWeight()));
         edadInput.setText(String.valueOf(current_user.getAge()));
@@ -74,7 +74,7 @@ public class UserConfigView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         pesoInput = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        cbxPais = new javax.swing.JComboBox<>();
+        cbxCountry = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -131,7 +131,7 @@ public class UserConfigView extends javax.swing.JFrame {
 
         jLabel7.setText("Peso");
 
-        cbxPais.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxCountry.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel8.setText("Edad");
 
@@ -207,7 +207,7 @@ public class UserConfigView extends javax.swing.JFrame {
                                         .addGap(15, 15, 15)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cbxPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(cbxCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(alturaInput)
                                                 .addComponent(pesoInput))
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -216,9 +216,7 @@ public class UserConfigView extends javax.swing.JFrame {
                                                     .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(emailInput, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(usernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +279,7 @@ public class UserConfigView extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(cbxPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbxCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(alturaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -317,14 +315,14 @@ public class UserConfigView extends javax.swing.JFrame {
                     password = new_password;
                 }
                 current_user.setPassword(Hash.sha1(password));
-                Object item = cbxPais.getSelectedItem();
+                Object item = cbxCountry.getSelectedItem();
                 String name = ((String)item);
-                Pais pais = PaisDAO.find(name);
+                Country country = CountryDAO.find(name);
                 current_user.setUsername(usernameInput.getText());
                 current_user.setName(nombreInput.getText());
                 current_user.setLast_name(apellidoInput.getText());
                 current_user.setEmail(emailInput.getText());
-                current_user.setCountry_id(pais.getID_PAIS());
+                current_user.setCountry_id(country.getId_country());
                 current_user.setHeight(Integer.parseInt(alturaInput.getText()));
                 current_user.setWeight(Integer.parseInt(pesoInput.getText()));
                 current_user.setAge(Integer.parseInt(edadInput.getText()));
@@ -407,7 +405,7 @@ public class UserConfigView extends javax.swing.JFrame {
     private javax.swing.JTextField alturaInput;
     private javax.swing.JTextField apellidoInput;
     private javax.swing.JButton backBtn;
-    private javax.swing.JComboBox<String> cbxPais;
+    private javax.swing.JComboBox<String> cbxCountry;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTextArea descripcionInput;
     private javax.swing.JTextField edadInput;

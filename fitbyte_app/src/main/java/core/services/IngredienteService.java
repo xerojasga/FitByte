@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+/*
 package core.services;
 
 import core.DAO.IngredienteDAO;
@@ -10,10 +13,6 @@ import core.models.Ingrediente;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- *
- * @author Xamir
- */
 public class IngredienteService {
     public static final String THE_ID_DOES_NOT_EXIST_ERROR_MESSAGE = "El ID indicado no existe";
     private static final Scanner scanner = new Scanner(System.in);
@@ -125,3 +124,5 @@ public class IngredienteService {
     
     
 }
+
+*/
