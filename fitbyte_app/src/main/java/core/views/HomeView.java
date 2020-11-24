@@ -14,6 +14,7 @@ import entrenador.views.MyUsersView;
 import entrenador.views.ReceivedRequestsView;
 import user.models.User;
 import user.views.UserConfigView;
+import core.views.consumption.*;
 
 /**
  *
@@ -159,6 +160,11 @@ public class HomeView extends javax.swing.JFrame {
         friendsBtn.setText("Mis amigos");
 
         registerConsumeBtn.setText("Registrar Consumo");
+        registerConsumeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerConsumeBtnActionPerformed(evt);
+            }
+        });
 
         searchRecipesBtn.setText("Buscador Recetas");
 
@@ -312,6 +318,12 @@ public class HomeView extends javax.swing.JFrame {
         this.dispose();
         MyUsersView my_users = new MyUsersView(current_user);
         my_users.setVisible(true);    }//GEN-LAST:event_user_coachBtnActionPerformed
+
+    private void registerConsumeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerConsumeBtnActionPerformed
+       this.dispose();
+       ConsumptionCreate cc = new ConsumptionCreate(current_user);
+       cc.setVisible(true);
+    }//GEN-LAST:event_registerConsumeBtnActionPerformed
 
     /**
      * @param args the command line arguments

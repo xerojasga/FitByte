@@ -10,6 +10,8 @@ import core.DAO.ExerciseDAO;
 import core.DAO.User_CoachDAO;
 import core.DAO.IngredientDAO;
 import core.DAO.PlateDAO;
+import core.DAO.plateIngredientDAO;
+import core.models.plateIngredient;
 import core.models.Exercise;
 import core.models.User_Coach;
 import core.models.Ingredient;
@@ -28,12 +30,15 @@ import user.models.User;
  */
 public class CoachConsumption extends javax.swing.JPanel {
     private static User current_user = new User();
+    private int cal = 0;
+    
     /**
      * Creates new form CoachConsumption
      */
     public CoachConsumption(User user) {
         user = current_user;
         initComponents();
+        String s = "Seleccionar";
         DefaultComboBoxModel modelUser = new DefaultComboBoxModel();
         ArrayList<User_Coach> users = User_CoachDAO.find_all_User(current_user.getId_user());
         DefaultComboBoxModel modelIngre = new DefaultComboBoxModel();
@@ -44,14 +49,16 @@ public class CoachConsumption extends javax.swing.JPanel {
         ArrayList<Exercise> exercises = ExerciseDAO.findAll();
         DefaultComboBoxModel modelWeak = new DefaultComboBoxModel();
         ArrayList<String> weakDays = daySet();
-            
+        
         for(User_Coach u_c: users){
             User u = UserDAO.find(u_c.getUser_id());
             modelUser.addElement(u.getUsername());
         }
+        modelIngre.addElement(s);
         for(Ingredient ingredient: ingredients){
             modelIngre.addElement(ingredient.getName());
         }
+        modelPlate.addElement(s);
         for(Plate plate: plates){
             modelPlate.addElement(plate.getPlateName());
         }
@@ -61,6 +68,12 @@ public class CoachConsumption extends javax.swing.JPanel {
         for(String day: weakDays){
             modelWeak.addElement(day);
         }
+        userCBX.setModel(modelUser);
+        ingredientCBX.setModel(modelIngre);
+        plateCBX.setModel(modelPlate);
+        exerciseCBX.setModel(modelExer);
+        dayCBX.setModel(modelWeak);
+        
         userCBX.setSelectedIndex(0);
         ingredientCBX.setSelectedIndex(0);
         plateCBX.setSelectedIndex(0);
@@ -74,6 +87,63 @@ public class CoachConsumption extends javax.swing.JPanel {
                 d.add(days[i]);
         }
         return d;
+    }
+    public User userSelected(){
+        String uSelected = (String)userCBX.getSelectedItem();
+        User u = UserDAO.find(uSelected);
+        return u;
+    }
+    public int ingredient_id(){
+        int r;
+        if(ingredientCBX.getSelectedIndex() == 0){
+            r = -1;
+        } else {
+            String a = (String)ingredientCBX.getSelectedItem();
+            r = Integer.parseInt(a);
+        }
+        return r;
+    }
+    public int plate_id(){
+        int r;
+        if(plateCBX.getSelectedIndex() == 0){
+            r = -1;
+        } else {
+            String a = (String)plateCBX.getSelectedItem();
+            r = Integer.parseInt(a);
+        }
+        return r;
+    }
+    public int exercise_id(){
+        String a = (String)exerciseCBX.getSelectedItem();
+        return Integer.parseInt(a);
+    }
+    public int num_horas_exer(){
+        return Integer.parseInt(hExerTF.getText());
+    }
+    public String recDay(){
+        String a = (String)dayCBX.getSelectedItem();
+        return a;
+    }
+    public int calories(){
+        int i = 0;
+        if (ingredient_id() != -1)i = IngredientDAO.find(ingredient_id()).getCalories();
+        int p = 0;
+        if (plate_id() != -1){
+            ArrayList<plateIngredient> pIngredients = plateIngredientDAO.findAll();
+            ArrayList<Ingredient> ingredients = new ArrayList<>();
+            for (plateIngredient pi: pIngredients){
+                if (plate_id() == pi.getPlateIngredientPlateID()){
+                    Ingredient ing = IngredientDAO.find(pi.getPlateIngredientIngredientID());
+                    ingredients.add(ing);
+                }
+            }
+            for (Ingredient ing: ingredients){
+                p = p + ing.getCalories();
+            }
+        }        
+        int e = ExerciseDAO.find(exercise_id()).getBurntHourCalorieExercise();
+        int h = num_horas_exer();
+        return i + p - e * h;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,7 +164,7 @@ public class CoachConsumption extends javax.swing.JPanel {
         ingredientCBX = new javax.swing.JComboBox<>();
         plateCBX = new javax.swing.JComboBox<>();
         exerciseCBX = new javax.swing.JComboBox<>();
-        hExerCBX = new javax.swing.JTextField();
+        hExerTF = new javax.swing.JTextField();
         dayCBX = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         userCBX = new javax.swing.JComboBox<>();
@@ -122,10 +192,10 @@ public class CoachConsumption extends javax.swing.JPanel {
 
         exerciseCBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        hExerCBX.setText("jTextField1");
-        hExerCBX.addActionListener(new java.awt.event.ActionListener() {
+        hExerTF.setText("0");
+        hExerTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hExerCBXActionPerformed(evt);
+                hExerTFActionPerformed(evt);
             }
         });
 
@@ -160,7 +230,7 @@ public class CoachConsumption extends javax.swing.JPanel {
                                 .addGap(58, 58, 58)
                                 .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(exerciseCBX, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(hExerCBX, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(hExerTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(userPaneLayout.createSequentialGroup()
@@ -210,7 +280,7 @@ public class CoachConsumption extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(hExerCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(hExerTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -244,9 +314,9 @@ public class CoachConsumption extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_ingredientCBXActionPerformed
 
-    private void hExerCBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hExerCBXActionPerformed
+    private void hExerTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hExerTFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_hExerCBXActionPerformed
+    }//GEN-LAST:event_hExerTFActionPerformed
 
     private void dayCBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayCBXActionPerformed
         // TODO add your handling code here:
@@ -256,7 +326,7 @@ public class CoachConsumption extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> dayCBX;
     private javax.swing.JComboBox<String> exerciseCBX;
-    private javax.swing.JTextField hExerCBX;
+    private javax.swing.JTextField hExerTF;
     private javax.swing.JComboBox<String> ingredientCBX;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;

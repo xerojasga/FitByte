@@ -5,38 +5,41 @@
  */
 package core.models;
 
+import java.sql.Date;
 /**
  *
  * @author Diego
  */
 public class Consumption {
     int id_consumption;
-    String date;
+    Date date;
     boolean rec_coach;
     int user_id;
     int ingredient_id;
     int plate_id;
-    int excersice_id;
+    int exercise_id;
     int calories;
     int num_hours_excers;
     String rec_day_weak;
-
+    
     public Consumption() {
     }
-
-    public Consumption(int id_consumo, String fecha, boolean rec_entrenador, int usuario_id, int ingrediente_id, int plato_id, int ejercicio_id,int calorias, int num_horas_ejerc, String rec_dia_semana) {
-        this.id_consumption = id_consumo;
-        this.date = fecha;
-        this.rec_coach = rec_entrenador;
-        this.user_id = usuario_id;
-        this.ingredient_id = ingrediente_id;
-        this.plate_id = plato_id;
-        this.excersice_id = ejercicio_id;
-        this.calories = calorias;
-        this.num_hours_excers = num_horas_ejerc;
-        this.rec_day_weak = rec_dia_semana;
+    
+    
+    public Consumption(int id_consumption, Date date, boolean rec_coach, int user_id, int ingredient_id, int plate_id, int excersice_id, int calories, int num_hours_excers, String rec_day_weak) {
+        this.id_consumption = id_consumption;
+        this.date = date;
+        this.rec_coach = rec_coach;
+        this.user_id = user_id;
+        this.ingredient_id = ingredient_id;
+        this.plate_id = plate_id;
+        this.exercise_id = excersice_id;
+        this.calories = calories;
+        this.num_hours_excers = num_hours_excers;
+        this.rec_day_weak = rec_day_weak;
     }
 
+    
     public int getId_consumption() {
         return id_consumption;
     }
@@ -45,11 +48,11 @@ public class Consumption {
         this.id_consumption = id_consumption;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -85,12 +88,12 @@ public class Consumption {
         this.plate_id = plate_id;
     }
 
-    public int getExcersice_id() {
-        return excersice_id;
+    public int getExercise_id() {
+        return exercise_id;
     }
 
-    public void setExcersice_id(int excersice_id) {
-        this.excersice_id = excersice_id;
+    public void setExercise_id(int exercise_id) {
+        this.exercise_id = exercise_id;
     }
 
     public int getCalories() {
