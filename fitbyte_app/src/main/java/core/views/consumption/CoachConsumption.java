@@ -63,7 +63,7 @@ public class CoachConsumption extends javax.swing.JPanel {
             modelPlate.addElement(plate.getPlateName());
         }
         for(Exercise exercise: exercises){
-            modelExer.addElement(exercise.getExerciseID() + "");
+            modelExer.addElement(exercise.getExerciseName());
         }
         for(String day: weakDays){
             modelWeak.addElement(day);
@@ -115,7 +115,15 @@ public class CoachConsumption extends javax.swing.JPanel {
     }
     public int exercise_id(){
         String a = (String)exerciseCBX.getSelectedItem();
-        return Integer.parseInt(a);
+        ArrayList<Exercise> exercises = ExerciseDAO.findAll();
+        Exercise ex = null;
+        for (Exercise e: exercises){
+            if (e.getExerciseName().equals(a)){
+                ex = e;
+                break;
+            }
+        }
+        return ex.getExerciseID();
     }
     public int num_horas_exer(){
         return Integer.parseInt(hExerTF.getText());
