@@ -21,8 +21,8 @@ public class ExerciseDAO {
     
     public static final String SELECT_ALL_SQL = "SELECT ID_EJERCICIO,DESCRIPCION, CALORIAS_QUEMA_HORA FROM  EJERCICIO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_EJERCICIO = ?";
-    public static final String CREATE_SQL = "INSERT INTO EJERCICIO (ID_EJERCICIO,DESCRIPCION, CALORIAS_QUEMA_HORA) VALUES (?,?,?)";
-    public static final String UPDATE_SQL = "UPDATE EJERCICIO SET DESCRIPCION = ?, CALORIAS_QUEMA_HORA = ? WHERE ID_EJERCICIO = ?";
+    public static final String CREATE_SQL = "INSERT INTO EJERCICIO (ID_EJERCICIO,NOMBRE, DESCRIPCION, CALORIAS_QUEMA_HORA) VALUES (?,?,?,?)";
+    public static final String UPDATE_SQL = "UPDATE EJERCICIO SET NOMBRE = ?, DESCRIPCION = ?, CALORIAS_QUEMA_HORA = ? WHERE ID_EJERCICIO = ?";
     public static final String DELETE_SQL = "DELETE FROM EJERCICIO WHERE ID_EJERCICIO = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
@@ -35,6 +35,7 @@ public class ExerciseDAO {
                     if(resultset.next()){
                         exercise = new Exercise(
                                 resultset.getInt("ID_EJERCICIO"),
+                                resultset.getString("NOMBRE"),
                                 resultset.getString("DESCRIPCION"),
                                 resultset.getInt("CALORIAS_QUEMA_HORA")
                                 );                    
@@ -59,6 +60,7 @@ public class ExerciseDAO {
                         Exercise exercise;
                         exercise = new Exercise(
                                 resultSet.getInt("ID_EJERCICIO"),
+                                resultSet.getString("NOMBRE"),
                                 resultSet.getString("DESCRIPCION"),
                                 resultSet.getInt("CALORIAS_QUEMA_HORA")
                         );
@@ -81,8 +83,9 @@ public class ExerciseDAO {
     public static int create(Exercise exercise){
         try (PreparedStatement stmnt = connection.prepareStatement(CREATE_SQL)) {
           stmnt.setInt(1, exercise.getExerciseID());
-          stmnt.setString(2, exercise.getExerciseDescription());
-          stmnt.setInt(3, exercise.getBurntHourCalorieExercise());
+          stmnt.setString(2, exercise.getExerciseName());
+          stmnt.setString(3, exercise.getExerciseDescription());
+          stmnt.setInt(4, exercise.getBurntHourCalorieExercise());
            
           return stmnt.executeUpdate();
         } catch (SQLException ex) {
@@ -93,10 +96,10 @@ public class ExerciseDAO {
     
     public static int update(Exercise exercise){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-                
-                statement.setString(1, exercise.getExerciseDescription());
-                statement.setInt(2, exercise.getBurntHourCalorieExercise());
-                statement.setInt(3, exercise.getExerciseID());
+                statement.setString(1, exercise.getExerciseName());
+                statement.setString(2, exercise.getExerciseDescription());
+                statement.setInt(3, exercise.getBurntHourCalorieExercise());
+                statement.setInt(4, exercise.getExerciseID());
                 return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);

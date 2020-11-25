@@ -28,6 +28,7 @@ import com.mycompany.fitbyte_app.MainView;
 import core.DAO.plateIngredientDAO;
 import core.models.plateIngredient;
 import core.views.HomeView;
+import core.views.consumption.ConsumptionView;
 import java.sql.Date;
 /**
  *
@@ -35,6 +36,8 @@ import java.sql.Date;
  */
 public class ConsumptionCreate extends javax.swing.JFrame {
     private static User current_user = new User();
+    private HomeView home = new HomeView(current_user);
+    private ConsumptionView back = new ConsumptionView(current_user);
     private CoachConsumption coachCons = new CoachConsumption(current_user);
     
     /**
@@ -313,6 +316,8 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             consumption.setRec_day_weak(null);
         }
         if (ConsumptionDAO.create(consumption) > 0){
+            this.home.setConsumedCalories();
+            this.home.setCaloriesToConsume();
             JOptionPane.showMessageDialog(this, "Consumo registrado con exito");
         } else {
             JOptionPane.showMessageDialog(this, "Error al registrar el consumo");
@@ -321,8 +326,7 @@ public class ConsumptionCreate extends javax.swing.JFrame {
 
     private void cancelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBActionPerformed
         this.dispose();
-        HomeView home = new HomeView(current_user);
-        home.setVisible(true);
+        back.setVisible(true);
     }//GEN-LAST:event_cancelBActionPerformed
 
     private void ingredientCBXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingredientCBXActionPerformed

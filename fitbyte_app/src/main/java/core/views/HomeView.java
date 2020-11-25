@@ -15,13 +15,16 @@ import entrenador.views.ReceivedRequestsView;
 import user.models.User;
 import user.views.UserConfigView;
 import core.views.consumption.*;
-
+import java.sql.Date;
+import core.DAO.ConsumptionDAO;
+import core.models.Consumption;
+import java.util.ArrayList;
+import java.time.*;
 /**
  *
  * @author developer
  */
 public class HomeView extends javax.swing.JFrame {
-
     /**
      * Creates new form HomeView
      */
@@ -43,7 +46,7 @@ public class HomeView extends javax.swing.JFrame {
            
            searchCouchBtn.setVisible(true);
            searchUserBtn.setVisible(true);
-           registerConsumeBtn.setVisible(true);
+           ConsumptionBtn.setVisible(true);
            friendsBtn.setVisible(true);
            searchRecipesBtn.setVisible(true);
            
@@ -58,7 +61,7 @@ public class HomeView extends javax.swing.JFrame {
             
             searchCouchBtn.setVisible(false);
             searchUserBtn.setVisible(false);
-            registerConsumeBtn.setVisible(false);
+            ConsumptionBtn.setVisible(false);
             friendsBtn.setVisible(false);
             searchRecipesBtn.setVisible(false);
             
@@ -91,7 +94,7 @@ public class HomeView extends javax.swing.JFrame {
         user_coachBtn = new javax.swing.JButton();
         searchUserBtn = new javax.swing.JButton();
         friendsBtn = new javax.swing.JButton();
-        registerConsumeBtn = new javax.swing.JButton();
+        ConsumptionBtn = new javax.swing.JButton();
         searchRecipesBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         calories_to_consumeLabel = new javax.swing.JLabel();
@@ -159,10 +162,10 @@ public class HomeView extends javax.swing.JFrame {
 
         friendsBtn.setText("Mis amigos");
 
-        registerConsumeBtn.setText("Registrar Consumo");
-        registerConsumeBtn.addActionListener(new java.awt.event.ActionListener() {
+        ConsumptionBtn.setText("Consumos");
+        ConsumptionBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerConsumeBtnActionPerformed(evt);
+                ConsumptionBtnActionPerformed(evt);
             }
         });
 
@@ -223,7 +226,7 @@ public class HomeView extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(searchUserBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(registerConsumeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ConsumptionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(searchCouchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(searchRecipesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(friendsBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -276,7 +279,7 @@ public class HomeView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchCouchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(registerConsumeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ConsumptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(searchUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -319,11 +322,11 @@ public class HomeView extends javax.swing.JFrame {
         MyUsersView my_users = new MyUsersView(current_user);
         my_users.setVisible(true);    }//GEN-LAST:event_user_coachBtnActionPerformed
 
-    private void registerConsumeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerConsumeBtnActionPerformed
+    private void ConsumptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsumptionBtnActionPerformed
        this.dispose();
-       ConsumptionCreate cc = new ConsumptionCreate(current_user);
+       ConsumptionView cc = new ConsumptionView(current_user);
        cc.setVisible(true);
-    }//GEN-LAST:event_registerConsumeBtnActionPerformed
+    }//GEN-LAST:event_ConsumptionBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,8 +363,47 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
     }
-
+    private int[] calCalc(){
+        int cons = 0;
+        int toCons = 0;
+        Date td = new Date(System.currentTimeMillis());
+        ArrayList<Consumption> selfCons = ConsumptionDAO.findAll();
+        LocalDate ld = td.toLocalDate();
+        DayOfWeek day = ld.getDayOfWeek();
+        int d = day.getValue();
+        String dia = "";
+        switch(d){
+            case(1): dia = "Lunes";
+            case(2): dia = "Martes";
+            case(3): dia = "Miercoles";
+            case(4): dia = "Jueves";
+            case(5): dia = "Viernes";
+            case(6): dia = "Sabado";
+            case(7): dia = "Domingo";
+            default: dia = null;
+        }
+                
+        for (Consumption c: selfCons){
+            if (td.equals(c.getDate()) && current_user.getId_user() == c.getUser_id() && !c.isRec_coach()){
+                cons = cons + c.getCalories();
+            }
+            if (dia.equals(c.getRec_day_weak()) && current_user.getId_user() == c.getUser_id() && c.isRec_coach()){
+                toCons = toCons + c.getCalories();
+            }
+        }
+        
+        
+        int[] ret = {cons, toCons - cons};
+        return ret;
+    }
+    public void setCaloriesToConsume(){
+        calories_to_consumeLabel.setText(calCalc()[1] + "");
+    }
+    public void setConsumedCalories(){
+        consumed_caloriesLabel.setText(calCalc()[0] + "");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ConsumptionBtn;
     private javax.swing.JButton btnConfigUsuario;
     private javax.swing.JLabel calificationLabel;
     private javax.swing.JLabel calories_to_consumeLabel;
@@ -379,7 +421,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton receivedRequestsBtn;
-    private javax.swing.JButton registerConsumeBtn;
     private javax.swing.JButton searchCouchBtn;
     private javax.swing.JButton searchRecipesBtn;
     private javax.swing.JButton searchUserBtn;
