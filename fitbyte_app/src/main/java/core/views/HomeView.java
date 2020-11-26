@@ -20,6 +20,7 @@ import core.DAO.ConsumptionDAO;
 import core.models.Consumption;
 import java.util.ArrayList;
 import java.time.*;
+import core.views.FavoriteView;
 /**
  *
  * @author developer
@@ -100,6 +101,7 @@ public class HomeView extends javax.swing.JFrame {
         calories_to_consumeLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         consumed_caloriesLabel = new javax.swing.JLabel();
+        myFavBTM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +181,13 @@ public class HomeView extends javax.swing.JFrame {
 
         consumed_caloriesLabel.setText("0");
 
+        myFavBTM.setText("Mis Favoritos");
+        myFavBTM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myFavBTMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,7 +203,8 @@ public class HomeView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(user_coachBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(receivedRequestsBtn))
+                            .addComponent(receivedRequestsBtn)
+                            .addComponent(myFavBTM, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -259,11 +269,16 @@ public class HomeView extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(receivedRequestsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lastNameLabel))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(descriptionLabel))
-                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(31, 31, 31)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel4)
+                                            .addComponent(descriptionLabel)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addComponent(myFavBTM, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(calificationLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(188, 188, 188)
@@ -286,7 +301,7 @@ public class HomeView extends javax.swing.JFrame {
                         .addComponent(friendsBtn)
                         .addGap(18, 18, 18)
                         .addComponent(searchRecipesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -327,6 +342,12 @@ public class HomeView extends javax.swing.JFrame {
        ConsumptionView cc = new ConsumptionView(current_user);
        cc.setVisible(true);
     }//GEN-LAST:event_ConsumptionBtnActionPerformed
+
+    private void myFavBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myFavBTMActionPerformed
+        FavoriteView fv = new FavoriteView(current_user);
+        this.dispose();
+        fv.setVisible(true);
+    }//GEN-LAST:event_myFavBTMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,6 +439,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JButton logOutBtn;
+    private javax.swing.JButton myFavBTM;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton receivedRequestsBtn;

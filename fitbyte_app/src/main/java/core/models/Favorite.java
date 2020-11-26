@@ -4,31 +4,31 @@
  * and open the template in the editor.
  */
 package core.models;
-
+import java.sql.Date;
 /**
  *
  * @author Diego
  */
 public class Favorite {
     int id_favorite;
-    String date;
+    Date date;
     String type;
     int user_id;
     int ingredient_id;
     int plate_id;
-    int excersice_id;
+    int exercise_id;
 
     public Favorite() {
     }
 
-    public Favorite(int id_favorito, String fecha, String tipo, int usuario_id, int ingrediente_id, int plato_id, int ejercicio_id) {
+    public Favorite(int id_favorito, Date fecha, String tipo, int usuario_id, int ingrediente_id, int plato_id, int ejercicio_id) {
         this.id_favorite = id_favorito;
         this.date = fecha;
         this.type = tipo;
         this.user_id = usuario_id;
         this.ingredient_id = ingrediente_id;
         this.plate_id = plato_id;
-        this.excersice_id = ejercicio_id;
+        this.exercise_id = ejercicio_id;
     }
 
     public int getId_favorite() {
@@ -39,11 +39,11 @@ public class Favorite {
         this.id_favorite = id_favorite;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -79,12 +79,12 @@ public class Favorite {
         this.plate_id = plate_id;
     }
 
-    public int getExcersice_id() {
-        return excersice_id;
+    public int getExercise_id() {
+        return exercise_id;
     }
 
-    public void setExcersice_id(int excersice_id) {
-        this.excersice_id = excersice_id;
+    public void setExercise_id(int exercise_id) {
+        this.exercise_id = exercise_id;
     }
     
     

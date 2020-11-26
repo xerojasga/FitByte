@@ -74,24 +74,7 @@ public class ConsumptionView extends javax.swing.JFrame {
             for (Object columna: columnas){
                 model.addColumn(columna);
             }
-            ArrayList<Consumption> cons = ConsumptionDAO.findAll();
-            ArrayList<Consumption> consumptions = new ArrayList<>();
-            for (Consumption c: cons){
-                if (c.getUser_id() == userSelected().getId_user()){
-                    consumptions.add(c);
-                }
-            }
-            for (Consumption c: consumptions){
-                String ingredient = IngredientDAO.find(c.getIngredient_id()).getName();
-                String plate = PlateDAO.find(c.getPlate_id()).getPlateName();
-                String exercise = ExerciseDAO.find(c.getExercise_id()).getExerciseName();
-                int calories = c.getCalories();
-                int hExer = c.getNum_hours_excers();
-                String weakDay = c.getRec_day_weak();
-                Object[] data = new Object[]{ingredient, plate, exercise, calories, hExer, weakDay};
-                model.addRow(data);
-            }
-            consumptionTable.setModel(model);
+            
         }
     }
     private boolean isCoach(){
@@ -119,6 +102,7 @@ public class ConsumptionView extends javax.swing.JFrame {
         consumptionTable = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         userCBX = new javax.swing.JComboBox<>();
+        selectBTM = new javax.swing.JButton();
         createBTM = new javax.swing.JButton();
         backBTM = new javax.swing.JButton();
 
@@ -154,16 +138,25 @@ public class ConsumptionView extends javax.swing.JFrame {
 
         userCBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        selectBTM.setText("Seleccionar");
+        selectBTM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectBTMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout coachPaneLayout = new javax.swing.GroupLayout(coachPane);
         coachPane.setLayout(coachPaneLayout);
         coachPaneLayout.setHorizontalGroup(
             coachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
             .addGroup(coachPaneLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
+                .addGap(19, 19, 19)
                 .addComponent(jLabel2)
-                .addGap(23, 23, 23)
-                .addComponent(userCBX, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(userCBX, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selectBTM))
         );
         coachPaneLayout.setVerticalGroup(
             coachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +164,8 @@ public class ConsumptionView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(coachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(userCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectBTM))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -243,6 +237,27 @@ public class ConsumptionView extends javax.swing.JFrame {
         cCreate.setVisible(true);
     }//GEN-LAST:event_createBTMActionPerformed
 
+    private void selectBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBTMActionPerformed
+        ArrayList<Consumption> cons = ConsumptionDAO.findAll();
+            ArrayList<Consumption> consumptions = new ArrayList<>();
+            for (Consumption c: cons){
+                if (c.getUser_id() == userSelected().getId_user()){
+                    consumptions.add(c);
+                }
+            }
+            for (Consumption c: consumptions){
+                String ingredient = IngredientDAO.find(c.getIngredient_id()).getName();
+                String plate = PlateDAO.find(c.getPlate_id()).getPlateName();
+                String exercise = ExerciseDAO.find(c.getExercise_id()).getExerciseName();
+                int calories = c.getCalories();
+                int hExer = c.getNum_hours_excers();
+                String weakDay = c.getRec_day_weak();
+                Object[] data = new Object[]{ingredient, plate, exercise, calories, hExer, weakDay};
+                model.addRow(data);
+            }
+            consumptionTable.setModel(model);
+    }//GEN-LAST:event_selectBTMActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,28 +296,14 @@ public class ConsumptionView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBTM;
     private javax.swing.JPanel coachPane;
-    private javax.swing.JPanel coachPanel;
-    private javax.swing.JPanel coachPanel1;
-    private javax.swing.JPanel coachPanel2;
-    private javax.swing.JTable coachTable;
-    private javax.swing.JTable coachTable1;
-    private javax.swing.JTable coachTable2;
     private javax.swing.JTable consumptionTable;
     private javax.swing.JButton createBTM;
-    private javax.swing.JComboBox<String> dayCBX;
-    private javax.swing.JComboBox<String> dayCBX1;
-    private javax.swing.JComboBox<String> dayCBX2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton selectBTM;
     private javax.swing.JComboBox<String> userCBX;
     // End of variables declaration//GEN-END:variables
 }
