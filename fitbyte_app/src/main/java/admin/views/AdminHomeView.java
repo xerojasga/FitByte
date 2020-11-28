@@ -31,6 +31,7 @@ public class AdminHomeView extends javax.swing.JFrame {
     private void initComponents() {
 
         allUsersView = new javax.swing.JButton();
+        inactiveBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,13 +42,22 @@ public class AdminHomeView extends javax.swing.JFrame {
             }
         });
 
+        inactiveBTN.setText("Usuarios Inactivo");
+        inactiveBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inactiveBTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(allUsersView)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(inactiveBTN)
+                    .addComponent(allUsersView))
                 .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -55,7 +65,9 @@ public class AdminHomeView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(allUsersView)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inactiveBTN)
+                .addContainerGap(213, Short.MAX_VALUE))
         );
 
         pack();
@@ -66,6 +78,13 @@ public class AdminHomeView extends javax.swing.JFrame {
         ControlUsersView users_control = new ControlUsersView(current_user);
         users_control.setVisible(true);
     }//GEN-LAST:event_allUsersViewActionPerformed
+
+    private void inactiveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inactiveBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        InactiveUsers n = new InactiveUsers();
+        n.setVisible(true);
+    }//GEN-LAST:event_inactiveBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -104,5 +123,6 @@ public class AdminHomeView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton allUsersView;
+    private javax.swing.JButton inactiveBTN;
     // End of variables declaration//GEN-END:variables
 }

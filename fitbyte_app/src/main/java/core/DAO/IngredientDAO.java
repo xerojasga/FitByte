@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class IngredientDAO {
     //Query Initializations
     public static final String SELECT_ALL_SQL = 
-            "SELECT  NOMBRE, MARCA_ID FROM ingrediente";
+            "SELECT * FROM INGREDIENTE ";
     public static final String SELECT_SQL = 
             SELECT_ALL_SQL + " WHERE ID_INGREDIENTE = ?";
     public static final String SELECT_SQL_NAME = 
@@ -45,6 +45,8 @@ public class IngredientDAO {
             "UPDATE ingrediente SET IMAGEN = ? WHERE ID_INGREDIENTE = ?;";
     public static final String DISPLAY_SQL = 
             "SELECT IMAGEN FROM ingrediente WHERE ID_INGREDIENTE = ?;";
+    public static final String SELECT =
+            "SELECT `ID_INGREDIENTE`, `NOMBRE`, `MARCA_ID` FROM `ingrediente`";
     private static final Connection connection = ConnectionProvider.connection;        
     //cambio del metodo create 11/11/20
     //Data Access Object Methods
@@ -147,7 +149,7 @@ public class IngredientDAO {
     public static ArrayList<Ingredient> findAll(){ 
         ArrayList<Ingredient> data = new ArrayList<>();
         
-         try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_SQL)) {
+         try (PreparedStatement statement = connection.prepareStatement(SELECT)) {
             if (statement.execute()) {
                 try (ResultSet resultSet = statement.getResultSet()) {
                     while(resultSet.next()){

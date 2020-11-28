@@ -25,7 +25,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="allUsersView" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="inactiveBTN" min="-2" max="-2" attributes="0"/>
+                  <Component id="allUsersView" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="172" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -35,7 +38,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Component id="allUsersView" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="247" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="inactiveBTN" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="213" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,6 +52,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="allUsersViewActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="inactiveBTN">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Usuarios Inactivo"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inactiveBTNActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

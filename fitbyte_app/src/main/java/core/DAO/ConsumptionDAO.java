@@ -23,7 +23,8 @@ public class ConsumptionDAO {
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE id_consumo = ?";
     public static final String CREATE_SQL = "INSERT INTO consumo (fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana) VALUES (?,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , rec_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? , calorias = ?, num_horas_ejerc = ? , rec_dia_semana = ? WHERE id_consumo = ?";
-    public static final String DELETE_SQL = "DELETE FROM consumo WHERE id_consumo = ?";       
+    public static final String DELETE_SQL = "DELETE FROM consumo WHERE id_consumo = ?";         
+    public static final String REGISTER = "SELECT * FROM `consumo` WHERE `FECHA` = (SELECT MAX(`FECHA`) FROM `consumo`) ORDER BY `ID_CONSUMO` DESC LIMIT ?";
     private static final Connection connection = ConnectionProvider.connection;        
 
     

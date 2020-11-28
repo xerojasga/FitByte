@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import user.models.User;
 
 /**
  *
@@ -24,8 +25,10 @@ public class IngredientCreate extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public IngredientCreate() {
+    public static User current_user;
+    public IngredientCreate(User user) {
         initComponents();
+        current_user = user;
         this.setLocationRelativeTo(null);
         //Filling the combo box
         ArrayList<Brand> brandlist = BrandDAO.findAll();
@@ -242,7 +245,7 @@ public class IngredientCreate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngredientCreate().setVisible(true);
+                new IngredientCreate(current_user).setVisible(true);
             }
         });
     }

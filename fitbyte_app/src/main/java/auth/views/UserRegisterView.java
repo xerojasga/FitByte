@@ -54,7 +54,7 @@ public class UserRegisterView extends javax.swing.JFrame {
         FileReader fr = null;
         String pol = "";
         try{
-            policy = new File("policy.txt");
+            policy = new File("policy.html");
             fr = new FileReader(policy);
             br = new BufferedReader(fr);
             while (br.readLine() != null){
@@ -343,8 +343,8 @@ public class UserRegisterView extends javax.swing.JFrame {
         if(UserDAO.create(current_user)>0){
             current_user.setId_user(UserDAO.find(current_user.getUsername()).getId_user());
             this.dispose();
-            HomeView home = new HomeView(current_user);
-            home.setVisible(true);
+            TAC tac = new TAC(current_user);
+            tac.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Error");
         }

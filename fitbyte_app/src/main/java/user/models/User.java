@@ -67,6 +67,17 @@ public class User {
         this.last_login = last_login;
         this.type = type;
     }
+    
+    public User(int id_user, String username, String name, String last_name, String email, String password, Date last_login,String type) {
+        this.id_user = id_user;
+        this.username = username;
+        this.name = name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+        this.last_login = last_login;
+        this.type = type;
+    }
 
     
     public int getId_user() {

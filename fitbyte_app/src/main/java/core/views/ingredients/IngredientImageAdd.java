@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import user.models.User;
 
 
 public class IngredientImageAdd extends javax.swing.JFrame {
@@ -31,8 +32,10 @@ public class IngredientImageAdd extends javax.swing.JFrame {
     /**
      * Creates new form testing_image
      */
-    public IngredientImageAdd() {
-        initComponents();        
+    public static User current_user;
+    public IngredientImageAdd(User user) {
+        initComponents();    
+        current_user = user;
     }
     
     
@@ -244,7 +247,7 @@ public class IngredientImageAdd extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngredientImageAdd().setVisible(true);
+                new IngredientImageAdd(current_user).setVisible(true);
             }
         });
     }

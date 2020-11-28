@@ -42,6 +42,8 @@ public class LoginView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         passwordInput = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
+        rehearsalBTN = new javax.swing.JButton();
+        newUserBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,24 +64,41 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
+        rehearsalBTN.setText("¿Olvidaste tu contraseña?");
+        rehearsalBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rehearsalBTNActionPerformed(evt);
+            }
+        });
+
+        newUserBTN.setText("Nuevo Usuario");
+        newUserBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newUserBTNActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(usernameInput)
-                    .addComponent(passwordInput, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(161, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addGap(149, 149, 149))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLogin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rehearsalBTN))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameInput)
+                            .addComponent(passwordInput, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
+                    .addComponent(newUserBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,9 +111,13 @@ public class LoginView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(passwordInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(btnLogin)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(rehearsalBTN))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(newUserBTN)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,6 +159,20 @@ public class LoginView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Tiene que llenar todos los datos");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void rehearsalBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rehearsalBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        PasswordRehearsal n = new PasswordRehearsal();
+        n.setVisible(true);
+    }//GEN-LAST:event_rehearsalBTNActionPerformed
+
+    private void newUserBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        UserRegisterView n = new UserRegisterView();
+        n.setVisible(true);
+    }//GEN-LAST:event_newUserBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,7 +216,9 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton newUserBTN;
     private javax.swing.JPasswordField passwordInput;
+    private javax.swing.JButton rehearsalBTN;
     private javax.swing.JTextField usernameInput;
     // End of variables declaration//GEN-END:variables
 }

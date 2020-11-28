@@ -20,6 +20,8 @@ import user.models.User;
 public class LoginDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USERNAME` = ?";
+    public static final String PASSWORD = "SELECT `PASSWORD` FROM `usuario` WHERE `ID_USUARIO` = ? AND `EMAIL` = ?";
+    
     private static final Connection connection = ConnectionProvider.connection;
     
     public static boolean login(User usuario){
@@ -41,6 +43,26 @@ public class LoginDAO {
             
         }
         return false;
+    }
+    
+     public static String Rehearseal(int id,String mail){
+        String result = "";
+        try (PreparedStatement statement = connection.prepareStatement(PASSWORD)){
+            statement.setInt(1, id);
+            statement.setString(2, mail);
+            if(statement.execute()){
+                try(ResultSet resultset = statement.getResultSet()){
+                    if(resultset.next()){
+                        result = resultset.getString("PASSWORD");
+                    }
+                }catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+        }
+        return result;
     }
 
 }

@@ -10,6 +10,7 @@ import com.mycompany.fitbyte_app.ConnectionProvider;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import user.models.User;
@@ -30,6 +31,8 @@ public class UserDAO {
             "UPDATE `USUARIO` SET `USERNAME`= ?,`NOMBRE`= ?,`APELLIDO`= ?,`EMAIL`= ?,`PAIS_ID`= ?,`ALTURA`= ? ,`PESO`= ?,`EDAD`= ?,`ADMIN`= ?, `PASSWORD`=?, `DESCRIPCION`= ? ,`ULT_INGRESO`=?,`TIPO`= ? WHERE `USUARIO`.`ID_USUARIO` = ? ";
     public static final String DELETE_SQL = 
             "DELETE FROM `USUARIO` WHERE `ID_USUARIO` = ?";
+    public static final String DATE_REGISTER = 
+            "SELECT `ID_USUARIO`, `USERNAME`, `NOMBRE`, `APELLIDO`, `EMAIL`, `PASSWORD`, `ULT_INGRESO`, `TIPO` FROM `usuario` WHERE `ULT_INGRESO` < ?";
     
     private static final Connection connection = ConnectionProvider.connection;   
     
@@ -195,6 +198,37 @@ public class UserDAO {
                                 resultset.getBoolean("ADMIN"),
                                 resultset.getString("PASSWORD"),
                                 resultset.getString("DESCRIPCION"),
+                                resultset.getDate("ULT_INGRESO"),
+                                resultset.getString("TIPO")
+                        );
+                        data.add(usuario);
+                    }
+                    
+                }
+            }           
+        }catch(SQLException e){
+            System.out.println("no se pudieron traer los usuarios");
+            System.out.println(e);
+        }
+        return data;
+    }
+    
+    public static ArrayList<User> findByDate(Date date){ 
+        ArrayList<User> data = new ArrayList<>();
+ 
+         try (PreparedStatement statement = connection.prepareStatement(DATE_REGISTER)) {
+             statement.setDate(1,date);
+            if (statement.execute()) {
+                try (ResultSet resultset = statement.getResultSet()) {
+                    while(resultset.next()){
+                        User usuario;
+                        usuario = new User(
+                                resultset.getInt("ID_USUARIO"),
+                                resultset.getString("USUARIO.USERNAME"),
+                                resultset.getString("NOMBRE"),
+                                resultset.getString("APELLIDO"),
+                                resultset.getString("EMAIL"),
+                                resultset.getString("PASSWORD"),
                                 resultset.getDate("ULT_INGRESO"),
                                 resultset.getString("TIPO")
                         );

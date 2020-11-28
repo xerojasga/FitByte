@@ -6,6 +6,7 @@
 package core.views;
 
 import auth.views.LoginView;
+import auth.views.TAC;
 import auth.views.UserRegisterView;
 import entrenador.views.SearchCoachView;
 import entrenador.DAO.CoachDAO;
@@ -21,6 +22,7 @@ import core.models.Consumption;
 import java.util.ArrayList;
 import java.time.*;
 import core.views.FavoriteView;
+import core.views.ingredients.IngredientCatalogue;
 /**
  *
  * @author developer
@@ -95,13 +97,16 @@ public class HomeView extends javax.swing.JFrame {
         user_coachBtn = new javax.swing.JButton();
         searchUserBtn = new javax.swing.JButton();
         friendsBtn = new javax.swing.JButton();
-        ConsumptionBtn = new javax.swing.JButton();
+        registerConsumeBtn = new javax.swing.JButton();
         searchRecipesBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         calories_to_consumeLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         consumed_caloriesLabel = new javax.swing.JLabel();
-        myFavBTM = new javax.swing.JButton();
+        ingredientBTN = new javax.swing.JButton();
+        weightBTN = new javax.swing.JButton();
+        TACBTN = new javax.swing.JButton();
+        ConsumptionBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,12 +169,7 @@ public class HomeView extends javax.swing.JFrame {
 
         friendsBtn.setText("Mis amigos");
 
-        ConsumptionBtn.setText("Consumos");
-        ConsumptionBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConsumptionBtnActionPerformed(evt);
-            }
-        });
+        registerConsumeBtn.setText("Registrar Consumo");
 
         searchRecipesBtn.setText("Buscador Recetas");
 
@@ -181,12 +181,28 @@ public class HomeView extends javax.swing.JFrame {
 
         consumed_caloriesLabel.setText("0");
 
-        myFavBTM.setText("Mis Favoritos");
-        myFavBTM.addActionListener(new java.awt.event.ActionListener() {
+        ingredientBTN.setText("Ingredientes");
+        ingredientBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myFavBTMActionPerformed(evt);
+                ingredientBTNActionPerformed(evt);
             }
         });
+
+        weightBTN.setText("Peso");
+        weightBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                weightBTNActionPerformed(evt);
+            }
+        });
+
+        TACBTN.setText("Terminos y Condiciones");
+        TACBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TACBTNActionPerformed(evt);
+            }
+        });
+
+        ConsumptionBtn.setText("Consumo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +220,10 @@ public class HomeView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(user_coachBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(receivedRequestsBtn)
-                            .addComponent(myFavBTM, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ingredientBTN)
+                            .addComponent(weightBTN)
+                            .addComponent(TACBTN)
+                            .addComponent(ConsumptionBtn))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -236,7 +255,7 @@ public class HomeView extends javax.swing.JFrame {
                         .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(searchUserBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ConsumptionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(registerConsumeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(searchCouchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(searchRecipesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(friendsBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -269,39 +288,44 @@ public class HomeView extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(receivedRequestsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lastNameLabel))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(31, 31, 31)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel4)
-                                            .addComponent(descriptionLabel)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
-                                        .addComponent(myFavBTM, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(calificationLabel))
+                                .addGap(27, 27, 27)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(descriptionLabel)
+                                    .addComponent(ingredientBTN))
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(calificationLabel)
+                                    .addComponent(weightBTN)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(188, 188, 188)
                                 .addComponent(rankLabel)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(calories_to_consumeLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(consumed_caloriesLabel)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(calories_to_consumeLabel))
+                                .addGap(9, 9, 9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(consumed_caloriesLabel)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(TACBTN)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ConsumptionBtn))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchCouchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ConsumptionBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(registerConsumeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(searchUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(friendsBtn)
                         .addGap(18, 18, 18)
                         .addComponent(searchRecipesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -348,6 +372,28 @@ public class HomeView extends javax.swing.JFrame {
         this.dispose();
         fv.setVisible(true);
     }//GEN-LAST:event_myFavBTMActionPerformed
+
+    private void ingredientBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingredientBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        IngredientCatalogue catalogue = new IngredientCatalogue(current_user);
+        catalogue.setVisible(true);
+    }//GEN-LAST:event_ingredientBTNActionPerformed
+
+    private void weightBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weightBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        //WeightHome weights = new WeightHome(current_user);
+        //weights.setVisible(true);
+        
+    }//GEN-LAST:event_weightBTNActionPerformed
+
+    private void TACBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TACBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        TAC n = new TAC(current_user);
+        n.setVisible(true);
+    }//GEN-LAST:event_TACBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,12 +471,14 @@ public class HomeView extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConsumptionBtn;
+    private javax.swing.JButton TACBTN;
     private javax.swing.JButton btnConfigUsuario;
     private javax.swing.JLabel calificationLabel;
     private javax.swing.JLabel calories_to_consumeLabel;
     private javax.swing.JLabel consumed_caloriesLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JButton friendsBtn;
+    private javax.swing.JButton ingredientBTN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -439,14 +487,15 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JButton logOutBtn;
-    private javax.swing.JButton myFavBTM;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton receivedRequestsBtn;
+    private javax.swing.JButton registerConsumeBtn;
     private javax.swing.JButton searchCouchBtn;
     private javax.swing.JButton searchRecipesBtn;
     private javax.swing.JButton searchUserBtn;
     private javax.swing.JButton user_coachBtn;
     private javax.swing.JLabel usernameLabel;
+    private javax.swing.JButton weightBTN;
     // End of variables declaration//GEN-END:variables
 }

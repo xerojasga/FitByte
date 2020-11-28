@@ -12,6 +12,7 @@ import core.models.Ingredient;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import user.models.User;
 
 /**
  *
@@ -22,8 +23,10 @@ public class IngredientEditor extends javax.swing.JFrame {
     /**
      * Creates new form IngredientEditor
      */
-    public IngredientEditor() {
+    public static User current_user;
+    public IngredientEditor(User user) {
         initComponents();
+        current_user = user;
         this.setLocationRelativeTo(null);
         //Filling the combo box
         ArrayList<Brand> brandlist = BrandDAO.findAll();
@@ -375,7 +378,7 @@ public class IngredientEditor extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IngredientEditor().setVisible(true);
+                new IngredientEditor(current_user).setVisible(true);
             }
         });
     }
