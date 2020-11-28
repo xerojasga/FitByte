@@ -20,10 +20,10 @@ public class InactiveUsers extends javax.swing.JFrame {
     /**
      * Creates new form InactiveUsers
      */
-
-    public InactiveUsers() {
+    public static User current_user;
+    public InactiveUsers(User user) {
         initComponents();
-        
+        current_user = user;
         ArrayList <Object> columns = new ArrayList<Object>();
         columns.add("IDENTIFIER");
         columns.add("USERNAME");
@@ -191,6 +191,9 @@ public class InactiveUsers extends javax.swing.JFrame {
 
     private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        AdminHomeView n = new AdminHomeView(current_user);
+        n.setVisible(true);
         
     }//GEN-LAST:event_exitBTNActionPerformed
 
@@ -230,7 +233,7 @@ public class InactiveUsers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InactiveUsers().setVisible(true);
+                new InactiveUsers(current_user).setVisible(true);
             }
         });
     }

@@ -329,7 +329,7 @@ public class IngredientEditor extends javax.swing.JFrame {
         int id = Integer.parseInt(searchTF.getText());
         Ingredient dummy = IngredientDAO.find(id);
         
-        dummy.setName(nnameTF.getText());
+        dummy.setName(nnameTF.getText().toUpperCase());
         dummy.setBrand_id(brand_D.getId_brand());
         dummy.setProteins(Integer.parseInt(nprotTF.getText()));
         dummy.setCalories(Integer.parseInt(ncalTF.getText()));
@@ -346,6 +346,9 @@ public class IngredientEditor extends javax.swing.JFrame {
     private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        this.dispose();
+        IngredientCatalogue n = new IngredientCatalogue(current_user);
+        n.setVisible(true);
     }//GEN-LAST:event_exitBTNActionPerformed
 
     /**

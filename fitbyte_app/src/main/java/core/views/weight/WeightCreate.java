@@ -23,7 +23,7 @@ public class WeightCreate extends javax.swing.JFrame {
     public static User current_user;
     public WeightCreate(User user) {
         initComponents();
-        current_user = new User();
+        current_user = user;
     }
 
     /**
@@ -113,7 +113,7 @@ public class WeightCreate extends javax.swing.JFrame {
         dummy.setWeight(Integer.parseInt(weightnTF.getText()));
         dummy.setDate(date);
         dummy.setUser_Id(current_user.getId_user());
-        //dummy.setUser_Id(1);
+        //dummy.setUser_Id(4);
         
         if(WeightDAO.create(dummy)>0){
             JOptionPane.showMessageDialog(this, "Register successfully added");

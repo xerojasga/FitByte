@@ -27,7 +27,7 @@ public class WeightDAO {
     public static final String SELECT_SQL = 
             SELECT_ALL_SQL + " WHERE `ID_PESO` = ?";
     public static final String CREATE_SQL = 
-            "INSERT INTO `peso`( `USUARIO_ID`, `PESO`, `FECHA`) VALUES (?,?,?)";
+            "INSERT INTO `peso` (`ID_PESO`, `USUARIO_ID`, `PESO`, `FECHA`) VALUES (NULL, ?, ?, ?)";
     public static final String UPDATE_SQL =
             "UPDATE `PESO` SET `USUARIO_ID`=?,`PESO`=?,`FECHA`=? WHERE `ID_PESO` = ?";
     public static final String DELETE_SQL = 

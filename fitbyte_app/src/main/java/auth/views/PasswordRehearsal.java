@@ -6,6 +6,7 @@
 package auth.views;
 
 import auth.DAO.LoginDAO;
+import auth.models.Hash;
 import javax.swing.JOptionPane;
 
 /**
@@ -155,7 +156,10 @@ public class PasswordRehearsal extends javax.swing.JFrame {
         if(res.equals("")){
             JOptionPane.showMessageDialog(this,"Sorry, the user doent exists or the parameters are incorrect");
         }else{
-            resultTF.setText(res);
+            String rehashed = Hash.md5(res);
+            //System.out.println(Hash.getHash(res, "MD5"));
+            System.out.println(Hash.sha1(res));
+            resultTF.setText(rehashed);
             resultTF.updateUI();
         }
     }//GEN-LAST:event_findBTNActionPerformed

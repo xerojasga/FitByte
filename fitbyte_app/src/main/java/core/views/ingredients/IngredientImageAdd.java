@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import com.mycompany.fitbyte_app.ConnectionProvider;
 import core.DAO.IngredientDAO;
+import static core.views.ingredients.IngredientCreate.current_user;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -208,6 +209,8 @@ public class IngredientImageAdd extends javax.swing.JFrame {
     private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        IngredientCatalogue n = new IngredientCatalogue(current_user);
+        n.setVisible(true);
     }//GEN-LAST:event_exitBTNActionPerformed
 
     /**

@@ -67,6 +67,11 @@ public class IngredientDelete extends javax.swing.JFrame {
         });
 
         exitBTN.setText("Salir");
+        exitBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,6 +146,13 @@ public class IngredientDelete extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Sorry, there is an error in this query");
         }
     }//GEN-LAST:event_deleteBTNActionPerformed
+
+    private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        IngredientCatalogue n = new IngredientCatalogue(current_user);
+        n.setVisible(true);
+    }//GEN-LAST:event_exitBTNActionPerformed
 
     /**
      * @param args the command line arguments

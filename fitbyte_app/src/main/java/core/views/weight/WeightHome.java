@@ -25,7 +25,7 @@ public class WeightHome extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     public WeightHome(User user) {
         initComponents();
-        current_user = new User();
+        current_user = user;
         
         ArrayList <Object> columns = new ArrayList<Object>();
         columns.add("ENTRY ID");
@@ -169,6 +169,7 @@ public class WeightHome extends javax.swing.JFrame {
 
     private void dataBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataBTNActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel model = new DefaultTableModel();
         ArrayList <Object> columns = new ArrayList<Object>();
         columns.add("ENTRY ID");
         columns.add("REGISTERED WEIGHT");
@@ -176,7 +177,6 @@ public class WeightHome extends javax.swing.JFrame {
         for(Object column :columns){
             model.addColumn(column);
         }
-        weightListTBL.setModel(model);
         
         ArrayList<Weight> weights = WeightDAO.findAllByID(current_user.getId_user());
         //ArrayList<Weight> weights = WeightDAO.findAllByID(1);

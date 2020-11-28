@@ -5,6 +5,7 @@
  */
 package core.views;
 
+import admin.views.AdminHomeView;
 import auth.views.LoginView;
 import auth.views.TAC;
 import auth.views.UserRegisterView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.time.*;
 import core.views.FavoriteView;
 import core.views.ingredients.IngredientCatalogue;
+import core.views.weight.WeightHome;
 /**
  *
  * @author developer
@@ -38,6 +40,7 @@ public class HomeView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         System.out.println(UserRegisterView.current_user.getUsername());
         current_user = user;
+        iduserLBL.setText(String.valueOf(user.getId_user()));
         usernameLabel.setText(user.getUsername());
         nameLabel.setText(user.getName());
         lastNameLabel.setText(user.getLast_name());
@@ -107,6 +110,9 @@ public class HomeView extends javax.swing.JFrame {
         weightBTN = new javax.swing.JButton();
         TACBTN = new javax.swing.JButton();
         ConsumptionBtn = new javax.swing.JButton();
+        adminBTN = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        iduserLBL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,18 +210,27 @@ public class HomeView extends javax.swing.JFrame {
 
         ConsumptionBtn.setText("Consumo");
 
+        adminBTN.setText("Panel Administrativo");
+        adminBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminBTNActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Codigo id de usuario:");
+
+        iduserLBL.setText("ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnConfigUsuario)
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(logOutBtn)
-                        .addGap(24, 24, 24))
+                        .addComponent(adminBTN)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(user_coachBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,43 +238,52 @@ public class HomeView extends javax.swing.JFrame {
                             .addComponent(ingredientBTN)
                             .addComponent(weightBTN)
                             .addComponent(TACBTN)
-                            .addComponent(ConsumptionBtn))
+                            .addComponent(ConsumptionBtn)
+                            .addComponent(btnConfigUsuario))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel1))
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(calificationLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rankLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lastNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(nameLabel)
-                                            .addComponent(usernameLabel))
-                                        .addGap(2, 2, 2))
-                                    .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(calories_to_consumeLabel))
+                                .addComponent(logOutBtn)
+                                .addGap(24, 24, 24))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(consumed_caloriesLabel)))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(searchUserBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(registerConsumeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(searchCouchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(searchRecipesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(friendsBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jLabel1))
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel4)
+                                            .addComponent(calificationLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(rankLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lastNameLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(nameLabel)
+                                                    .addComponent(usernameLabel)
+                                                    .addComponent(iduserLBL))
+                                                .addGap(2, 2, 2))
+                                            .addComponent(descriptionLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(calories_to_consumeLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(consumed_caloriesLabel)))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(searchUserBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(registerConsumeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(searchCouchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(searchRecipesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(friendsBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(16, 16, 16))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,7 +291,9 @@ public class HomeView extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnConfigUsuario))
+                    .addComponent(btnConfigUsuario)
+                    .addComponent(jLabel6)
+                    .addComponent(iduserLBL))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -325,7 +351,9 @@ public class HomeView extends javax.swing.JFrame {
                         .addComponent(friendsBtn)
                         .addGap(18, 18, 18)
                         .addComponent(searchRecipesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(adminBTN)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -383,8 +411,8 @@ public class HomeView extends javax.swing.JFrame {
     private void weightBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weightBTNActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        //WeightHome weights = new WeightHome(current_user);
-        //weights.setVisible(true);
+        WeightHome weights = new WeightHome(current_user);
+        weights.setVisible(true);
         
     }//GEN-LAST:event_weightBTNActionPerformed
 
@@ -394,6 +422,17 @@ public class HomeView extends javax.swing.JFrame {
         TAC n = new TAC(current_user);
         n.setVisible(true);
     }//GEN-LAST:event_TACBTNActionPerformed
+
+    private void adminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBTNActionPerformed
+        // TODO add your handling code here:
+        if(current_user.isAdmin()){
+            this.setVisible(true);
+            AdminHomeView  n = new AdminHomeView(current_user);
+            n.setVisible(true);
+        }else{
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_adminBTNActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,18 +511,21 @@ public class HomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConsumptionBtn;
     private javax.swing.JButton TACBTN;
+    private javax.swing.JButton adminBTN;
     private javax.swing.JButton btnConfigUsuario;
     private javax.swing.JLabel calificationLabel;
     private javax.swing.JLabel calories_to_consumeLabel;
     private javax.swing.JLabel consumed_caloriesLabel;
     private javax.swing.JLabel descriptionLabel;
     private javax.swing.JButton friendsBtn;
+    private javax.swing.JLabel iduserLBL;
     private javax.swing.JButton ingredientBTN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel lastNameLabel;
     private javax.swing.JButton logOutBtn;

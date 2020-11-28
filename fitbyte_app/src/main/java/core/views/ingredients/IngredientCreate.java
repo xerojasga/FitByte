@@ -212,6 +212,8 @@ public class IngredientCreate extends javax.swing.JFrame {
     private void BTN_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ExitActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        IngredientCatalogue n = new IngredientCatalogue(current_user);
+        n.setVisible(true);
     }//GEN-LAST:event_BTN_ExitActionPerformed
 
     /**

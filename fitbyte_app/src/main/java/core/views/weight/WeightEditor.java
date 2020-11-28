@@ -23,7 +23,7 @@ public class WeightEditor extends javax.swing.JFrame {
     public static User current_user;
     public WeightEditor(User user) {
         initComponents();
-        current_user = new User();
+        current_user = user;
     }
 
     /**

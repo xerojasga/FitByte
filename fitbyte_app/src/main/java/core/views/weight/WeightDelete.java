@@ -21,7 +21,7 @@ public class WeightDelete extends javax.swing.JFrame {
     public static User current_user;
     public WeightDelete(User user) {
         initComponents();
-        current_user = new User();
+        current_user = user;
     }
 
     /**
