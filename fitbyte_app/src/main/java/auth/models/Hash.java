@@ -9,7 +9,7 @@ package auth.models;
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+ */   
 public class Hash {
     
     /* Retorna un hash a partir de un tipo y un texto */

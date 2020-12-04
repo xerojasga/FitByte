@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+ */     
 public class PasswordRehearsal extends javax.swing.JFrame {
 
     /**

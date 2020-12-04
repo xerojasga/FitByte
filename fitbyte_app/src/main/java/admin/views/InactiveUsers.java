@@ -14,7 +14,7 @@ import user.models.User;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+ */      
 public class InactiveUsers extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     /**

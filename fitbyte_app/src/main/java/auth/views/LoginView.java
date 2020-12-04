@@ -17,7 +17,7 @@ import user.models.User;
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+ */     
 public class LoginView extends javax.swing.JFrame {
 
     /**

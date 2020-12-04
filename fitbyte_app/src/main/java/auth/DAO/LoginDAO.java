@@ -11,12 +11,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import user.models.User;
+import user.models.User; 
 
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+ */  
 public class LoginDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USERNAME` = ?";

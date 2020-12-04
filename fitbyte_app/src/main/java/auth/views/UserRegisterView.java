@@ -24,7 +24,7 @@ public class UserRegisterView extends javax.swing.JFrame {
     
     /**
      * Creates new form UserRegister
-     */
+     */      
     
     public UserRegisterView() {
         initComponents();
