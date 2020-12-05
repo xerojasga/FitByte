@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPane1" pref="486" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSeparator1" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="exitBTN" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="226" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="exitBTN" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="TERMINOS Y CONDICIONES"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="El presente contrato describe los t&#xe9;rminos y condiciones aplicables al uso del contenido, productos y/o servicios de FITBYTE del cual es titular FIT BYTE APP. Para hacer uso del contenido, productos y/o servicios de la aplicacion el usuario deber&#xe1; sujetarse a los presentes t&#xe9;rminos y condiciones.&#xa;&#xa;I. OBJETO &#xa;El objeto es regular el acceso y utilizaci&#xf3;n del contenido, productos y/o servicios a disposici&#xf3;n del p&#xfa;blico en general en la aplicaci&#xf3;n FITBYTE.&#xa;El titular se reserva el derecho de realizar cualquier tipo de modificaci&#xf3;n en el sitio web en cualquier momento y sin previo aviso, el usuario acepta dichas modificaciones.&#xa;El acceso a la aplicacion por parte del usuario es libre y gratuito, la utilizaci&#xf3;n del contenido, productos y/o servicios implica un costo de suscripci&#xf3;n para el usuario.&#xa;La aplicacion solo admite el acceso a personas mayores de edad y no se hace responsable por el incumplimiento de esto.&#xa;La aplicacion est&#xe1; dirigido a usuarios residentes en America Latina y cumple con la legislaci&#xf3;n establecida en dichos paises, si el usuario reside en otro pa&#xed;s y decide acceder al sitio web lo har&#xe1; bajo su responsabilidad.&#xa;La administraci&#xf3;n del sitio web puede ejercerse por terceros, es decir, personas distintas al titular, sin afectar esto los presentes t&#xe9;rminos y condiciones.&#xa;&#xa;II. USUARIO &#xa;La actividad del usuario en la aplicacion como publicaciones o comentarios estar&#xe1;n sujetos a los presentes t&#xe9;rminos y condiciones. &#xa;El usuario se compromete a utilizar el contenido, productos y/o servicios de forma l&#xed;cita, sin faltar a la moral o al orden p&#xfa;blico, absteni&#xe9;ndose de realizar cualquier acto que afecte los derechos de terceros o el funcionamiento del sitio web.&#xa;El usuario se compromete a proporcionar informaci&#xf3;n ver&#xed;dica en los formularios la aplicaci&#xf3;n. La misma no supone una relaci&#xf3;n entre el usuario y el titular del sitio web. El usuario manifiesta ser mayor de edad y contar con la capacidad jur&#xed;dica de acatar los presentes t&#xe9;rminos y condiciones.&#xa;&#xa;III. ACCESO Y NAVEGACI&#xd3;N EN LA APLIACION &#xa;El titular no garantiza la continuidad y disponibilidad del contenido, productos y/o servicios en la aplicacion, realizar&#xe1; acciones que fomenten el buen funcionamiento de dicha aplicacion sin responsabilidad alguna.&#xa;El titular no se responsabiliza de que el software est&#xe9; libre de errores que puedan causar un da&#xf1;o al software y/o hardware del equipo del cual el usuario a la aplicacion. De igual forma, no se responsabiliza por los da&#xf1;os causados por el acceso y/o utilizaci&#xf3;n de la aplicaci&#xf3;n.&#xa;&#xa;IV. POL&#xcd;TICA DE PRIVACIDAD Y PROTECCI&#xd3;N DE DATOS &#xa;Conforme a lo establecido en las Leyes de Protecci&#xf3;n de Datos Personales en Posesi&#xf3;n de Particulares, el titular de compromete a tomar las medidas necesarias que garanticen la seguridad del usuario, evitando que se haga uso indebido de los datos personales que el usuario proporcione en la aplicaci&#xf3;n.&#xa;El titular corroborar&#xe1; que los datos personales contenidos en las bases de datos sean correctos, ver&#xed;dicos y actuales, as&#xed; como que se utilicen &#xfa;nicamente con el fin con el que fueron recabados.&#xa;FITBYTE APP se reserva el derecho de realizar cualquier tipo de modificaci&#xf3;n en el Aviso de Privacidad en cualquier momento y sin previo aviso, de acuerdo con sus necesidades o cambios en la legislaci&#xf3;n aplicable, el usuario acepta dichas modificaciones.&#xa;La aplicacion implica la utilizaci&#xf3;n de informaci&#xf3;n que se almacenan en el navegador utilizado por el usuario como datos de ingreso, preferencias del usuario, fecha y hora en que se accede a la aplicacion, esta informaci&#xf3;n es an&#xf3;nima y solo se utilizar&#xe1; para mejorar el sitio web.&#xa;&#xa;V. POL&#xcd;TICA DE PROPIEDAD INTELECTUAL E INDUSTRIAL&#xa;El titular manifiesta tener los derechos de propiedad intelectual e industrial de la aplicaci&#xf3;n incluyendo, logotipos, marcas, colores, estructuras, dise&#xf1;os y dem&#xe1;s elementos que lo distinguen, protegidos por la legislaci&#xf3;n colombiana e internacional en materia de propiedad intelectual e industrial.&#xa;El usuario se compromete a respetar los derechos de propiedad industrial e intelectual del titular pudiendo visualizar los elementos del sitio web, almacenarlos, copiarlos e imprimirlos exclusivamente para uso personal.&#xa;&#xa;VI. LEGISLACI&#xd3;N Y JURISDICCI&#xd3;N APLICABLE &#xa;La relaci&#xf3;n entre el usuario y el titular se regir&#xe1; por las legislaciones aplicables en Colombia.&quot;"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JSeparator" name="jSeparator2">
+    </Component>
+    <Component class="javax.swing.JButton" name="exitBTN">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Volver"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitBTNActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

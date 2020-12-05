@@ -8,6 +8,7 @@ package core.views;
 import admin.views.AdminHomeView;
 import auth.views.LoginView;
 import auth.views.TAC;
+import auth.views.TACHome;
 import auth.views.UserRegisterView;
 import entrenador.views.SearchCoachView;
 import entrenador.DAO.CoachDAO;
@@ -45,6 +46,9 @@ public class HomeView extends javax.swing.JFrame {
         nameLabel.setText(user.getName());
         lastNameLabel.setText(user.getLast_name());
         descriptionLabel.setText(user.getDescription());
+        
+        
+        
         if("Usuario".equals(current_user.getType())){
             // si el usuario no es entrenador puede buscar entrenadores pero no ver las solicitudes recibidas
            calificationLabel.setText("");
@@ -52,7 +56,7 @@ public class HomeView extends javax.swing.JFrame {
            
            searchCouchBtn.setVisible(true);
            searchUserBtn.setVisible(true);
-           ConsumptionBtn.setVisible(true);
+           reporteBTN.setVisible(true);
            friendsBtn.setVisible(true);
            searchRecipesBtn.setVisible(true);
            
@@ -67,11 +71,25 @@ public class HomeView extends javax.swing.JFrame {
             
             searchCouchBtn.setVisible(false);
             searchUserBtn.setVisible(false);
-            ConsumptionBtn.setVisible(false);
+            reporteBTN.setVisible(false);
             friendsBtn.setVisible(false);
             searchRecipesBtn.setVisible(false);
             
         }
+        
+        if("Admin".equals(current_user.getType())){
+            adminBTN.setVisible(true);
+        }else{
+            adminBTN.setVisible(false);
+        }
+        
+        calCalc();
+        setCaloriesToConsume();
+        setConsumedCalories();
+    }
+
+    public HomeView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -109,10 +127,10 @@ public class HomeView extends javax.swing.JFrame {
         ingredientBTN = new javax.swing.JButton();
         weightBTN = new javax.swing.JButton();
         TACBTN = new javax.swing.JButton();
-        ConsumptionBtn = new javax.swing.JButton();
         adminBTN = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         iduserLBL = new javax.swing.JLabel();
+        reporteBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,6 +194,11 @@ public class HomeView extends javax.swing.JFrame {
         friendsBtn.setText("Mis amigos");
 
         registerConsumeBtn.setText("Registrar Consumo");
+        registerConsumeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerConsumeBtnActionPerformed(evt);
+            }
+        });
 
         searchRecipesBtn.setText("Buscador Recetas");
 
@@ -208,8 +231,6 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
-        ConsumptionBtn.setText("Consumo");
-
         adminBTN.setText("Panel Administrativo");
         adminBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +241,13 @@ public class HomeView extends javax.swing.JFrame {
         jLabel6.setText("Codigo id de usuario:");
 
         iduserLBL.setText("ID");
+
+        reporteBTN.setText("Reporte de consumos");
+        reporteBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -238,8 +266,8 @@ public class HomeView extends javax.swing.JFrame {
                             .addComponent(ingredientBTN)
                             .addComponent(weightBTN)
                             .addComponent(TACBTN)
-                            .addComponent(ConsumptionBtn)
-                            .addComponent(btnConfigUsuario))
+                            .addComponent(btnConfigUsuario)
+                            .addComponent(reporteBTN))
                         .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -340,7 +368,7 @@ public class HomeView extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(TACBTN)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ConsumptionBtn))))
+                                .addComponent(reporteBTN))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchCouchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -419,20 +447,28 @@ public class HomeView extends javax.swing.JFrame {
     private void TACBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TACBTNActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        TAC n = new TAC(current_user);
+        TACHome n = new TACHome(current_user);
         n.setVisible(true);
     }//GEN-LAST:event_TACBTNActionPerformed
 
     private void adminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBTNActionPerformed
         // TODO add your handling code here:
-        if(current_user.isAdmin()){
-            this.setVisible(true);
+            this.dispose();
             AdminHomeView  n = new AdminHomeView(current_user);
             n.setVisible(true);
-        }else{
-            this.setVisible(false);
-        }
+        
     }//GEN-LAST:event_adminBTNActionPerformed
+
+    private void reporteBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteBTNActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        Reports n = new Reports(current_user);
+        n.setVisible(true);
+    }//GEN-LAST:event_reporteBTNActionPerformed
+
+    private void registerConsumeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerConsumeBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerConsumeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,10 +506,11 @@ public class HomeView extends javax.swing.JFrame {
         });
     }
     private int[] calCalc(){
-        int cons = 0;
+        //Para hombres: (10 x peso de Kg) + (6,25 x altura en cm) – (5 x edad en años) + 5.
+        int cons = (int) ((10*current_user.getWeight())+(6.25*current_user.getHeight())-(5*current_user.getAge())+5);
         int toCons = 0;
         Date td = new Date(System.currentTimeMillis());
-        ArrayList<Consumption> selfCons = ConsumptionDAO.findAll();
+        ArrayList<Consumption> selfCons = ConsumptionDAO.findAllID(current_user.getId_user());
         LocalDate ld = td.toLocalDate();
         DayOfWeek day = ld.getDayOfWeek();
         int d = day.getValue();
@@ -498,18 +535,16 @@ public class HomeView extends javax.swing.JFrame {
             }
         }
         
-        
         int[] ret = {cons, toCons - cons};
         return ret;
     }
     public void setCaloriesToConsume(){
-        calories_to_consumeLabel.setText(calCalc()[1] + "");
+        calories_to_consumeLabel.setText(calCalc()[0] + "");
     }
     public void setConsumedCalories(){
-        consumed_caloriesLabel.setText(calCalc()[0] + "");
+        consumed_caloriesLabel.setText(calCalc()[1] + "");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ConsumptionBtn;
     private javax.swing.JButton TACBTN;
     private javax.swing.JButton adminBTN;
     private javax.swing.JButton btnConfigUsuario;
@@ -533,6 +568,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton receivedRequestsBtn;
     private javax.swing.JButton registerConsumeBtn;
+    private javax.swing.JButton reporteBTN;
     private javax.swing.JButton searchCouchBtn;
     private javax.swing.JButton searchRecipesBtn;
     private javax.swing.JButton searchUserBtn;

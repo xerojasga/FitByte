@@ -39,6 +39,18 @@ public class Consumption {
         this.rec_day_weak = rec_day_weak;
     }
 
+    public Consumption(int id_consumption, Date date, int plate_id, int exercise_id, int calories, int num_hours_excers, String rec_day_weak) {
+        this.id_consumption = id_consumption;
+        this.date = date;
+        this.plate_id = plate_id;
+        this.exercise_id = exercise_id;
+        this.calories = calories;
+        this.num_hours_excers = num_hours_excers;
+        this.rec_day_weak = rec_day_weak;
+    }
+
+    
+
     
     public int getId_consumption() {
         return id_consumption;

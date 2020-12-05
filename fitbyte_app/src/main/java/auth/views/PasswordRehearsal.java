@@ -7,7 +7,10 @@ package auth.views;
 
 import auth.DAO.LoginDAO;
 import auth.models.Hash;
+import java.util.Random;
 import javax.swing.JOptionPane;
+import user.DAO.UserDAO;
+import user.models.User;
 
 /**
  *
@@ -20,6 +23,18 @@ public class PasswordRehearsal extends javax.swing.JFrame {
      */
     public PasswordRehearsal() {
         initComponents();
+    }
+    
+    public String randomString(){
+        char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRTYUVWXYZ1234567890".toCharArray();
+        StringBuilder sb = new StringBuilder(10);
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        String output = sb.toString();
+        return output;
     }
 
     /**
@@ -56,7 +71,7 @@ public class PasswordRehearsal extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("\"Alerta: Necesitas conocer el email con el que te registraste\ny el id asignado a tu usario para continuar.\"\n");
+        jTextArea1.setText("\"Alerta: Necesitas conocer el email con el que te registraste\ny el id asignado a tu usario para continuar.\"\n\nPor seguridad del sistema se usa un cifrado de un solo camino\npor ende se procede a cambiar la contraseña.\n");
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel3.setText("ID de usuario:");
@@ -156,12 +171,16 @@ public class PasswordRehearsal extends javax.swing.JFrame {
         if(res.equals("")){
             JOptionPane.showMessageDialog(this,"Sorry, the user doent exists or the parameters are incorrect");
         }else{
-            String rehashed = Hash.md5(res);
-            //System.out.println(Hash.getHash(res, "MD5"));
-            System.out.println(Hash.sha1(res));
-            resultTF.setText(rehashed);
+            String tempres = randomString();
+            resultTF.setText(tempres);
             resultTF.updateUI();
+            User s = UserDAO.find(id);
+            s.setPassword(Hash.sha1(tempres));
+            if(UserDAO.update(s)>0){
+                System.out.println("Modificado");
+            }
         }
+        
     }//GEN-LAST:event_findBTNActionPerformed
 
     private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed

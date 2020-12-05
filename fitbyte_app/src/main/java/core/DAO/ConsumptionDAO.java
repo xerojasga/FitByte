@@ -15,12 +15,15 @@ import core.models.Consumption;
 /**
  *
  * @author Diego
+ * Modified by Brayan
  */
 
 public class ConsumptionDAO {
     //id_consumo, fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana
     public static final String SELECT_ALL_SQL = "SELECT * FROM consumo";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE id_consumo = ?";
+    public static final String SELECT_ID = SELECT_ALL_SQL + " WHERE usuario_id = ?";
+    public static final String SELECT_USER = "SELECT * FROM `consumo` WHERE usuario_id = ? ORDER BY `FECHA` DESC LIMIT ?";
     public static final String CREATE_SQL = "INSERT INTO consumo (fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana) VALUES (?,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , rec_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? , calorias = ?, num_horas_ejerc = ? , rec_dia_semana = ? WHERE id_consumo = ?";
     public static final String DELETE_SQL = "DELETE FROM consumo WHERE id_consumo = ?";         
@@ -72,6 +75,71 @@ public class ConsumptionDAO {
                             resultSet.getBoolean("rec_entenador"),
                             resultSet.getInt("usuario_id"),
                             resultSet.getInt("ingrediente_id"),
+                            resultSet.getInt("plato_id"),
+                            resultSet.getInt("ejercicio_id"),
+                            resultSet.getInt("calorias"),
+                            resultSet.getInt("num_horas_ejerc"),
+                            resultSet.getString("rec_dia_semana")
+                        );
+                        data.add(consumo);
+                    }
+                }
+            }           
+        }catch(SQLException e){
+            System.out.println("no se pudieron traer los consumos");
+            System.out.println(e);
+        }
+        return data;
+    }
+    
+    public static ArrayList<Consumption> findAllID(int user_id){ 
+        ArrayList<Consumption> data = new ArrayList<>();
+        
+         try (PreparedStatement statement = connection.prepareStatement(SELECT_ID)) {
+             statement.setInt(1, user_id);
+            if (statement.execute()) {
+                try (ResultSet resultSet = statement.getResultSet()) {
+                    while(resultSet.next()){
+                        Consumption consumo;
+                        consumo = new Consumption(
+                            resultSet.getInt("id_consumo"),
+                            resultSet.getDate("fecha"),
+                            resultSet.getBoolean("rec_entenador"),
+                            resultSet.getInt("usuario_id"),
+                            resultSet.getInt("ingrediente_id"),
+                            resultSet.getInt("plato_id"),
+                            resultSet.getInt("ejercicio_id"),
+                            resultSet.getInt("calorias"),
+                            resultSet.getInt("num_horas_ejerc"),
+                            resultSet.getString("rec_dia_semana")
+                        );
+                        data.add(consumo);
+                    }
+                }
+            }           
+        }catch(SQLException e){
+            System.out.println("no se pudieron traer los consumos");
+            System.out.println(e);
+        }
+        return data;
+    }
+    
+    public static ArrayList<Consumption> findAllU(int id_usuario,int n_reg){ 
+        ArrayList<Consumption> data = new ArrayList<>();
+        
+         try (PreparedStatement statement = connection.prepareStatement(SELECT_USER)) {
+             statement.setInt(1, id_usuario);
+             statement.setInt(2, n_reg);
+            if (statement.execute()) {
+                try (ResultSet resultSet = statement.getResultSet()) {
+                    while(resultSet.next()){
+                        Consumption consumo;
+                        consumo = new Consumption(
+                            resultSet.getInt("id_consumo"),
+                            resultSet.getDate("fecha"),
+                            //resultSet.getBoolean("rec_entenador"),
+                            //resultSet.getInt("usuario_id"),
+                            //resultSet.getInt("ingrediente_id"),
                             resultSet.getInt("plato_id"),
                             resultSet.getInt("ejercicio_id"),
                             resultSet.getInt("calorias"),

@@ -37,8 +37,8 @@
                           <Component id="ingredientBTN" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="weightBTN" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="TACBTN" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ConsumptionBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnConfigUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="reporteBTN" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -171,7 +171,7 @@
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="TACBTN" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ConsumptionBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="reporteBTN" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -187,7 +187,7 @@
                       <Component id="searchRecipesBtn" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="adminBTN" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
@@ -299,6 +299,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Registrar Consumo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerConsumeBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="searchRecipesBtn">
       <Properties>
@@ -349,11 +352,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TACBTNActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="ConsumptionBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Consumo"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="adminBTN">
       <Properties>
         <Property name="text" type="java.lang.String" value="Panel Administrativo"/>
@@ -371,6 +369,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="reporteBTN">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reporte de consumos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteBTNActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

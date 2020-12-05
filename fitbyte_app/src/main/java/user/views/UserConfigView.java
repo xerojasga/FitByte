@@ -42,7 +42,7 @@ public class UserConfigView extends javax.swing.JFrame {
         apellidoInput.setText(current_user.getLast_name());
         emailInput.setText(current_user.getEmail());
         Country country = CountryDAO.find(current_user.getCountry_id());
-        cbxCountry.setSelectedIndex(country.getId_country()-1);
+        //cbxCountry.setSelectedIndex(country.getId_country()-1);
         alturaInput.setText(String.valueOf(current_user.getHeight()));
         pesoInput.setText(String.valueOf(current_user.getWeight()));
         edadInput.setText(String.valueOf(current_user.getAge()));
