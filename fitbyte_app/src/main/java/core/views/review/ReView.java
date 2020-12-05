@@ -32,7 +32,7 @@ public class ReView extends javax.swing.JFrame {
         ArrayList<Review> rev = ReviewDAO.findAll();
         Review review = new Review();
         for (Review r: rev){
-            if (r.getUser_id() == current_user.getId_user() && r.getCoach_id() == cReviewed.getId_couch()){
+            if (r.getUser_id() == current_user.getId_user() && r.getCoach_id() == cReviewed.getId_coach()){
                 review = r;
                 rows = true;
                 break;
@@ -178,7 +178,7 @@ public class ReView extends javax.swing.JFrame {
             ArrayList<Review> rev = ReviewDAO.findAll();
             Review review = new Review();
             for (Review r: rev){
-                if (r.getUser_id() == current_user.getId_user() && r.getCoach_id() == cReviewed.getId_couch()){
+                if (r.getUser_id() == current_user.getId_user() && r.getCoach_id() == cReviewed.getId_coach()){
                     review = r;
                     break;
                 }
@@ -193,7 +193,7 @@ public class ReView extends javax.swing.JFrame {
         } else if (v){
             Review rev = new Review();
             rev.setUser_id(current_user.getId_user());
-            rev.setCoach_id(cReviewed.getId_couch());;
+            rev.setCoach_id(cReviewed.getId_coach());;
             rev.setContent(reviewTA.getText());
             if (ReviewDAO.create(rev) > 0){
                 JOptionPane.showMessageDialog(this, "Review creada");
@@ -214,7 +214,7 @@ public class ReView extends javax.swing.JFrame {
             ArrayList<Review> rev = ReviewDAO.findAll();
             Review review = new Review();
             for (Review r: rev){
-                if (r.getUser_id() == current_user.getId_user() && r.getCoach_id() == cReviewed.getId_couch()){
+                if (r.getUser_id() == current_user.getId_user() && r.getCoach_id() == cReviewed.getId_coach()){
                     review = r;
                     break;
                 }
