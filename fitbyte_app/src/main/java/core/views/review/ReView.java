@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
  * @author Diego
  */
 public class ReView extends javax.swing.JFrame {
-    private User current_user = new User();
-    private Coach cReviewed = new Coach();
+    private static User current_user = new User();
+    private static Coach cReviewed = new Coach();
     private boolean rows = false;
     /**
      * Creates new form ReView
@@ -258,7 +258,7 @@ public class ReView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReView().setVisible(true);
+                new ReView(current_user,cReviewed).setVisible(true);
             }
         });
     }
