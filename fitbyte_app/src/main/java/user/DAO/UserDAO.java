@@ -21,18 +21,18 @@ import user.models.User;
  */
 public class UserDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `ID_USUARIO` = ?";
-    public static final String SELECT_SQL_NAME = SELECT_ALL_SQL + " WHERE `USERNAME` = ?";
-    public static final String SELECT_ALL_SQL_NAME = SELECT_ALL_SQL + " WHERE `USERNAME` LIKE ?";
-    public static final String SELECT_ALL_ENTRENADOR_SQL_NAME = "SELECT * FROM `USUARIO` JOIN `ENTRENADOR` ON `USUARIO`.`ID_USUARIO` = `ENTRENADOR`.`USUARIO_ID` WHERE `USUARIO`.`USERNAME` LIKE ? ";
+    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_USUARIO = ?";
+    public static final String SELECT_SQL_NAME = SELECT_ALL_SQL + " WHERE USERNAME = ?";
+    public static final String SELECT_ALL_SQL_NAME = SELECT_ALL_SQL + " WHERE USERNAME LIKE ?";
+    public static final String SELECT_ALL_ENTRENADOR_SQL_NAME = "SELECT * FROM USUARIO JOIN ENTRENADOR ON USUARIO.ID_USUARIO = ENTRENADOR.USUARIO_ID WHERE USUARIO.USERNAME LIKE ? ";
     public static final String CREATE_SQL = 
-            "INSERT INTO `USUARIO`(`USERNAME`, `NOMBRE`, `APELLIDO`, `EMAIL`, `PAIS_ID`, `ALTURA`, `PESO`, `EDAD`, `ADMIN`, `PASSWORD`, `DESCRIPCION`,`ULT_INGRESO`,`TIPO`) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO USUARIO(USERNAME, NOMBRE, APELLIDO, EMAIL, PAIS_ID, ALTURA, PESO, EDAD, ADMIN, PASSWORD, DESCRIPCION,ULT_INGRESO,TIPO) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String UPDATE_SQL = 
-            "UPDATE `USUARIO` SET `USERNAME`= ?,`NOMBRE`= ?,`APELLIDO`= ?,`EMAIL`= ?,`PAIS_ID`= ?,`ALTURA`= ? ,`PESO`= ?,`EDAD`= ?,`ADMIN`= ?, `PASSWORD`=?, `DESCRIPCION`= ? ,`ULT_INGRESO`=?,`TIPO`= ? WHERE `USUARIO`.`ID_USUARIO` = ? ";
+            "UPDATE USUARIO SET USERNAME= ?,NOMBRE= ?,APELLIDO= ?,EMAIL= ?,PAIS_ID= ?,ALTURA= ? ,PESO= ?,EDAD= ?,ADMIN= ?, PASSWORD=?, DESCRIPCION= ? ,ULT_INGRESO=?,TIPO= ? WHERE USUARIO.ID_USUARIO = ? ";
     public static final String DELETE_SQL = 
-            "DELETE FROM `USUARIO` WHERE `ID_USUARIO` = ?";
+            "DELETE FROM USUARIO WHERE ID_USUARIO = ?";
     public static final String DATE_REGISTER = 
-            "SELECT `ID_USUARIO`, `USERNAME`, `NOMBRE`, `APELLIDO`, `EMAIL`, `PASSWORD`, `ULT_INGRESO`, `TIPO` FROM `usuario` WHERE `ULT_INGRESO` < ?";
+            "SELECT ID_USUARIO, USERNAME, NOMBRE, APELLIDO`, EMAIL, PASSWORD, ULT_INGRESO, TIPO FROM usuario WHERE ULT_INGRESO < ?";
     
     private static final Connection connection = ConnectionProvider.connection;   
     

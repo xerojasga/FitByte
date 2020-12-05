@@ -188,14 +188,14 @@ public class SearchCoachView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void send_requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_requestBtnActionPerformed
-        Request existing_request = RequestDAO.find(current_user.getId_user(), selected_coach.getUser_id(),"Entrenamiento");
+        Request existing_request = RequestDAO.find(current_user.getId_user(), selected_coach.getId_user(),"Entrenamiento");
         
-        int id_coach = selected_coach.getId_couch();
+        int id_coach = selected_coach.getId_coach();
         User_Coach user_coach = User_CoachDAO.find( current_user.getId_user(),id_coach );
         
         if(user_coach == null){
             if(existing_request == null){
-                Request request = new Request(current_user.getId_user(),selected_coach.getUser_id(),"Entrenamiento"); 
+                Request request = new Request(current_user.getId_user(),selected_coach.getId_user(),"Entrenamiento"); 
                 if(RequestDAO.create(request) > 0){ 
                     JOptionPane.showMessageDialog(this, "Se ha enviado la solicitud exitosamente");
                 }else{

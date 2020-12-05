@@ -6,6 +6,7 @@
 package core.views;
 
 import admin.views.AdminHomeView;
+import auth.views.BecomeCoachGUI;
 import auth.views.LoginView;
 import auth.views.TAC;
 import auth.views.TACHome;
@@ -53,7 +54,7 @@ public class HomeView extends javax.swing.JFrame {
             // si el usuario no es entrenador puede buscar entrenadores pero no ver las solicitudes recibidas
            calificationLabel.setText("");
            rankLabel.setText("");
-           
+           becomeCoachButton.setVisible(true);
            searchCouchBtn.setVisible(true);
            searchUserBtn.setVisible(true);
            reporteBTN.setVisible(true);
@@ -64,7 +65,7 @@ public class HomeView extends javax.swing.JFrame {
            user_coachBtn.setVisible(false);
         }else{
             Coach coach = CoachDAO.find(user.getId_user());        
-            rankLabel.setText(String.valueOf(coach.getCalification()));
+            rankLabel.setText(String.valueOf(coach.getScore()));
             
             receivedRequestsBtn.setVisible(true);
             user_coachBtn.setVisible(true);
@@ -74,7 +75,7 @@ public class HomeView extends javax.swing.JFrame {
             reporteBTN.setVisible(false);
             friendsBtn.setVisible(false);
             searchRecipesBtn.setVisible(false);
-            
+            becomeCoachButton.setVisible(false);
         }
         
         if("Admin".equals(current_user.getType())){
@@ -131,6 +132,7 @@ public class HomeView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         iduserLBL = new javax.swing.JLabel();
         reporteBTN = new javax.swing.JButton();
+        becomeCoachButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -249,6 +251,13 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
+        becomeCoachButton.setText("Conviertete en entrenador");
+        becomeCoachButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                becomeCoachButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,7 +284,7 @@ public class HomeView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(logOutBtn)
                                 .addGap(24, 24, 24))
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,12 +314,14 @@ public class HomeView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(consumed_caloriesLabel)))
                                 .addGap(35, 35, 35)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(searchUserBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(registerConsumeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(searchCouchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(searchRecipesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(friendsBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(becomeCoachButton, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(searchUserBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(registerConsumeBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(searchCouchBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(searchRecipesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(friendsBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
                                 .addGap(16, 16, 16))))))
         );
         layout.setVerticalGroup(
@@ -368,7 +379,10 @@ public class HomeView extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(TACBTN)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(reporteBTN))))
+                                .addComponent(reporteBTN)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(adminBTN)
+                        .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchCouchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -378,10 +392,10 @@ public class HomeView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(friendsBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(searchRecipesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adminBTN)
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(searchRecipesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(becomeCoachButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -470,6 +484,11 @@ public class HomeView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_registerConsumeBtnActionPerformed
 
+    private void becomeCoachButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_becomeCoachButtonActionPerformed
+       BecomeCoachGUI becomeCoach = new BecomeCoachGUI(current_user);
+                    becomeCoach.setVisible(true);
+    }//GEN-LAST:event_becomeCoachButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -547,6 +566,7 @@ public class HomeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton TACBTN;
     private javax.swing.JButton adminBTN;
+    private javax.swing.JButton becomeCoachButton;
     private javax.swing.JButton btnConfigUsuario;
     private javax.swing.JLabel calificationLabel;
     private javax.swing.JLabel calories_to_consumeLabel;

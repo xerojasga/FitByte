@@ -30,7 +30,7 @@ public class MyUsersView extends javax.swing.JFrame {
         current_user = user;
         Coach coach ;
         coach = CoachDAO.find(current_user.getId_user());
-        ArrayList<User_Coach> my_users= User_CoachDAO.find_all_Coach(coach.getId_couch());
+        ArrayList<User_Coach> my_users= User_CoachDAO.find_all_Coach(coach.getId_coach());
         
         ArrayList<Object> columnas = new ArrayList<Object>();
         columnas.add("ID");

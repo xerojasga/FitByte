@@ -19,14 +19,26 @@ import java.util.ArrayList;
  * @author developer
  */
 public class CoachDAO {
+    
+    /*  int id_coach; 
+    int id_user;
+    boolean Verified;
+    float Score;
+    int Contact_Number;
+    */
     public static final String SELECT_ALL_SQL = "SELECT * FROM ENTRENADOR";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USUARIO_ID` = ?";
-    public static final String CREATE_SQL = 
-            "INSERT INTO `ENTRENADOR` (`USUARIO_ID`,`VERIFICADO`,`CALIFICACION`) VALUES (?,?,?)";
-    public static final String UPDATE_SQL = 
-            "UPDATE `ENTRENADOR` SET `USUARIO_ID` = ? , `VERIFICADO` = ? , `CALIFICACION` = ? WHERE `ID_ENTRENADOR` = ? ";
-    public static final String DELETE_SQL = 
-            "DELETE FROM `ENTRENADOR` WHERE `ID_ENTRENADOR` = ?";       
+    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_ENTRENADOR = ?";
+    
+    public static final String CREATE_SQL = "INSERT INTO ENTRENADOR (ID_ENTRENADOR,USUARIO_ID,VERIFICADO,"
+            + "CALIFICACION,NUMERO_DE_CONTACTO)"
+            + " VALUES (?,?,?,?,?)";
+    
+    public static final String UPDATE_SQL = "UPDATE ENTRENADOR SET ID_ENTRENADOR=?,USUARIO_ID=?,"
+            + "VERIFICADO=?,"
+            + "CALIFICACION=?,NUMERO_DE_CONTACTO=?";
+    
+    public static final String DELETE_SQL = "DELETE FROM ENTRENADOR WHERE ID_ENTRENADOR = ?";       
+    
     private static final Connection connection = ConnectionProvider.connection;
     
     
@@ -38,10 +50,14 @@ public class CoachDAO {
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
                         couch = new Coach(
+                      /*(`ID_ENTRENADOR`,`USUARIO_ID`,`VERIFICADO`,"
+            + "`CALIFICACION`,`NUMERO_DE_CONTACTO`)"*/         
+                                
                                 resultset.getInt("ID_ENTRENADOR"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
-                                resultset.getInt("CALIFICACION")
+                                resultset.getFloat("CALIFICACION"),
+                                resultset.getLong("NUMERO_DE_CONTACTO")
                         );                
                     }            
                 } catch (SQLException ex) {
@@ -63,10 +79,12 @@ public class CoachDAO {
                     while(resultset.next()){
                         Coach couch;
                         couch = new Coach(
+                                 
                                 resultset.getInt("ID_ENTRENADOR"),
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
-                                resultset.getInt("CALIFICACION")
+                                resultset.getFloat("CALIFICACION"),
+                                resultset.getLong("NUMERO_DE_CONTACTO")
                         );
                         data.add(couch);
                     }
@@ -82,9 +100,18 @@ public class CoachDAO {
     
     public static int create(Coach couch){
         try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
-            statement.setInt(1, couch.getUser_id()); 
-            statement.setBoolean(2, couch.isVerificated());    
-            statement.setInt(3, couch.getCalification()); 
+    /*  public int getId_coach() { return id_coach;}
+ public int getId_user() {return id_user;}
+public float getScore() {return Score;}
+public boolean isVerified() {return Verified;}
+public int getContact_Number() {return Contact_Number;}
+*/
+            statement.setInt(1, couch.getId_coach()); 
+            statement.setInt(2, couch.getId_user());
+            statement.setFloat(3, couch.getScore());
+            statement.setBoolean(4, couch.isVerified());
+            statement.setLong(5, couch.getContact_Number());
+            
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -95,10 +122,13 @@ public class CoachDAO {
     
     public static int update(Coach couch){       
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_SQL)) {
-                statement.setInt(1, couch.getUser_id()); 
-                statement.setBoolean(2, couch.isVerificated());    
-                statement.setInt(3, couch.getCalification());
-                statement.setInt(4, couch.getId_couch());
+                
+            
+            statement.setInt(1, couch.getId_user());
+            statement.setFloat(2, couch.getScore());
+            statement.setBoolean(3, couch.isVerified());
+            statement.setLong(4, couch.getContact_Number());
+            statement.setInt(5, couch.getId_coach()); 
                 return statement.executeUpdate();
         }catch(SQLException ex){ 
                 System.out.println(ex);

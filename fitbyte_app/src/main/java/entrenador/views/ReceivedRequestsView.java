@@ -193,7 +193,7 @@ public class ReceivedRequestsView extends javax.swing.JFrame {
 
     private void acceptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptBtnActionPerformed
         int id_user = selected_user.getId_user();
-        int id_coach = CoachDAO.find(current_user.getId_user()).getId_couch() ;
+        int id_coach = CoachDAO.find(current_user.getId_user()).getId_coach() ;
         
         User_Coach user_coach = new User_Coach(id_user,id_coach,true);
         
