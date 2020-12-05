@@ -37,10 +37,6 @@ import core.views.consumption.ConsumptionCreate;
  */
 public class ConsumptionView extends javax.swing.JFrame {
     private static User current_user = new User();
-    private static UserPane userPane = new UserPane(current_user);
-    DefaultTableModel model = new DefaultTableModel();
-    private HomeView home = new HomeView(current_user);
-    private ConsumptionCreate cCreate = new ConsumptionCreate(current_user);
     /**
      * Creates new form ConsumptionView
      */
@@ -49,41 +45,22 @@ public class ConsumptionView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         if (!isCoach()){
-            userPane.setVisible(false);
-            userPane.removeAll();
-            userPane.add(userPane);
-            userPane.setVisible(true);
+            UserPane userPane = new UserPane(current_user);
+            mainPane.setVisible(false);
+            mainPane.removeAll();
+            mainPane.add(userPane);
+            mainPane.setVisible(true);
         } else{
-            String s = "Seleccionar";
-            DefaultComboBoxModel modelUser = new DefaultComboBoxModel();
-            ArrayList<User_Coach> users = User_CoachDAO.find_all_User(current_user.getId_user());
-            for(User_Coach u_c: users){
-                User u = UserDAO.find(u_c.getUser_id());
-                modelUser.addElement(u.getUsername());
-            }
-            userCBX.setModel(modelUser);
-            userCBX.setSelectedIndex(0);
-            
-            ArrayList<Object> columnas = new ArrayList<>();
-            columnas.add("Ingrediente");
-            columnas.add("Plato");
-            columnas.add("Ejercicio");
-            columnas.add("Calorias");
-            columnas.add("Horas de Ejercicio");
-            columnas.add("Dia de la semana");
-            for (Object columna: columnas){
-                model.addColumn(columna);
-            }
+            CoachPane cp = new CoachPane(current_user);
+            mainPane.setVisible(false);
+            mainPane.removeAll();
+            mainPane.add(cp);
+            mainPane.setVisible(true);
             
         }
     }
     private boolean isCoach(){
         return current_user.getType().equalsIgnoreCase("Entrenador");
-    }
-    public User userSelected(){
-        String uSelected = (String)userCBX.getSelectedItem();
-        User u = UserDAO.find(uSelected);
-        return u;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,12 +74,7 @@ public class ConsumptionView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        coachPane = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        consumptionTable = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        userCBX = new javax.swing.JComboBox<>();
-        selectBTM = new javax.swing.JButton();
+        mainPane = new javax.swing.JPanel();
         createBTM = new javax.swing.JButton();
         backBTM = new javax.swing.JButton();
 
@@ -121,55 +93,7 @@ public class ConsumptionView extends javax.swing.JFrame {
 
         jLabel1.setText("Consumos:");
 
-        consumptionTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Ingrediente", "Plato", "Ejercicio", "Calorías", "Horas de Ejercicio", "Dia de la Semana"
-            }
-        ));
-        jScrollPane4.setViewportView(consumptionTable);
-
-        jLabel2.setText("Seleccione un usuario");
-
-        userCBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        selectBTM.setText("Seleccionar");
-        selectBTM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectBTMActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout coachPaneLayout = new javax.swing.GroupLayout(coachPane);
-        coachPane.setLayout(coachPaneLayout);
-        coachPaneLayout.setHorizontalGroup(
-            coachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-            .addGroup(coachPaneLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel2)
-                .addGap(28, 28, 28)
-                .addComponent(userCBX, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(selectBTM))
-        );
-        coachPaneLayout.setVerticalGroup(
-            coachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(coachPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(coachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(userCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectBTM))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        mainPane.setLayout(new java.awt.GridBagLayout());
 
         createBTM.setText("Crear Consumo");
         createBTM.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +124,7 @@ public class ConsumptionView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(coachPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(mainPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(backBTM)
@@ -216,7 +140,7 @@ public class ConsumptionView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(coachPane, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createBTM)
@@ -228,35 +152,16 @@ public class ConsumptionView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBTMActionPerformed
+        HomeView home = new HomeView(current_user);
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_backBTMActionPerformed
 
     private void createBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBTMActionPerformed
+        ConsumptionCreate cCreate = new ConsumptionCreate(current_user);
         this.dispose();
         cCreate.setVisible(true);
     }//GEN-LAST:event_createBTMActionPerformed
-
-    private void selectBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBTMActionPerformed
-        ArrayList<Consumption> cons = ConsumptionDAO.findAll();
-            ArrayList<Consumption> consumptions = new ArrayList<>();
-            for (Consumption c: cons){
-                if (c.getUser_id() == userSelected().getId_user()){
-                    consumptions.add(c);
-                }
-            }
-            for (Consumption c: consumptions){
-                String ingredient = IngredientDAO.find(c.getIngredient_id()).getName();
-                String plate = PlateDAO.find(c.getPlate_id()).getPlateName();
-                String exercise = ExerciseDAO.find(c.getExercise_id()).getExerciseName();
-                int calories = c.getCalories();
-                int hExer = c.getNum_hours_excers();
-                String weakDay = c.getRec_day_weak();
-                Object[] data = new Object[]{ingredient, plate, exercise, calories, hExer, weakDay};
-                model.addRow(data);
-            }
-            consumptionTable.setModel(model);
-    }//GEN-LAST:event_selectBTMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,15 +200,10 @@ public class ConsumptionView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBTM;
-    private javax.swing.JPanel coachPane;
-    private javax.swing.JTable consumptionTable;
     private javax.swing.JButton createBTM;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton selectBTM;
-    private javax.swing.JComboBox<String> userCBX;
+    private javax.swing.JPanel mainPane;
     // End of variables declaration//GEN-END:variables
 }
