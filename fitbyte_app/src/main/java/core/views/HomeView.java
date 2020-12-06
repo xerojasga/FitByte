@@ -462,9 +462,7 @@ public class HomeView extends javax.swing.JFrame {
         my_users.setVisible(true);    }//GEN-LAST:event_user_coachBtnActionPerformed
 
     private void ConsumptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConsumptionBtnActionPerformed
-       this.dispose();
-       ConsumptionView cc = new ConsumptionView(current_user);
-       cc.setVisible(true);
+       
     }//GEN-LAST:event_ConsumptionBtnActionPerformed
 
     private void myFavBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_myFavBTMActionPerformed
@@ -520,9 +518,14 @@ public class HomeView extends javax.swing.JFrame {
     }//GEN-LAST:event_becomeCoachButtonActionPerformed
 
     private void consumptionBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consumptionBTMActionPerformed
-        ConsumptionView cv = new ConsumptionView(current_user);
         this.dispose();
-        cv.setVisible(true);
+        if("Usuario".equals(current_user.getType())){
+            ConsumptionViewUser n = new ConsumptionViewUser(current_user);
+            n.setVisible(true);
+        }else if("Entrenador".equals(current_user.getType())){
+            ConsumptionViewCoach n = new ConsumptionViewCoach(current_user);
+            n.setVisible(true);
+        }
     }//GEN-LAST:event_consumptionBTMActionPerformed
 
     private void toFavButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toFavButtonActionPerformed

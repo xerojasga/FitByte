@@ -7,7 +7,13 @@ package core.views;
 
 import core.DAO.ConsumptionDAO;
 import core.models.Consumption;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import user.models.User;
 
@@ -74,7 +80,7 @@ public class Reports extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         horasTF = new javax.swing.JTextField();
         exitBTN = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        exportBTN = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,7 +129,12 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Exportar");
+        exportBTN.setText("Exportar");
+        exportBTN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportBTNActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +165,7 @@ public class Reports extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(horasTF, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(exportBTN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(exitBTN)))
                 .addContainerGap())
@@ -192,7 +203,7 @@ public class Reports extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(exitBTN)
-                                .addComponent(jButton1)))
+                                .addComponent(exportBTN)))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -246,6 +257,46 @@ public class Reports extends javax.swing.JFrame {
         n.setVisible(true);
     }//GEN-LAST:event_exitBTNActionPerformed
 
+    private void exportBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportBTNActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        String Directory;
+        Directory = fc.getCurrentDirectory().getAbsolutePath()+"/results.txt ";
+            File result = new File(Directory);
+            if(!result.exists()){
+                try {
+                    result.createNewFile();
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            }
+        
+            FileWriter fw;
+        try {
+            fw = new FileWriter(result);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < consumeTBL.getColumnCount(); i++){
+                String s = consumeTBL.getColumnName(i)+"\t";
+                bw.write(s);
+            }
+            bw.write("\n");
+            
+            for (int i = 0; i < consumeTBL.getRowCount(); i++){
+                for (int j = 0; j < consumeTBL.getColumnCount(); j++) {
+                    String s;
+                    s = consumeTBL.getValueAt(i, j).toString() + "\t";
+                    bw.write(s);
+                }
+                bw.write("\n");
+            }
+            bw.close();
+            JOptionPane.showMessageDialog(this, "Results Created in "+Directory);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }//GEN-LAST:event_exportBTNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -286,8 +337,8 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JButton chargeBTN;
     private javax.swing.JTable consumeTBL;
     private javax.swing.JButton exitBTN;
+    private javax.swing.JButton exportBTN;
     private javax.swing.JTextField horasTF;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
