@@ -36,7 +36,6 @@ import core.views.HomeView;
  */
 public class FavoriteView extends javax.swing.JFrame {
     private static User current_user = new User();
-    private static HomeView home = new HomeView(current_user);
     DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form favoriteView
@@ -85,7 +84,7 @@ public class FavoriteView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        backBTM = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         favoPane = new javax.swing.JPanel();
         typeCBX = new javax.swing.JComboBox<>();
@@ -111,8 +110,8 @@ public class FavoriteView extends javax.swing.JFrame {
 
         jLabel1.setText("Mis Favoritos");
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backBTM.setText("Volver");
+        backBTM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -188,7 +187,7 @@ public class FavoriteView extends javax.swing.JFrame {
                         .addComponent(jSeparator1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(backBTM))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(164, 164, 164)
                         .addComponent(jLabel1)
@@ -208,7 +207,7 @@ public class FavoriteView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(favoPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(backBTM)
                 .addContainerGap())
         );
 
@@ -234,6 +233,7 @@ public class FavoriteView extends javax.swing.JFrame {
     }//GEN-LAST:event_revisarBTMActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        HomeView home = new HomeView(current_user);
         this.dispose();
         home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -277,7 +277,7 @@ public class FavoriteView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel favoPane;
     private javax.swing.JTable favoriteTable;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton backBTM;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

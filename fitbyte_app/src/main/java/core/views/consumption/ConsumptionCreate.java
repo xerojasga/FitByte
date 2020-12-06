@@ -36,9 +36,7 @@ import java.sql.Date;
  */
 public class ConsumptionCreate extends javax.swing.JFrame {
     private static User current_user = new User();
-    private HomeView home = new HomeView(current_user);
-    private ConsumptionView back = new ConsumptionView(current_user);
-    private CoachConsumption coachCons = new CoachConsumption(current_user);
+    private CCCPane coachCons = new CCCPane(current_user);
     
     /**
      * Creates new form ConsumptionCreate
@@ -70,6 +68,7 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             for(Plate plate: plates){
                 modelPlate.addElement(plate.getPlateName());
             }
+            modelExer.addElement(s);
             for(Exercise exercise: exercises){
                 modelExer.addElement(exercise.getExerciseName());
             }
@@ -154,6 +153,7 @@ public class ConsumptionCreate extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -176,13 +176,42 @@ public class ConsumptionCreate extends javax.swing.JFrame {
 
         jLabel1.setText("Registrar Consumo");
 
+        userPane.setLayout(new java.awt.GridBagLayout());
+
         jLabel2.setText("Ingrediente:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 10, 0, 0);
+        userPane.add(jLabel2, gridBagConstraints);
 
         jLabel3.setText("Plato:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 10, 0, 0);
+        userPane.add(jLabel3, gridBagConstraints);
 
         jLabel4.setText("Ejercicio:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 10, 0, 0);
+        userPane.add(jLabel4, gridBagConstraints);
 
         jLabel5.setText("Horas de ejercicio:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(21, 10, 0, 0);
+        userPane.add(jLabel5, gridBagConstraints);
 
         ingredientCBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ingredientCBX.addActionListener(new java.awt.event.ActionListener() {
@@ -190,10 +219,34 @@ public class ConsumptionCreate extends javax.swing.JFrame {
                 ingredientCBXActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 121;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(11, 48, 0, 111);
+        userPane.add(ingredientCBX, gridBagConstraints);
 
         plateCBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 121;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 48, 0, 111);
+        userPane.add(plateCBX, gridBagConstraints);
 
         exerciseCBX.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 121;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 48, 0, 111);
+        userPane.add(exerciseCBX, gridBagConstraints);
 
         hExerTF.setText("0");
         hExerTF.addActionListener(new java.awt.event.ActionListener() {
@@ -201,47 +254,14 @@ public class ConsumptionCreate extends javax.swing.JFrame {
                 hExerTFActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout userPaneLayout = new javax.swing.GroupLayout(userPane);
-        userPane.setLayout(userPaneLayout);
-        userPaneLayout.setHorizontalGroup(
-            userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(48, 48, 48)
-                .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ingredientCBX, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(plateCBX, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exerciseCBX, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hExerTF, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                .addContainerGap(111, Short.MAX_VALUE))
-        );
-        userPaneLayout.setVerticalGroup(
-            userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(userPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(ingredientCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(plateCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(exerciseCBX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(userPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(hExerTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 168;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 48, 76, 111);
+        userPane.add(hExerTF, gridBagConstraints);
 
         acceptB.setText("Aceptar");
         acceptB.addActionListener(new java.awt.event.ActionListener() {
@@ -324,8 +344,8 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             consumption.setRec_day_weak(null);
         }
         if (ConsumptionDAO.create(consumption) > 0){
-            this.home.setConsumedCalories();
-            this.home.setCaloriesToConsume();
+            //this.home.setConsumedCalories();
+            //this.home.setCaloriesToConsume();
             JOptionPane.showMessageDialog(this, "Consumo registrado con exito");
         } else {
             JOptionPane.showMessageDialog(this, "Error al registrar el consumo");
@@ -333,6 +353,7 @@ public class ConsumptionCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_acceptBActionPerformed
 
     private void cancelBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBActionPerformed
+        ConsumptionView back = new ConsumptionView(current_user);
         this.dispose();
         back.setVisible(true);
     }//GEN-LAST:event_cancelBActionPerformed

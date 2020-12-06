@@ -36,7 +36,7 @@ public class UserProfileView extends javax.swing.JFrame {
            rankLabel.setText("");
         }else{
             Coach coach = CoachDAO.find(user_profile.getId_user());        
-            rankLabel.setText(String.valueOf(coach.getCalification()));
+            rankLabel.setText(String.valueOf(coach.getScore()));
         }
         
     }
