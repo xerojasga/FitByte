@@ -27,6 +27,7 @@ import java.time.*;
 import core.views.FavoriteView;
 import core.views.ingredients.IngredientCatalogue;
 import core.views.weight.WeightHome;
+import user.views.SearchUsersView;
 /**
  *
  * @author developer
@@ -134,7 +135,7 @@ public class HomeView extends javax.swing.JFrame {
         reporteBTN = new javax.swing.JButton();
         becomeCoachButton = new javax.swing.JButton();
         consumptionBTM = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        toFavButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,6 +195,11 @@ public class HomeView extends javax.swing.JFrame {
         });
 
         searchUserBtn.setText("Buscador usuarios");
+        searchUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchUserBtnActionPerformed(evt);
+            }
+        });
 
         friendsBtn.setText("Mis amigos");
 
@@ -267,10 +273,10 @@ public class HomeView extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Favoritos");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        toFavButton.setText("Favoritos");
+        toFavButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                toFavButtonActionPerformed(evt);
             }
         });
 
@@ -341,7 +347,7 @@ public class HomeView extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(consumptionBTM)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2)))
+                                        .addComponent(toFavButton)))
                                 .addGap(15, 15, 15))))))
         );
         layout.setVerticalGroup(
@@ -412,7 +418,7 @@ public class HomeView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(consumptionBTM)
-                            .addComponent(jButton2))
+                            .addComponent(toFavButton))
                         .addGap(3, 3, 3)
                         .addComponent(friendsBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -519,11 +525,17 @@ public class HomeView extends javax.swing.JFrame {
         cv.setVisible(true);
     }//GEN-LAST:event_consumptionBTMActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FavoriteView fav = new FavoriteView(current_user);
+    private void toFavButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toFavButtonActionPerformed
+        addFavoriteGUI fav = new addFavoriteGUI(current_user);
         this.dispose();
         fav.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_toFavButtonActionPerformed
+
+    private void searchUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchUserBtnActionPerformed
+        SearchUsersView friend = new SearchUsersView(current_user);
+        this.dispose();
+        friend.setVisible(true);
+    }//GEN-LAST:event_searchUserBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -612,7 +624,6 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JButton friendsBtn;
     private javax.swing.JLabel iduserLBL;
     private javax.swing.JButton ingredientBTN;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -630,6 +641,7 @@ public class HomeView extends javax.swing.JFrame {
     private javax.swing.JButton searchCouchBtn;
     private javax.swing.JButton searchRecipesBtn;
     private javax.swing.JButton searchUserBtn;
+    private javax.swing.JButton toFavButton;
     private javax.swing.JButton user_coachBtn;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JButton weightBTN;

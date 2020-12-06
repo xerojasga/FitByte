@@ -99,7 +99,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="consumptionBTM" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="toFavButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -195,7 +195,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="consumptionBTM" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="toFavButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="friendsBtn" min="-2" max="-2" attributes="0"/>
@@ -305,6 +305,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Buscador usuarios"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchUserBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="friendsBtn">
       <Properties>
@@ -410,12 +413,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="consumptionBTMActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="toFavButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Favoritos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toFavButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -74,6 +74,7 @@ public class Reports extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         horasTF = new javax.swing.JTextField();
         exitBTN = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +123,8 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Exportar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -143,15 +146,17 @@ public class Reports extends javax.swing.JFrame {
                         .addGap(17, 17, 17)))
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3)
-                        .addComponent(jSeparator3)
-                        .addComponent(jLabel4)
-                        .addComponent(caltotTF)
-                        .addComponent(jLabel5)
-                        .addComponent(horasTF, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-                    .addComponent(exitBTN, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
+                    .addComponent(jSeparator3)
+                    .addComponent(jLabel4)
+                    .addComponent(caltotTF)
+                    .addComponent(jLabel5)
+                    .addComponent(horasTF, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exitBTN)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -185,7 +190,9 @@ public class Reports extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(horasTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(exitBTN))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(exitBTN)
+                                .addComponent(jButton1)))
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -280,6 +287,7 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JTable consumeTBL;
     private javax.swing.JButton exitBTN;
     private javax.swing.JTextField horasTF;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

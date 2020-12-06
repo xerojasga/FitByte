@@ -24,7 +24,7 @@ public class PlateDAO {
     public static final String SELECT_ALL_SQL = "SELECT ID_PLATO, NOMBRE, DESCRIPCION, RECETA, PUBLICO FROM PLATO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_PLATO = ?";
     public static final String CREATE_SQL = "INSERT INTO PLATO (ID_PLATO,NOMBRE, DESCRIPCION, RECETA, PUBLICO) VALUES (?,?,?,?,?)";
-
+   public static final String SELECT_SQL_NAME =  SELECT_ALL_SQL + " WHERE NOMBRE = ?";
     /**
      *
      */
@@ -56,6 +56,31 @@ public class PlateDAO {
         }
             return plate;
       }
+    
+    
+     public static Plate find(String name){        
+        Plate plate_D = new Plate();
+        try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_NAME)){
+            statement.setString(1,name);
+             if(statement.execute()){
+                 try(ResultSet resultset = statement.getResultSet()){
+                       if(resultset.next()){
+                           plate_D = new Plate(
+                               resultset.getInt("ID_PLATO"),
+                                resultset.getString("NOMBRE"),
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getString("RECETA"),
+                                resultset.getBoolean("PUBLICO"));
+                       }
+                 } catch(SQLException ex){
+                     System.out.println(ex);
+                 }
+             }
+        }catch(SQLException ex){
+           System.out.println(ex);
+        }
+        return plate_D;
+    }
     
     public static ArrayList<Plate> findAll(){ 
         ArrayList<Plate> data = new ArrayList<>();
