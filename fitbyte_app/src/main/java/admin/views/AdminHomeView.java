@@ -39,6 +39,7 @@ public class AdminHomeView extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         homeBTN = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        seeAllCoachesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +74,13 @@ public class AdminHomeView extends javax.swing.JFrame {
             }
         });
 
+        seeAllCoachesButton.setText("Ver todos los entrenadores");
+        seeAllCoachesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeAllCoachesButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,7 +102,9 @@ public class AdminHomeView extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(allUsersView, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(inactiveBTN, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inactiveBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(seeAllCoachesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,7 +119,9 @@ public class AdminHomeView extends javax.swing.JFrame {
                     .addComponent(allUsersView)
                     .addComponent(inactiveBTN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(seeAllCoachesButton))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -145,6 +157,12 @@ public class AdminHomeView extends javax.swing.JFrame {
         findAndDeleteUserGUI n = new findAndDeleteUserGUI(current_user);
         n.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void seeAllCoachesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeAllCoachesButtonActionPerformed
+         this.dispose();
+        ControlCoachesView n = new ControlCoachesView(current_user);
+        n.setVisible(true);
+    }//GEN-LAST:event_seeAllCoachesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,5 +207,6 @@ public class AdminHomeView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton seeAllCoachesButton;
     // End of variables declaration//GEN-END:variables
 }
