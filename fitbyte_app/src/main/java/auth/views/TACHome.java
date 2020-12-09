@@ -96,7 +96,7 @@ public class TACHome extends javax.swing.JFrame {
     private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        HomeView n = new HomeView();
+        HomeView n = new HomeView(current_user);
         n.setVisible(true);
     }//GEN-LAST:event_exitBTNActionPerformed
 
