@@ -20,10 +20,10 @@ import core.models.Consumption;
 
 public class ConsumptionDAO {
     //id_consumo, fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana
-    public static final String SELECT_ALL_SQL = "SELECT * FROM consumo";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE id_consumo = ?";
-    public static final String SELECT_ID = SELECT_ALL_SQL + " WHERE usuario_id = ?";
-    public static final String SELECT_USER = "SELECT * FROM `consumo` WHERE usuario_id = ? ORDER BY `FECHA` DESC LIMIT ?";
+    public static final String SELECT_ALL_SQL = "SELECT * FROM CONSUMO";
+    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_CONSUMO = ?";
+    public static final String SELECT_ID = SELECT_ALL_SQL + " WHERE USUARIO_ID = ?";
+    public static final String SELECT_USER = "SELECT * FROM CONSUMO WHERE usuario_id = ? ORDER BY `FECHA` DESC LIMIT ?";
     public static final String CREATE_SQL = "INSERT INTO consumo (fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana) VALUES (?,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , rec_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? , calorias = ?, num_horas_ejerc = ? , rec_dia_semana = ? WHERE id_consumo = ?";
     public static final String DELETE_SQL = "DELETE FROM consumo WHERE id_consumo = ?";         
@@ -41,7 +41,7 @@ public class ConsumptionDAO {
                         consumo = new Consumption(
                             resultset.getInt("id_consumo"),
                             resultset.getDate("fecha"),
-                            resultset.getBoolean("rec_entenador"),
+                            resultset.getBoolean("rec_entrenador"),
                             resultset.getInt("usuario_id"),
                             resultset.getInt("ingrediente_id"),
                             resultset.getInt("plato_id"),
@@ -72,7 +72,7 @@ public class ConsumptionDAO {
                         consumo = new Consumption(
                             resultSet.getInt("id_consumo"),
                             resultSet.getDate("fecha"),
-                            resultSet.getBoolean("rec_entenador"),
+                            resultSet.getBoolean("rec_entrenador"),
                             resultSet.getInt("usuario_id"),
                             resultSet.getInt("ingrediente_id"),
                             resultSet.getInt("plato_id"),
@@ -104,7 +104,7 @@ public class ConsumptionDAO {
                         consumo = new Consumption(
                             resultSet.getInt("id_consumo"),
                             resultSet.getDate("fecha"),
-                            resultSet.getBoolean("rec_entenador"),
+                            resultSet.getBoolean("rec_entrenador"),
                             resultSet.getInt("usuario_id"),
                             resultSet.getInt("ingrediente_id"),
                             resultSet.getInt("plato_id"),
@@ -137,7 +137,7 @@ public class ConsumptionDAO {
                         consumo = new Consumption(
                             resultSet.getInt("id_consumo"),
                             resultSet.getDate("fecha"),
-                            //resultSet.getBoolean("rec_entenador"),
+                            //resultSet.getBoolean("rec_entrenador"),
                             //resultSet.getInt("usuario_id"),
                             //resultSet.getInt("ingrediente_id"),
                             resultSet.getInt("plato_id"),

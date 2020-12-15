@@ -36,8 +36,8 @@ import java.sql.Date;
  */
 public class ConsumptionCreate extends javax.swing.JFrame {
     private static User current_user = new User();
-    private CCCPane coachCons = new CCCPane(current_user);
-    
+    private CCCPane coachCons;
+   // private CCCPane coachCons;
     /**
      * Creates new form ConsumptionCreate
      */
@@ -46,6 +46,7 @@ public class ConsumptionCreate extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         if (isCoach()){
+            coachCons = new CCCPane(current_user);
             userPane.setVisible(false);
             userPane.removeAll();
             userPane.add(coachCons);
@@ -80,7 +81,6 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             ingredientCBX.setSelectedIndex(0);
             plateCBX.setSelectedIndex(0);
             exerciseCBX.setSelectedIndex(0);
-            
         }
         
     }
@@ -95,24 +95,35 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             r = -1;
         } else {
             String a = (String)ingredientCBX.getSelectedItem();
-            r = Integer.parseInt(a);
+            Ingredient ing = IngredientDAO.find(a);
+            r = ing.getId_ingredient();
         }
         return r;
     }
     public int plate_id(){
         int r;
+        Plate pl = new Plate();
         if(plateCBX.getSelectedIndex() == 0){
             r = -1;
         } else {
             String a = (String)plateCBX.getSelectedItem();
-            r = Integer.parseInt(a);
+            ArrayList<Plate> plates = PlateDAO.findAll();
+            
+            for (Plate p: plates){
+                if (p.getPlateName().equals(a)){
+                    pl = p;
+                    break;
+                }
+            }
+            r = pl.getPlateID();
         }
         return r;
     }
     public int exercise_id(){
         String a = (String)exerciseCBX.getSelectedItem();
+        System.out.println(a);
         ArrayList<Exercise> exercises = ExerciseDAO.findAll();
-        Exercise ex = null;
+        Exercise ex = new Exercise();
         for (Exercise e: exercises){
             if (e.getExerciseName().equals(a)){
                 ex = e;
@@ -337,10 +348,11 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             consumption.setDate(new Date(System.currentTimeMillis()));
             consumption.setRec_coach(false);
             consumption.setUser_id(current_user.getId_user());
-            consumption.setIngredient_id(coachCons.ingredient_id());
-            consumption.setExercise_id(coachCons.exercise_id());
-            consumption.setNum_hours_excers(coachCons.num_horas_exer());
-            consumption.setCalories(coachCons.calories());
+            consumption.setIngredient_id(ingredient_id());
+            consumption.setPlate_id(plate_id());
+            consumption.setExercise_id(exercise_id());
+            consumption.setNum_hours_excers(num_horas_exer());
+            consumption.setCalories(calories());
             consumption.setRec_day_weak(null);
         }
         if (ConsumptionDAO.create(consumption) > 0){

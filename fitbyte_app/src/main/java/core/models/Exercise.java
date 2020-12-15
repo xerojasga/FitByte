@@ -7,14 +7,17 @@ public class Exercise{
    private int burntHourCalorieExercise;
 
     public Exercise(){}
-    public Exercise(int exerciseID){this.exerciseID=exerciseID;}
+    public Exercise(int exerciseID){
+        this.exerciseID=exerciseID;
+    }
     public Exercise(int exerciseID, String exerciseName, String exerciseDescription){
         this.exerciseID=exerciseID;
         this.exerciseName = exerciseName;
-    	this.exerciseDescription=exerciseDescription;}
+    	this.exerciseDescription=exerciseDescription;
+    }
     public Exercise(int exerciseID, String exerciseName, String exerciseDescription,int burntHourCalorieExercise){
     	this.exerciseID=exerciseID;
-    	this.exerciseDescription=exerciseDescription;
+    	this.exerciseName = exerciseName;
         this.exerciseDescription=exerciseDescription;
         this.burntHourCalorieExercise=burntHourCalorieExercise;}
 

@@ -19,7 +19,7 @@ public class ExerciseDAO {
    private String exerciseDescription;
    private int burntHourCalorieExercise;*/
     
-    public static final String SELECT_ALL_SQL = "SELECT ID_EJERCICIO,DESCRIPCION, CALORIAS_QUEMA_HORA FROM  EJERCICIO";
+    public static final String SELECT_ALL_SQL = "SELECT * FROM  EJERCICIO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_EJERCICIO = ?";
     public static final String CREATE_SQL = "INSERT INTO EJERCICIO (ID_EJERCICIO,NOMBRE, DESCRIPCION, CALORIAS_QUEMA_HORA) VALUES (?,?,?,?)";
     public static final String UPDATE_SQL = "UPDATE EJERCICIO SET NOMBRE = ?, DESCRIPCION = ?, CALORIAS_QUEMA_HORA = ? WHERE ID_EJERCICIO = ?";
