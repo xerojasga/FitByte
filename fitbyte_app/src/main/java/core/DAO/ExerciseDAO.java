@@ -19,8 +19,13 @@ public class ExerciseDAO {
    private String exerciseDescription;
    private int burntHourCalorieExercise;*/
     
+<<<<<<< HEAD
     public static final String SELECT_ALL_SQL = "SELECT * FROM  EJERCICIO";
+=======
+    public static final String SELECT_ALL_SQL = "SELECT ID_EJERCICIO,NOMBRE,DESCRIPCION, CALORIAS_QUEMA_HORA FROM  EJERCICIO";
+>>>>>>> main
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_EJERCICIO = ?";
+    public static final String SELECT_SQL_NAME =  SELECT_ALL_SQL + " WHERE DESCRIPCION = ?";
     public static final String CREATE_SQL = "INSERT INTO EJERCICIO (ID_EJERCICIO,NOMBRE, DESCRIPCION, CALORIAS_QUEMA_HORA) VALUES (?,?,?,?)";
     public static final String UPDATE_SQL = "UPDATE EJERCICIO SET NOMBRE = ?, DESCRIPCION = ?, CALORIAS_QUEMA_HORA = ? WHERE ID_EJERCICIO = ?";
     public static final String DELETE_SQL = "DELETE FROM EJERCICIO WHERE ID_EJERCICIO = ?";       
@@ -49,6 +54,31 @@ public class ExerciseDAO {
         }
             return exercise;
       }
+    
+    
+    public static Exercise find(String name){        
+        Exercise exercise_D = new Exercise();
+        try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_NAME)){
+            statement.setString(1,name);
+             if(statement.execute()){
+                 try(ResultSet resultset = statement.getResultSet()){
+                       if(resultset.next()){
+                           exercise_D = new Exercise(
+                                resultset.getInt("ID_EJERCICIO"),
+                                resultset.getString("NOMBRE"),
+                                resultset.getString("DESCRIPCION"),
+                                resultset.getInt("CALORIAS_QUEMA_HORA")
+                                ); 
+                       }
+                 } catch(SQLException ex){
+                     System.out.println(ex);
+                 }
+             }
+        }catch(SQLException ex){
+           System.out.println(ex);
+        }
+        return exercise_D;
+    }
     
     public static ArrayList<Exercise> findAll(){ 
         ArrayList<Exercise> data = new ArrayList<>();

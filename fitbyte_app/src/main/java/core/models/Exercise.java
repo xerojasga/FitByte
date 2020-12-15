@@ -7,6 +7,7 @@ public class Exercise{
    private int burntHourCalorieExercise;
 
     public Exercise(){}
+<<<<<<< HEAD
     public Exercise(int exerciseID){
         this.exerciseID=exerciseID;
     }
@@ -15,6 +16,9 @@ public class Exercise{
         this.exerciseName = exerciseName;
     	this.exerciseDescription=exerciseDescription;
     }
+=======
+    
+>>>>>>> main
     public Exercise(int exerciseID, String exerciseName, String exerciseDescription,int burntHourCalorieExercise){
     	this.exerciseID=exerciseID;
     	this.exerciseName = exerciseName;
