@@ -36,7 +36,7 @@ import core.views.consumption.ConsumptionCreate;
  * @author Diego
  */
 public class ConsumptionView extends javax.swing.JFrame {
-    private static User current_user = new User();
+    private static User current_user;
     /**
      * Creates new form ConsumptionView
      */

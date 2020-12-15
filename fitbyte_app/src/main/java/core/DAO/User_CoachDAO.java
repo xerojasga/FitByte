@@ -21,16 +21,16 @@ import java.util.ArrayList;
 public class User_CoachDAO {
 
         
-    public static final String SELECT_ALL_SQL = "SELECT * FROM `USUARIO_ENTRENADOR`  ";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `USUARIO_ID` = ? AND `ENTRENADOR_ID` = ?";
-    public static final String SELECT_SQL_ENTRENADOR = SELECT_ALL_SQL + " WHERE `ENTRENADOR_ID` = ?";
-    public static final String SELECT_SQL_USUARIO = SELECT_ALL_SQL + " WHERE `USUARIO_ID` = ?";
+    public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO_ENTRENADOR  ";
+    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE USUARIO_ID = ? AND ENTRENADOR_ID = ?";
+    public static final String SELECT_SQL_ENTRENADOR = SELECT_ALL_SQL + " WHERE ENTRENADOR_ID = ?";
+    public static final String SELECT_SQL_USUARIO = SELECT_ALL_SQL + " WHERE USUARIO_ID = ?";
     public static final String CREATE_SQL = "INSERT INTO USUARIO_ENTRENADOR (USUARIO_ID,ENTRENADOR_ID,ACTIVO) VALUES (?,?,?)";
     public static final String UPDATE_SQL = "UPDATE SOLICITUD SET USUARIO_ID = ?, ENTRENADOR_ID = ?, ACTIVO= ? WHERE USUARIO_ID = ? , ENTRENADOR_ID = ?";
     public static final String DELETE_SQL = "DELETE FROM USUARIO_ENTRENADOR WHERE ID_USUARIO_ENTRENADOR = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-        public static User_Coach find(int id_user,int id_coach){        
+        public static User_Coach find(int id_user, int id_coach){        
         User_Coach user_coach = null;
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL)){
             statement.setInt(1,id_user);

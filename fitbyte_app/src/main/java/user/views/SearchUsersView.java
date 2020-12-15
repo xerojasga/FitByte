@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entrenador.views;
+package user.views;
 
+import entrenador.views.*;
 import core.DAO.User_CoachDAO;
 import core.models.User_Coach;
 import core.views.HomeView;
@@ -22,16 +23,16 @@ import user.models.User;
  *
  * @author developer
  */
-public class SearchCoachView extends javax.swing.JFrame {
+public class SearchUsersView extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     
     public static User current_user = new User();
-    Coach selected_coach = new Coach();
+    User selected_user = new User();
     
     /**
      * Creates new form BusquedaUsuario
      */
-    public SearchCoachView(User user) {
+    public SearchUsersView(User user) {
         initComponents();
         
         current_user = user;
@@ -58,14 +59,12 @@ public class SearchCoachView extends javax.swing.JFrame {
         LastNameLabel = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         EmailLabel = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        contactNumberLabel = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        VerifiedLabel = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        NickNameLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Buscador de Entrenador");
+        jLabel1.setText("Buscador de Usuarios");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +79,7 @@ public class SearchCoachView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nombre Entrenador:");
+        jLabel2.setText("Nombre Usuario:");
 
         send_requestBtn.setText("Enviar Solicitud");
         send_requestBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -102,17 +101,13 @@ public class SearchCoachView extends javax.swing.JFrame {
 
         LastNameLabel.setText("No Encontrado");
 
-        jLabel4.setText("Email Entrenador:");
+        jLabel4.setText("Email Usuario:");
 
         EmailLabel.setText("No Encontrado");
 
-        jLabel5.setText("Telefono De Contacto:");
+        jLabel6.setText("Nickname:");
 
-        contactNumberLabel.setText("No Encontrado");
-
-        jLabel7.setText("¿Verificado? :");
-
-        VerifiedLabel.setText("No Encontrado");
+        NickNameLabel.setText("No Encontrado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,47 +120,35 @@ public class SearchCoachView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(143, 143, 143)
-                            .addComponent(send_requestBtn)
-                            .addGap(3, 3, 3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(entrenadorSeleccionadoLabel)
-                            .addGap(131, 131, 131))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(26, 26, 26)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(26, 26, 26)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(EmailLabel)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(coachIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btnBuscar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(LastNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(143, 143, 143)
+                        .addComponent(send_requestBtn))
+                    .addComponent(entrenadorSeleccionadoLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(contactNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(VerifiedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6))
+                                .addGap(26, 26, 26)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmailLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(coachIDTF, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnBuscar))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(LastNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(NickNameLabel))))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,15 +169,11 @@ public class SearchCoachView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(EmailLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(contactNumberLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(VerifiedLabel))
-                .addGap(59, 59, 59)
+                    .addComponent(jLabel6)
+                    .addComponent(NickNameLabel))
+                .addGap(89, 89, 89)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBtn)
                     .addComponent(send_requestBtn))
@@ -207,10 +186,10 @@ public class SearchCoachView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        int coachID =  Integer.parseInt(coachIDTF.getText());
-        Coach coach = CoachDAO.find(coachID);
-        User user = UserDAO.find(coach.getId_user());
-        int id_coachUser = coach.getId_user();
+        int UserID =  Integer.parseInt(coachIDTF.getText());
+        
+        selected_user = UserDAO.find(UserID);
+        int id_coachUser = UserID;
         System.out.println(id_coachUser);
       /*   
      EmailLabel;
@@ -219,31 +198,27 @@ public class SearchCoachView extends javax.swing.JFrame {
      contactNumberLabel;
      nameLabel;
     */
-      EmailLabel.setText(user.getEmail());
-     LastNameLabel.setText(user.getLast_name());
-     String verBool;
-      if (coach.isVerified()){verBool="Si";}
-      else {verBool="No";}
-     VerifiedLabel.setText(verBool);
-     contactNumberLabel.setText(Long.toString(coach.getContact_Number()));
-     nameLabel.setText(user.getName());
+      EmailLabel.setText(selected_user.getEmail());
+     LastNameLabel.setText(selected_user.getLast_name());
+     NickNameLabel.setText(selected_user.getUsername());
+     nameLabel.setText(selected_user.getName());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void send_requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_send_requestBtnActionPerformed
-        int coachID =  Integer.parseInt(coachIDTF.getText());
+        int toSelectUserID =  Integer.parseInt(coachIDTF.getText());
        
         
-        selected_coach = CoachDAO.find(coachID);
-        int id_coachUser = selected_coach.getId_user();
+        selected_user = UserDAO.find(toSelectUserID);
+        int id_coachUser = selected_user.getId_user();
         System.out.println(id_coachUser);
-        Request existing_request = RequestDAO.find(current_user.getId_user(), id_coachUser ,"Entrenamiento");
-        User_Coach user_coach = User_CoachDAO.find(current_user.getId_user(),coachID);
+        Request existing_request = RequestDAO.find(current_user.getId_user(), id_coachUser ,"Amistad");
+        User_Coach user_coach = User_CoachDAO.find(current_user.getId_user(),toSelectUserID);
        
-        if(user_coach == null){
+
            
             if(existing_request == null){
                 
-                Request request = new Request(current_user.getId_user(),id_coachUser,"Entrenamiento"); 
+                Request request = new Request(current_user.getId_user(),toSelectUserID,"Amistad"); 
                 if(RequestDAO.create(request) > 0){ 
                     JOptionPane.showMessageDialog(this, "Se ha enviado la solicitud exitosamente");
                 }else{
@@ -252,9 +227,7 @@ public class SearchCoachView extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(this, "No se ha podido crear la solicitud, pueda que haya una existente");
             }
-        }else{
-            JOptionPane.showMessageDialog(this, "Al parecer ya tienes asignado este entrenador");
-        }
+        
     }//GEN-LAST:event_send_requestBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -284,14 +257,22 @@ public class SearchCoachView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchUsersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchUsersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchUsersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SearchCoachView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchUsersView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -304,7 +285,7 @@ public class SearchCoachView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchCoachView(current_user).setVisible(true);
+                new SearchUsersView(current_user).setVisible(true);
             }
         });
     }
@@ -312,18 +293,16 @@ public class SearchCoachView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JLabel LastNameLabel;
-    private javax.swing.JLabel VerifiedLabel;
+    private javax.swing.JLabel NickNameLabel;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JTextField coachIDTF;
-    private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JLabel entrenadorSeleccionadoLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JButton send_requestBtn;
     // End of variables declaration//GEN-END:variables

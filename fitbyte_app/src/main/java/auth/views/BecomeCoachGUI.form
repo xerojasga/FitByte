@@ -32,10 +32,8 @@
               <EmptySpace pref="53" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="goBackButton" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="becomTrainerButton" max="32767" attributes="0"/>
-                      <Component id="ContactNumberTF" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="becomTrainerButton" max="32767" attributes="0"/>
+                  <Component id="ContactNumberTF" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
           </Group>
@@ -55,7 +53,7 @@
               <Component id="becomTrainerButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="goBackButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="179" max="32767" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,6 +86,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goBackButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

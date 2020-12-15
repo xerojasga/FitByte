@@ -19,11 +19,11 @@ import java.sql.Date;
  */
 public class FavoriteDAO {
     //id_favorito, fecha, tipo, usuario_id, ingrediente_id, plato_id, ejercicio_id
-    public static final String SELECT_ALL_SQL = "SELECT * FROM favorito";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE id_favorito = ?";
-    public static final String CREATE_SQL = "INSERT INTO consumo (fecha, tipo, usuario_id, ingrediente_id, plato_id, ejercicio_id) VALUES (?,?,?,?,?,?)";
-    public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , red_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? WHERE id_favorito = ?";
-    public static final String DELETE_SQL = "DELETE FROM favorito WHERE id_favorito = ?";       
+    public static final String SELECT_ALL_SQL = "SELECT * FROM FAVORITO";
+    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_FAVORITO = ?";
+    public static final String CREATE_SQL = "INSERT INTO consumo (FECHA,TIPO,USUARIO_ID,INGREDIENTE_ID,PLATO_ID,EJERCICIO_ID) VALUES (?,?,?,?,?,?)";
+    public static final String UPDATE_SQL = "UPDATE consumo SET FECHA = ? ,TIPO=? ,USUARIO_ID = ?,INGREDIENTE_ID = ?,PLATO_ID = ? ,EJERCICIO_ID = ? WHERE ID_FAVORITO = ?";
+    public static final String DELETE_SQL = "DELETE FROM FAVORITO WHERE ID_FAVORITO = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
     public static Favorite find(int id_favorito){        
@@ -34,13 +34,13 @@ public class FavoriteDAO {
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
                         favorito = new Favorite(
-                            resultset.getInt("id_favorito"),
-                            resultset.getDate("fecha"),
-                            resultset.getString("tipor"),
-                            resultset.getInt("usuario_id"),
-                            resultset.getInt("ingrediente_id"),
-                            resultset.getInt("plato_id"),
-                            resultset.getInt("ejercicio_id")
+                            resultset.getInt("ID_FAVORITO"),
+                            resultset.getDate("FECHA"),
+                            resultset.getString("TIPO"),
+                            resultset.getInt("USUARIO_ID"),
+                            resultset.getInt("INGREDIENTE_ID"),
+                            resultset.getInt("PLATO_ID"),
+                            resultset.getInt("EJERCICIO_ID")
                         );                    
                     }            
                 } catch (SQLException ex) {
@@ -62,13 +62,13 @@ public class FavoriteDAO {
                     while(resultSet.next()){
                         Favorite favorito;
                         favorito = new Favorite(
-                            resultSet.getInt("id_favorito"),
-                            resultSet.getDate("fecha"),
-                            resultSet.getString("tipo"),
-                            resultSet.getInt("usuario_id"),
-                            resultSet.getInt("ingrediente_id"),
-                            resultSet.getInt("plato_id"),
-                            resultSet.getInt("ejercicio_id")
+                            resultSet.getInt("ID_FAVORITO"),
+                            resultSet.getDate("FECHA"),
+                            resultSet.getString("TIPO"),
+                            resultSet.getInt("USUARIO_ID"),
+                            resultSet.getInt("INGREDIENTE_ID"),
+                            resultSet.getInt("PLATO_ID"),
+                            resultSet.getInt("EJERCICIO_ID")
                         );
                         data.add(favorito);
                     }
@@ -83,7 +83,8 @@ public class FavoriteDAO {
     
     public static int create(Favorite favorito){
         try (PreparedStatement stmnt = connection.prepareStatement(CREATE_SQL)) {
-          stmnt.setDate(1, favorito.getDate());
+         
+            stmnt.setDate(1, favorito.getDate());
           stmnt.setString(2, favorito.getType());
           stmnt.setInt(3, favorito.getUser_id());
           stmnt.setInt(4, favorito.getIngredient_id());

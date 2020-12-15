@@ -35,7 +35,7 @@ import core.views.HomeView;
  * @author Diego
  */
 public class FavoriteView extends javax.swing.JFrame {
-    private static User current_user = new User();
+    private static User current_user;
     DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form favoriteView

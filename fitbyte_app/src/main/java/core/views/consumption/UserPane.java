@@ -34,7 +34,7 @@ import java.sql.Date;
  * @author Diego
  */
 public class UserPane extends javax.swing.JPanel {
-    private static User current_user = new User();
+    private static User current_user;
     DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form UconsumptionView

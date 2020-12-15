@@ -21,15 +21,22 @@ import java.util.ArrayList;
  */
 public class RequestDAO {
     
-    public static final String SELECT_ALL_SQL = "SELECT * FROM `SOLICITUD`  ";
-    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE `U_EMISOR_ID` = ? AND `U_RECEPTOR_ID` = ? AND `TIPO_SOLICITUD` = ?";   
-    public static final String SELECT_SQL_RECEIVED = SELECT_ALL_SQL + " WHERE `U_RECEPTOR_ID` = ? AND `TIPO_SOLICITUD` = ?";
-    public static final String CREATE_SQL = "INSERT INTO SOLICITUD (U_EMISOR_ID,U_RECEPTOR_ID,TIPO_SOLICITUD) VALUES (?,?,?)";
-    public static final String UPDATE_SQL = "UPDATE SOLICITUD SET U_EMISOR_ID = ?, U_RECEPTOR_ID = ?, TIPO_SOLICITUD= ? WHERE U_RECEPTOR_ID = ?";
+     /*ID_SOLICITUD        ,
+       USUARIO_ID       ,
+        ENTRENADOR_ID       ,
+          TIPO_SOLICITUD        */
+    
+    public static final String SELECT_ALL_SQL = "SELECT * FROM SOLICITUD  ";
+    public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_SOLICITUD=?";   
+    public static final String SELECT_SQL_RECEIVED = SELECT_ALL_SQL + " WHERE ENTRENADOR_ID = ? AND TIPO_SOLICITUD = ?";
+    
+    public static final String CREATE_SQL = "INSERT INTO SOLICITUD (ID_SOLICITUD,USUARIO_ID, ENTRENADOR_ID,TIPO_SOLICITUD) VALUES (?,?,?,?)";
+    public static final String UPDATE_SQL = "UPDATE SOLICITUD SET  ID_SOLICITUD=? ,USUARIO_ID = ?, ENTRENADOR_ID = ?, TIPO_SOLICITUD= ? WHERE ID_SOLICITUD = ?";
     public static final String DELETE_SQL = "DELETE FROM SOLICITUD WHERE ID_SOLICITUD = ?";       
     private static final Connection connection = ConnectionProvider.connection;        
     
-    public static ArrayList<Request> find_all_received(int id_receiver,String type){        
+    public static ArrayList<Request> find_all_received(int id_receiver, String type){        
+        
         ArrayList<Request> requests = new ArrayList<>();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_RECEIVED)){
             statement.setInt(1,id_receiver);
@@ -40,8 +47,8 @@ public class RequestDAO {
                         Request request;
                         request = new Request(
                            resultset.getInt("ID_SOLICITUD"),
-                           resultset.getInt("U_EMISOR_ID"),
-                           resultset.getInt("U_RECEPTOR_ID"),
+                           resultset.getInt("USUARIO_ID"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getString("TIPO_SOLICITUD")
                         );
                         requests.add(request);
@@ -66,9 +73,9 @@ public class RequestDAO {
                     while(resultset.next()){
                         Request request;
                         request = new Request(
-                           resultset.getInt("ID_SOLICITUD"),
-                           resultset.getInt("U_EMISOR_ID"),
-                           resultset.getInt("U_RECEPTOR_ID"),
+                          resultset.getInt("ID_SOLICITUD"),
+                           resultset.getInt("USUARIO_ID"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getString("TIPO_SOLICITUD")
                         );
                         requests.add(request);
@@ -82,19 +89,20 @@ public class RequestDAO {
         return requests;
     }
     
-    public static Request find(int user_id,int coach_id, String type){        
-        Request request = null ;
+    public static Request find (int user_id,int coach_id, String type){        
+        Request request = new Request();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL)){
-            statement.setInt(2,coach_id);
             statement.setInt(1,user_id);
+            statement.setInt(2,coach_id);
             statement.setString(3,type);
+            /*statement.setInt(4,10);*/
              if(statement.execute()){
                  try (ResultSet resultset = statement.getResultSet()) {
                     if(resultset.next()){
                         request = new Request(
                            resultset.getInt("ID_SOLICITUD"),
-                           resultset.getInt("U_EMISOR_ID"),
-                           resultset.getInt("U_RECEPTOR_ID"),
+                           resultset.getInt("USUARIO_ID"),
+                           resultset.getInt("ENTRENADOR_ID"),
                            resultset.getString("TIPO_SOLICITUD")
                         );       
                     }
@@ -110,9 +118,11 @@ public class RequestDAO {
     
     public static int create(Request request){
         try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
-            statement.setInt(1,request.getUser_sender_id());
-            statement.setInt(2,request.getUser_receiver_id());
-            statement.setString(3, request.getType());
+            
+            statement.setInt(1,request.getId_request());
+            statement.setInt(2,request.getUser_sender_id());
+            statement.setInt(3,request.getUser_receiver_id());
+            statement.setString(4, request.getType());
             return statement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

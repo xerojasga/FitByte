@@ -30,8 +30,8 @@ public class CoachDAO {
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_ENTRENADOR = ?";
     
     public static final String CREATE_SQL = "INSERT INTO ENTRENADOR (ID_ENTRENADOR,USUARIO_ID,VERIFICADO,"
-            + "CALIFICACION,NUMERO_DE_CONTACTO)"
-            + " VALUES (?,?,?,?,?)";
+            + "NUM_CONTACTO,CALIFICACION)"
+            + " VALUES (NULL,?,?,?,?)";
     
     public static final String UPDATE_SQL = "UPDATE ENTRENADOR SET ID_ENTRENADOR=?,USUARIO_ID=?,"
             + "VERIFICADO=?,"
@@ -57,7 +57,7 @@ public class CoachDAO {
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
                                 resultset.getFloat("CALIFICACION"),
-                                resultset.getLong("NUMERO_DE_CONTACTO")
+                                resultset.getLong("NUM_CONTACTO")
                         );                
                     }            
                 } catch (SQLException ex) {
@@ -84,7 +84,7 @@ public class CoachDAO {
                                 resultset.getInt("USUARIO_ID"),
                                 resultset.getBoolean("VERIFICADO"),
                                 resultset.getFloat("CALIFICACION"),
-                                resultset.getLong("NUMERO_DE_CONTACTO")
+                                resultset.getLong("NUM_CONTACTO")
                         );
                         data.add(couch);
                     }
@@ -106,11 +106,11 @@ public float getScore() {return Score;}
 public boolean isVerified() {return Verified;}
 public int getContact_Number() {return Contact_Number;}
 */
-            statement.setInt(1, couch.getId_coach()); 
-            statement.setInt(2, couch.getId_user());
-            statement.setFloat(3, couch.getScore());
-            statement.setBoolean(4, couch.isVerified());
-            statement.setLong(5, couch.getContact_Number());
+            //tatement.setInt(, couch.getId_coach()); 
+            statement.setInt(1, couch.getId_user());
+            statement.setBoolean(2, couch.isVerified());
+            statement.setString(4, String.valueOf(couch.getScore()));
+            statement.setLong(3, couch.getContact_Number());
             
             return statement.executeUpdate();
         } catch (SQLException ex) {

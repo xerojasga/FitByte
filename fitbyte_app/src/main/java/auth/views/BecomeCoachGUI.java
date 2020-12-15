@@ -61,6 +61,11 @@ public class BecomeCoachGUI extends javax.swing.JFrame {
         });
 
         goBackButton.setText("Cancelar");
+        goBackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goBackButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,9 +79,8 @@ public class BecomeCoachGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(goBackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(becomTrainerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ContactNumberTF)))
+                    .addComponent(becomTrainerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ContactNumberTF))
                 .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
@@ -92,7 +96,7 @@ public class BecomeCoachGUI extends javax.swing.JFrame {
                 .addComponent(becomTrainerButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(goBackButton)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,6 +130,13 @@ public class BecomeCoachGUI extends javax.swing.JFrame {
         }
          }
     }//GEN-LAST:event_becomTrainerButtonActionPerformed
+
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        HomeView n = new HomeView(current_user);
+        n.setVisible(true);
+    }//GEN-LAST:event_goBackButtonActionPerformed
 
     /**
      * @param args the command line arguments

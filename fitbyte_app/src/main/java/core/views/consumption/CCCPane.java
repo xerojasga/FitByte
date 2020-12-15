@@ -29,7 +29,7 @@ import user.models.User;
  * @author Diego
  */
 public class CCCPane extends javax.swing.JPanel {
-    private static User current_user = new User();
+    private static User current_user;
     private int cal = 0;
     
     /**
