@@ -36,13 +36,13 @@ public class HomeView extends javax.swing.JFrame {
     /**
      * Creates new form HomeView
      */
-    public static User current_user ;
+    public static User current_user;
     
     public HomeView(User user) {
         initComponents();
         this.setLocationRelativeTo(null);
-        System.out.println(UserRegisterView.current_user.getUsername());
         current_user = user;
+        System.out.println(current_user.getUsername());
         iduserLBL.setText(String.valueOf(user.getId_user()));
         usernameLabel.setText(user.getUsername());
         nameLabel.setText(user.getName());
@@ -85,7 +85,7 @@ public class HomeView extends javax.swing.JFrame {
             adminBTN.setVisible(false);
         }
         
-        calCalc();
+        int[] calo = calCalc();
         setCaloriesToConsume();
         setConsumedCalories();
     }
@@ -663,7 +663,7 @@ public class HomeView extends javax.swing.JFrame {
             case(5): dia = "Viernes";
             case(6): dia = "Sabado";
             case(7): dia = "Domingo";
-            default: dia = null;
+            default: dia = "";
         }
                 
         for (Consumption c: selfCons){

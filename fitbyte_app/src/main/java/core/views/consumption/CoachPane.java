@@ -12,6 +12,8 @@ import core.DAO.PlateDAO;
 import core.DAO.User_CoachDAO;
 import core.models.Consumption;
 import core.models.User_Coach;
+import entrenador.DAO.*;
+import entrenador.models.*;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
@@ -34,9 +36,18 @@ public class CoachPane extends javax.swing.JPanel {
         String s = "Seleccionar";
         DefaultComboBoxModel modelUser = new DefaultComboBoxModel();
         ArrayList<User_Coach> users = User_CoachDAO.findAll();
+        ArrayList<Coach> cs = CoachDAO.findAll();
+        Coach current_coach = new Coach();
+        for (Coach c: cs){
+            if (c.getId_user() == current_user.getId_user()){
+                current_coach = c;
+                break;
+            }
+        }
         modelUser.addElement(s);
         for(User_Coach u_c: users){
-            if (u_c.getCouch_id() == current_user.getId_user()){
+            if (u_c.getCouch_id() == current_coach.getId_coach()){
+                System.out.println(u_c.getUser_id());
                 User u = UserDAO.find(u_c.getUser_id());
                 modelUser.addElement(u.getUsername());
             }

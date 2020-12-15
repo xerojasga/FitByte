@@ -340,6 +340,7 @@ public class ConsumptionCreate extends javax.swing.JFrame {
             User u = this.coachCons.userSelected();
             consumption.setUser_id(u.getId_user());
             consumption.setIngredient_id(coachCons.ingredient_id());
+            consumption.setPlate_id(coachCons.plate_id());
             consumption.setExercise_id(coachCons.exercise_id());
             consumption.setNum_hours_excers(coachCons.num_horas_exer());
             consumption.setCalories(coachCons.calories());

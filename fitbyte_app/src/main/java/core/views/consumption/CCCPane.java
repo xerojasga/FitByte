@@ -16,6 +16,8 @@ import core.models.Exercise;
 import core.models.User_Coach;
 import core.models.Ingredient;
 import core.models.Plate;
+import entrenador.DAO.CoachDAO;
+import entrenador.models.Coach;
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
@@ -36,11 +38,27 @@ public class CCCPane extends javax.swing.JPanel {
      * Creates new form CoachConsumption
      */
     public CCCPane(User user) {
-        user = current_user;
+        current_user = user;
         initComponents();
         String s = "Seleccionar";
         DefaultComboBoxModel modelUser = new DefaultComboBoxModel();
-        ArrayList<User_Coach> users = User_CoachDAO.find_all_User(current_user.getId_user());
+        ArrayList<User_Coach> users = User_CoachDAO.findAll();
+        ArrayList<Coach> cs = CoachDAO.findAll();
+        Coach current_coach = new Coach();
+        for (Coach c: cs){
+            if (c.getId_user() == current_user.getId_user()){
+                current_coach = c;
+                break;
+            }
+        }
+        modelUser.addElement(s);
+        for(User_Coach u_c: users){
+            if (u_c.getCouch_id() == current_coach.getId_coach()){
+                System.out.println(u_c.getUser_id());
+                User u = UserDAO.find(u_c.getUser_id());
+                modelUser.addElement(u.getUsername());
+            }
+        }
         DefaultComboBoxModel modelIngre = new DefaultComboBoxModel();
         ArrayList<Ingredient> ingredients = IngredientDAO.findAll();
         DefaultComboBoxModel modelPlate = new DefaultComboBoxModel();
@@ -50,11 +68,6 @@ public class CCCPane extends javax.swing.JPanel {
         DefaultComboBoxModel modelWeak = new DefaultComboBoxModel();
         ArrayList<String> weakDays = daySet();
         
-        modelUser.addElement(s);
-        for(User_Coach u_c: users){
-            User u = UserDAO.find(u_c.getUser_id());
-            modelUser.addElement(u.getUsername());
-        }
         modelIngre.addElement(s);
         for(Ingredient ingredient: ingredients){
             modelIngre.addElement(ingredient.getName());
@@ -96,22 +109,29 @@ public class CCCPane extends javax.swing.JPanel {
         return u;
     }
     public int ingredient_id(){
-        int r;
+        int r = 0;
         if(ingredientCBX.getSelectedIndex() == 0){
             r = -1;
         } else {
             String a = (String)ingredientCBX.getSelectedItem();
-            r = Integer.parseInt(a);
+            ArrayList<Ingredient> ing = IngredientDAO.findAll();
+            for (Ingredient ig : ing){
+                if (ig.getName().equals(a)){
+                    r = ig.getId_ingredient();
+                    break;
+                }
+            }
         }
         return r;
     }
     public int plate_id(){
-        int r;
+        int r = 0;
         if(plateCBX.getSelectedIndex() == 0){
             r = -1;
         } else {
             String a = (String)plateCBX.getSelectedItem();
-            r = Integer.parseInt(a);
+            Plate p = PlateDAO.find(a);
+            r = p.getPlateID();
         }
         return r;
     }
