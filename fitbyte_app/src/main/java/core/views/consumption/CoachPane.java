@@ -33,10 +33,13 @@ public class CoachPane extends javax.swing.JPanel {
         initComponents();
         String s = "Seleccionar";
         DefaultComboBoxModel modelUser = new DefaultComboBoxModel();
-        ArrayList<User_Coach> users = User_CoachDAO.find_all_User(current_user.getId_user());
+        ArrayList<User_Coach> users = User_CoachDAO.findAll();
+        modelUser.addElement(s);
         for(User_Coach u_c: users){
-            User u = UserDAO.find(u_c.getUser_id());
-            modelUser.addElement(u.getUsername());
+            if (u_c.getCouch_id() == current_user.getId_user()){
+                User u = UserDAO.find(u_c.getUser_id());
+                modelUser.addElement(u.getUsername());
+            }
         }
         userCBX.setModel(modelUser);
         userCBX.setSelectedIndex(0);

@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class User_CoachDAO {
 
         
-    public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO_ENTRENADOR  ";
+    public static final String SELECT_ALL_SQL = "SELECT * FROM USUARIO_ENTRENADOR";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE USUARIO_ID = ? AND ENTRENADOR_ID = ?";
     public static final String SELECT_SQL_ENTRENADOR = SELECT_ALL_SQL + " WHERE ENTRENADOR_ID = ?";
     public static final String SELECT_SQL_USUARIO = SELECT_ALL_SQL + " WHERE USUARIO_ID = ?";
@@ -56,7 +56,7 @@ public class User_CoachDAO {
         
     public static ArrayList<User_Coach> find_all_User(int id_user){        
         ArrayList<User_Coach> user_coach_items = new ArrayList<>();
-        try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_ENTRENADOR)){
+        try(PreparedStatement statement = connection.prepareStatement(SELECT_SQL_USUARIO)){
             statement.setInt(1,id_user);
              if(statement.execute()){
                  try (ResultSet resultset = statement.getResultSet()) {

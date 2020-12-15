@@ -50,6 +50,7 @@ public class ConsumptionView extends javax.swing.JFrame {
             mainPane.removeAll();
             mainPane.add(userPane);
             mainPane.setVisible(true);
+            
         } else{
             CoachPane cp = new CoachPane(current_user);
             mainPane.setVisible(false);

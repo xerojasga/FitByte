@@ -170,10 +170,11 @@ public class UserPane extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectBTMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBTMActionPerformed
+        model.setRowCount(0);
         ArrayList<Consumption> cons = ConsumptionDAO.findAll();
         ArrayList<Consumption> consumptions = new ArrayList<>();
         for (Consumption c: cons){
-            if (c.getRec_day_weak().equals(recDay()) && c.getUser_id() == current_user.getId_user()){
+            if (c.getRec_day_weak() != null && c.getRec_day_weak().equals(recDay()) && c.getUser_id() == current_user.getId_user()){
                 consumptions.add(c);
             }
         }

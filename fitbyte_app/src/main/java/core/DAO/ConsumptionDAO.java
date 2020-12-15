@@ -23,19 +23,13 @@ public class ConsumptionDAO {
     public static final String SELECT_ALL_SQL = "SELECT * FROM CONSUMO";
     public static final String SELECT_SQL = SELECT_ALL_SQL + " WHERE ID_CONSUMO = ?";
     public static final String SELECT_ID = SELECT_ALL_SQL + " WHERE USUARIO_ID = ?";
-<<<<<<< HEAD
-    public static final String SELECT_USER = "SELECT * FROM CONSUMO WHERE usuario_id = ? ORDER BY `FECHA` DESC LIMIT ?";
-    public static final String CREATE_SQL = "INSERT INTO consumo (fecha, rec_entrenador, usuario_id, ingrediente_id, plato_id, ejercicio_id, calorias, num_horas_ejerc, rec_dia_semana) VALUES (?,?,?,?,?,?,?,?,?)";
-    public static final String UPDATE_SQL = "UPDATE consumo SET fecha = ? , rec_entrenador = ? , usuario_id = ?, ingrediente_id = ?, plato_id = ? , ejercicio_id = ? , calorias = ?, num_horas_ejerc = ? , rec_dia_semana = ? WHERE id_consumo = ?";
-    public static final String DELETE_SQL = "DELETE FROM consumo WHERE id_consumo = ?";         
-    public static final String REGISTER = "SELECT * FROM `consumo` WHERE `FECHA` = (SELECT MAX(`FECHA`) FROM `consumo`) ORDER BY `ID_CONSUMO` DESC LIMIT ?";
-=======
+    
     public static final String SELECT_USER = "SELECT * FROM CONSUMO WHERE USUARIO_ID = ? ORDER BY `FECHA` DESC LIMIT ?";
     public static final String CREATE_SQL = "INSERT INTO CONSUMO (FECHA, REC_ENTRENADOR, USUARIO_ID, INGREDIENTE_ID, PLATO_ID, EJERCICIO_ID, CALORIAS, NUM_HORAS_EJERC, REC_DIA_SEMANA) VALUES (?,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_SQL = "UPDATE CONSUMO SET FECHA = ? , REC_ENTRENADOR = ? , USUARIO_ID = ?, INGREDIENTE_ID = ?, PLATO_ID = ? , EJERCICIO_ID = ? , CALORIAS = ?, NUM_HORAS_EJERC = ? , REC_DIA_SEMANA = ? WHERE ID_CONSUMO = ?";
     public static final String DELETE_SQL = "DELETE FROM CONSUMO WHERE id_consumo = ?";         
     public static final String REGISTER = "SELECT * FROM CONSUMO WHERE `FECHA` = (SELECT MAX(`FECHA`) FROM `consumo`) ORDER BY `ID_CONSUMO` DESC LIMIT ?";
->>>>>>> main
+
     private static final Connection connection = ConnectionProvider.connection;        
 
     
@@ -47,21 +41,9 @@ public class ConsumptionDAO {
                 try(ResultSet resultset = statement.getResultSet()){
                     if(resultset.next()){
                         consumo = new Consumption(
-<<<<<<< HEAD
-                            resultset.getInt("id_consumo"),
-                            resultset.getDate("fecha"),
-                            resultset.getBoolean("rec_entrenador"),
-                            resultset.getInt("usuario_id"),
-                            resultset.getInt("ingrediente_id"),
-                            resultset.getInt("plato_id"),
-                            resultset.getInt("ejercicio_id"),
-                            resultset.getInt("calorias"),
-                            resultset.getInt("num_horas_ejerc"),
-                            resultset.getString("rec_dia_semana")
-=======
                             resultset.getInt("ID_CONSUMO"),
                             resultset.getDate("FECHA"),
-                            resultset.getBoolean("REC_ENTENADOR"),
+                            resultset.getBoolean("REC_ENTRENADOR"),
                             resultset.getInt("USUARIO_ID"),
                             resultset.getInt("INGREDIENTE_ID"),
                             resultset.getInt("PLATO_ID"),
@@ -69,7 +51,6 @@ public class ConsumptionDAO {
                             resultset.getInt("CALORIAS"),
                             resultset.getInt("NUM_HORAS_EJERC"),
                             resultset.getString("REC_DIA_SEMANA")
->>>>>>> main
                         );                    
                     }            
                 } catch (SQLException ex) {
@@ -91,21 +72,9 @@ public class ConsumptionDAO {
                     while(resultSet.next()){
                         Consumption consumo;
                         consumo = new Consumption(
-<<<<<<< HEAD
-                            resultSet.getInt("id_consumo"),
-                            resultSet.getDate("fecha"),
-                            resultSet.getBoolean("rec_entrenador"),
-                            resultSet.getInt("usuario_id"),
-                            resultSet.getInt("ingrediente_id"),
-                            resultSet.getInt("plato_id"),
-                            resultSet.getInt("ejercicio_id"),
-                            resultSet.getInt("calorias"),
-                            resultSet.getInt("num_horas_ejerc"),
-                            resultSet.getString("rec_dia_semana")
-=======
                             resultSet.getInt("ID_CONSUMO"),
                             resultSet.getDate("FECHA"),
-                            resultSet.getBoolean("REC_ENTENADOR"),
+                            resultSet.getBoolean("REC_ENTRENADOR"),
                             resultSet.getInt("USUARIO_ID"),
                             resultSet.getInt("INGREDIENTE_ID"),
                             resultSet.getInt("PLATO_ID"),
@@ -113,7 +82,6 @@ public class ConsumptionDAO {
                             resultSet.getInt("CALORIAS"),
                             resultSet.getInt("NUM_HORAS_EJERC"),
                             resultSet.getString("REC_DIA_SEMANA")
->>>>>>> main
                         );
                         data.add(consumo);
                     }
@@ -136,21 +104,9 @@ public class ConsumptionDAO {
                     while(resultSet.next()){
                         Consumption consumo;
                         consumo = new Consumption(
-<<<<<<< HEAD
-                            resultSet.getInt("id_consumo"),
-                            resultSet.getDate("fecha"),
-                            resultSet.getBoolean("rec_entrenador"),
-                            resultSet.getInt("usuario_id"),
-                            resultSet.getInt("ingrediente_id"),
-                            resultSet.getInt("plato_id"),
-                            resultSet.getInt("ejercicio_id"),
-                            resultSet.getInt("calorias"),
-                            resultSet.getInt("num_horas_ejerc"),
-                            resultSet.getString("rec_dia_semana")
-=======
                             resultSet.getInt("ID_CONSUMO"),
                             resultSet.getDate("FECHA"),
-                            resultSet.getBoolean("REC_ENTENADOR"),
+                            resultSet.getBoolean("REC_ENTRENADOR"),
                             resultSet.getInt("USUARIO_ID"),
                             resultSet.getInt("INGREDIENTE_ID"),
                             resultSet.getInt("PLATO_ID"),
@@ -158,7 +114,6 @@ public class ConsumptionDAO {
                             resultSet.getInt("CALORIAS"),
                             resultSet.getInt("NUM_HORAS_EJERC"),
                             resultSet.getString("REC_DIA_SEMANA")
->>>>>>> main
                         );
                         data.add(consumo);
                     }
@@ -182,15 +137,9 @@ public class ConsumptionDAO {
                     while(resultSet.next()){
                         Consumption consumo;
                         consumo = new Consumption(
-<<<<<<< HEAD
-                            resultSet.getInt("id_consumo"),
-                            resultSet.getDate("fecha"),
-                            //resultSet.getBoolean("rec_entrenador"),
-=======
                             resultSet.getInt("ID_CONSUMO"),
                             resultSet.getDate("FECHA"),
-                            //resultSet.getBoolean("rec_entenador"),
->>>>>>> main
+                            //resultSet.getBoolean("REC_ENTRENADOR"),
                             //resultSet.getInt("usuario_id"),
                             //resultSet.getInt("ingrediente_id"),
                             resultSet.getInt("PLATO_ID"),

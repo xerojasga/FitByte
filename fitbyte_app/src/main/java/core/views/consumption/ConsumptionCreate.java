@@ -35,15 +35,11 @@ import java.sql.Date;
  * @author Diego
  */
 public class ConsumptionCreate extends javax.swing.JFrame {
-<<<<<<< HEAD
-    private static User current_user = new User();
     private CCCPane coachCons;
    // private CCCPane coachCons;
-=======
+
     private static User current_user;
-    private CCCPane coachCons = new CCCPane(current_user);
     
->>>>>>> main
     /**
      * Creates new form ConsumptionCreate
      */
